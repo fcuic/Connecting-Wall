@@ -1,0 +1,7 @@
+ //getanje nested valuea 1. nacin:
+   // console.log(this.wallService.formModel.get(['GroupATerms','GroupATerm1']).value);
+    //getanje nested valuea 2. nacin:
+    //console.log(this.wallService.formModel.get('GroupATerms').get('GroupATerm2').value);
+    //console.log(this.wallService.formModel.value);//TESTANJE postanog zida
+
+    //

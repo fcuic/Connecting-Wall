@@ -1,0 +1,115 @@
+<form [formGroup]="service.formModel" class="normal-form">
+    <input type="hidden" fromControlName="$key">
+            <label>
+                 Quiz Name : 
+                <input type="text" formControlName="wallName">
+                <label class="text-danger" *ngIf="service.formModel.get('wallName').touched && service.formModel.get('wallName').errors?.required">This field is required!</label>
+            </label>
+<mat-grid-list cols="2" rowHeight="200px">
+<mat-grid-tile>
+    <div formGroupName="GroupATerms">
+        <label>Group A Term 1 :
+        <input formControlName="GroupATerm1">
+        <label class="text-danger" *ngIf="service.formModel.get('GroupATerms').get('GroupATerm1').touched && service.formModel.get('GroupATerms').get('GroupATerm1').errors?.required">This field is required!</label>
+        </label>
+        <label>Group A Term 2 :
+        <input formControlName="GroupATerm2">
+        <label class="text-danger" *ngIf="service.formModel.get('GroupATerms').get('GroupATerm2').touched && service.formModel.get('GroupATerms').get('GroupATerm2').errors?.required">This field is required!</label>
+        </label>
+        <label>Group A Term 3 :
+        <input formControlName="GroupATerm3">
+        <label class="text-danger" *ngIf="service.formModel.get('GroupATerms').get('GroupATerm3').touched && service.formModel.get('GroupATerms').get('GroupATerm3').errors?.required">This field is required!</label>
+        </label>
+        <label>Group A Term 4 :
+        <input formControlName="GroupATerm4">
+        <label class="text-danger" *ngIf="service.formModel.get('GroupATerms').get('GroupATerm4').touched && service.formModel.get('GroupATerms').get('GroupATerm4').errors?.required">This field is required!</label>
+        </label>
+    </div>
+    <label>
+        <div class="text">Group A Connection : 
+        <input type="text" placeholder="Group A Connection" formControlName="GroupAConnections">
+        </div>
+    <label class="text-danger" *ngIf="service.formModel.get('GroupAConnections').touched && service.formModel.get('GroupAConnections').errors?.required">This field is required!</label>
+    </label>
+</mat-grid-tile>
+<mat-grid-tile>
+    <div formGroupName="GroupBTerms">
+        <label>Group B Term 1 :
+        <input formControlName="GroupBTerm1">
+        <label class="text-danger" *ngIf="service.formModel.get('GroupBTerms').get('GroupBTerm1').touched && service.formModel.get('GroupBTerms').get('GroupBTerm1').errors?.required">This field is required!</label>
+        </label>
+        <label>Group B Term 2 :
+        <input formControlName="GroupBTerm2">
+        <label class="text-danger" *ngIf="service.formModel.get('GroupBTerms').get('GroupBTerm2').touched && service.formModel.get('GroupBTerms').get('GroupBTerm2').errors?.required">This field is required!</label>
+        </label>
+        <label>Group B Term 3 :
+        <input formControlName="GroupBTerm3">
+        <label class="text-danger" *ngIf="service.formModel.get('GroupBTerms').get('GroupBTerm3').touched && service.formModel.get('GroupBTerms').get('GroupBTerm3').errors?.required">This field is required!</label>
+        </label>
+        <label>Group B Term 4 :
+        <input formControlName="GroupBTerm4">
+        <label class="text-danger" *ngIf="service.formModel.get('GroupBTerms').get('GroupBTerm4').touched && service.formModel.get('GroupBTerms').get('GroupBTerm4').errors?.required">This field is required!</label>
+        </label>
+    </div>
+    <label>
+        <div class="text">Group B Connection : 
+        <input type="text" placeholder="Group B Connection" formControlName="GroupBConnections">
+        </div>
+    <label class="text-danger" *ngIf="service.formModel.get('GroupBConnections').touched && service.formModel.get('GroupBConnections').errors?.required">This field is required!</label>
+    </label>
+</mat-grid-tile>
+<mat-grid-tile>
+    <div formGroupName="GroupCTerms">
+        <label>Group C Term 1 :
+        <input formControlName="GroupCTerm1">
+        <label class="text-danger" *ngIf="service.formModel.get('GroupCTerms').get('GroupCTerm1').touched && service.formModel.get('GroupCTerms').get('GroupCTerm1').errors?.required">This field is required!</label>
+        </label>
+        <label>Group C Term 2 :
+        <input formControlName="GroupCTerm2">
+        <label class="text-danger" *ngIf="service.formModel.get('GroupCTerms').get('GroupCTerm2').touched && service.formModel.get('GroupCTerms').get('GroupCTerm2').errors?.required">This field is required!</label>
+        </label>
+        <label>Group C Term 3 :
+        <input formControlName="GroupCTerm3">
+        <label class="text-danger" *ngIf="service.formModel.get('GroupCTerms').get('GroupCTerm3').touched && service.formModel.get('GroupCTerms').get('GroupCTerm3').errors?.required">This field is required!</label>
+        </label>
+        <label>Group C Term 4 :
+        <input formControlName="GroupCTerm4">
+        <label class="text-danger" *ngIf="service.formModel.get('GroupCTerms').get('GroupCTerm4').touched && service.formModel.get('GroupCTerms').get('GroupCTerm4').errors?.required">This field is required!</label>
+        </label>
+    </div>
+    <label>
+        <div class="text">Group C Connection : 
+        <input type="text" placeholder="Group C Connection" formControlName="GroupCConnections">
+        </div>
+    <label class="text-danger" *ngIf="service.formModel.get('GroupCConnections').touched && service.formModel.get('GroupCConnections').errors?.required">This field is required!</label>
+    </label>
+</mat-grid-tile>
+<mat-grid-tile>
+    <div formGroupName="GroupDTerms">
+        <label>Group D Term 1 :
+        <input formControlName="GroupDTerm1">
+        <label class="text-danger" *ngIf="service.formModel.get('GroupDTerms').get('GroupDTerm1').touched && service.formModel.get('GroupDTerms').get('GroupDTerm1').errors?.required">This field is required!</label>
+        </label>
+        <label>Group D Term 2 :
+        <input formControlName="GroupDTerm2">
+        <label class="text-danger" *ngIf="service.formModel.get('GroupDTerms').get('GroupDTerm2').touched && service.formModel.get('GroupDTerms').get('GroupDTerm2').errors?.required">This field is required!</label>
+        </label>
+        <label>Group D Term 3 :
+        <input formControlName="GroupDTerm3">
+        <label class="text-danger" *ngIf="service.formModel.get('GroupDTerms').get('GroupDTerm3').touched && service.formModel.get('GroupDTerms').get('GroupDTerm3').errors?.required">This field is required!</label>
+        </label>
+        <label>Group D Term 4 :
+        <input formControlName="GroupDTerm4">
+        <label class="text-danger" *ngIf="service.formModel.get('GroupDTerms').get('GroupDTerm4').touched && service.formModel.get('GroupDTerms').get('GroupDTerm4').errors?.required">This field is required!</label>
+        </label>
+    </div>
+    <label>
+        <div class="text">Group D Connection : 
+        <input type="text" placeholder="Group D Connection" formControlName="GroupDConnections">
+        </div>
+    <label class="text-danger" *ngIf="service.formModel.get('GroupDConnections').touched && service.formModel.get('GroupDConnections').errors?.required">This field is required!</label>
+    </label>
+</mat-grid-tile>
+</mat-grid-list>
+<button type="submit" mat-raised-button color="primary" [disabled]="!service.formModel.valid">Submit Changes</button>
+</form>

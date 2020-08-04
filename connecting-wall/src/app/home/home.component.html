@@ -1,0 +1,67 @@
+<app-header></app-header>
+<!--<div class="card m-5" style="width:20rem" *ngIf="userDetails">
+<ul class="list-group">
+    <li class="list-group-item"><strong>Username : </strong>{{userDetails.userName}}</li>
+    <li class="list-group-item"><strong>Full name : </strong>{{userDetails.fullName}}</li>
+    <li class="list-group-item"><strong>E-mail : </strong>{{userDetails.email}}</li>
+</ul>
+</div>-->
+<div class="container">
+<div class="d-flex justify-content-center" *ngIf="userDetails"><!--moram upisat ngif inace baca error-->
+<h1 class="display-1">Welcome <strong>{{userDetails.userName}} !</strong></h1>
+</div>
+<div class="d-flex justify-content-center">
+<p class="h2">Ready to play?</p></div>
+<!--<img src="/assets/img/quiz-master.jpg">-->
+<div class="search-div">
+    <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" autocomplete="off">
+    </mat-form-field>
+</div>
+<div class="example-container mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" matSort>
+        <!--Column ID-->
+        <ng-container matColumnDef="WallName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Wall Name</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.wallName}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Creator FullName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Creators Full Name</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.user.fullName}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Creator UserName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Creators Username</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.user.userName}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Email">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Creators E-Mail</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.user.email}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Date Created">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Date Created</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.dateCreated}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Actions">
+             <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>            
+                <mat-cell *matCellDef="let row">
+                <button type="button" class="btn btn-success">Play Quiz</button>
+                </mat-cell>
+        </ng-container>
+        <!--<ng-container matColumnDef="loading">
+            <mat-footer-cell *matFooterCellDef colspan="5">
+                Loading Created Walls...
+            </mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="noData">
+            <mat-footer-cell *matFooterCellDef colspan="5">
+                No data.
+            </mat-footer-cell>
+        </ng-container>-->
+        <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columns;"></mat-row>
+        <!--<mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
+        <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}"></mat-footer-row>-->
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+</div>
+</div>

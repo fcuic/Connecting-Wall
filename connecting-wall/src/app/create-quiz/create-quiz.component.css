@@ -1,0 +1,41 @@
+img{
+    display: block;
+    max-width:500px;
+    max-height:300px;
+    width: auto;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body{
+    background-color: #07442e;;
+}
+
+input.form-control,input.form-control:focus{
+    background-color: #fbfbfb;
+    color: rgb(29, 3, 3);
+    border: 1px solid #636b7b;
+}
+button[type=submit].btn{
+    border-radius: 20px;
+    background-color: #cc0a0a;
+    color: #fff;
+}
+.container{
+    background-image:url("../../assets/img/connwall.jpg.png");
+    height:100em; background-size:cover; width:200em;
+     background-position:50% 50%;
+}
+.text{
+    display: block;
+    font-size: 25px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    color: #f81500;
+    padding:10px;
+}
+.text-danger{
+    font-size: 15px;
+}
+

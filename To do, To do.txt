@@ -1,0 +1,14 @@
+- obirsati usera sa foerign keyom u wall tablici, sve wallove s userid-om i usera,HARD SOLVED
+- getati wall po user id-u,Hard SOLVED
+- dizajnirati posting wall,LOW SOLVED
+- stavit i prikaz i brisanje zidova na admin panel NORMAL SOLVED SOLVED
+- omogućiti dohvaćanje atributa po stranom kljucu iz druge tablice LEGENDARY SOLVED
+-omogućiti brisanje usera, a tako i njegovog zida i njegovih group connectionsa i termova HARD SOLVED
+-OMOGUĆITI MODIFY ZIDOVA NA MY QUIZZES TAKO ŠTO SE IZBACI POPUP DIALOG HARD ovo sad radim
+
+
+
+
+- rješavanje kviza :
+- popup dialog za rješavanje na home komponenti
+...

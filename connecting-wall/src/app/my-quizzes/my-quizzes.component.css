@@ -1,0 +1,21 @@
+img{
+    display: block;
+    max-width:400px;
+    max-height:400px;
+    width: auto;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+.container{
+    background-image:url("../../assets/img/changes.png");
+    height:50em; background-size:cover; width:150em;
+     background-position:50% 50%;
+}
+.h2{
+    color: rgb(81, 0, 255);
+}
+::ng-deep.mat-dialog-container 
+{
+    background-color: rgb(6, 159, 80);
+}

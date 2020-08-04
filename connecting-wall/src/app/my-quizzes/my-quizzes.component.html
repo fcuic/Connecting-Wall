@@ -1,0 +1,51 @@
+<app-header></app-header>
+<div class="container">
+<div class="d-flex justify-content-center" *ngIf="userDetails"><!--moram upisat ngif inace baca error-->
+    <h1 class="display-1">Welcome <strong>{{userDetails.userName}} !</strong></h1>
+</div>
+<div class="d-flex justify-content-center">
+    <p class="h2">Edit or delete Walls you posted here!</p> 
+</div>
+<!--<img src="/assets/img/changes.png">-->
+<div class="search-div">
+    <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" autocomplete="off">
+    </mat-form-field>
+</div>
+<div class="example-container mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" matSort>
+        <!--Column ID-->
+        <ng-container matColumnDef="WallName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Wall Name</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.wallName}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Creator FullName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Creators Full Name</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.user.fullName}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Creator UserName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Creators Username</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.user.userName}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Email">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Creators E-Mail</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.user.email}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Date Created">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Date Created</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.dateCreated}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Actions">
+             <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>            
+                <mat-cell *matCellDef="let row">
+                <button type="button" class="btn btn-primary" (click)="onEdit()">Modify</button>
+                &nbsp; <!--horizontal space-->
+                <button mat-icon-button color="warn" (click)="DeleteWall(row.wallID)"><mat-icon>delete_outline</mat-icon></button>
+                </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+</div>
+</div>

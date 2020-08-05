@@ -62,6 +62,7 @@ import { EditWallComponent } from './edit-wall/edit-wall.component';
     MatInputModule,
     MatDialogModule,
     MatToolbarModule,
+    MatGridListModule,
     ToastrModule.forRoot({
       progressBar:true
     }),

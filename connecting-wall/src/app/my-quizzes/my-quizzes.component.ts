@@ -26,6 +26,7 @@ export class MyQuizzesComponent implements OnInit {
     
   }
   readonly BaseURI = 'http://localhost:57392/api';
+  WallDetails:any;
   userDetails;//for user id!
   userID:any;
   searchField;
@@ -72,8 +73,24 @@ export class MyQuizzesComponent implements OnInit {
       });
     }
   }
-  onEdit()//editing created walls!
+  editWall(wallID:string)//editing created walls!
   {
+    //this.router.navigate(['/edit',wallID]);
+    this.WallDetails=this.service.getWallById(wallID).subscribe(//zato sto vraca observable bez subscribea
+      res=>{
+        this.WallDetails=res;
+        //console.log(this.WallDetails);
+        //console.log(this.WallDetails.groupATerms[0].termName);
+        //console.log(this.WallDetails.groupBTerms[0].termName);
+        this.service.populateForm(this.WallDetails);
+      }
+    );
+
+    //console.log(this.service.getWallById(wallID));
+    //console.log(this.WallDetails);
+    //console.log(this.WallDetails.wallName);
+    //this.service.populateForm(this.service.getWallById(wallID));
+    //populateForm(this.walls.id)
     const dialogConfig=new MatDialogConfig();
    // dialogConfig.disableClose=true;
     dialogConfig.autoFocus=true;

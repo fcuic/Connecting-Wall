@@ -67,7 +67,17 @@ namespace Registration.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Wall>> GetWall(Guid id)
         {
-            var wall = await _context.Walls.FindAsync(id);
+            var wall = await _context.Walls
+                .Include(p => p.User)
+                .Include(p => p.groupATerms)
+                .Include(p => p.groupBTerms)
+                .Include(p => p.groupCTerms)
+                .Include(p => p.groupDTerms)
+                .Include(p => p.groupAConnections)
+                .Include(p => p.groupBConnections)
+                .Include(p => p.groupCConnections)
+                .Include(p => p.groupDConnections)
+                .FirstOrDefaultAsync(i => i.wallID == id);//bolje nego findbyid
 
             if (wall == null)
             {

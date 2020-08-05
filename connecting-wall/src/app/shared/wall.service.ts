@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders,HttpParams } from '@angular/common/http';
 import { UserService } from '../shared/user.service';
 import {tap, catchError} from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
+import {Wall} from '../../models/wall';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class WallService {
  
 
   formModel= this.fb.group({
-    $key:new FormControl(null),//za modify, primarni ključ zida
+    //$key:new FormControl(null),//za modify, primarni ključ zida
     wallName:['',[Validators.required,Validators.minLength(3)]],
     GroupATerms:this.fb.group({
       GroupATerm1:['', Validators.required],
@@ -63,5 +64,47 @@ export class WallService {
     return this.http.get<any>(this.BaseURI+'/Wall/GetWallsByUserId/'+id).pipe(
       catchError(Error=>of(null))
     );
+  }
+  getWallById(id:any)
+  {
+    return this.http.get<any>(this.BaseURI+'/Wall/'+id).pipe(
+      catchError(Error=>of(null))
+    );
+  }
+  populateForm(Object:Wall)
+  {
+    this.formModel.patchValue({
+      wallName:Object.wallName,
+      GroupATerms:{
+        GroupATerm1:Object.groupATerms[0].termName,
+        GroupATerm2:Object.groupATerms[1].termName,
+        GroupATerm3:Object.groupATerms[2].termName,
+        GroupATerm4:Object.groupATerms[3].termName
+      },
+      GroupBTerms:{
+        GroupBTerm1:Object.groupBTerms[0].termName,
+        GroupBTerm2:Object.groupBTerms[1].termName,
+        GroupBTerm3:Object.groupBTerms[2].termName,
+        GroupBTerm4:Object.groupBTerms[3].termName
+      },
+      GroupCTerms:{
+        GroupCTerm1:Object.groupCTerms[0].termName,
+        GroupCTerm2:Object.groupCTerms[1].termName,
+        GroupCTerm3:Object.groupCTerms[2].termName,
+        GroupCTerm4:Object.groupCTerms[3].termName
+      },
+      GroupDTerms:{
+        GroupDTerm1:Object.groupDTerms[0].termName,
+        GroupDTerm2:Object.groupDTerms[1].termName,
+        GroupDTerm3:Object.groupDTerms[2].termName,
+        GroupDTerm4:Object.groupDTerms[3].termName
+      },
+      GroupAConnections:Object.groupAConnections[0].connectionName,
+      GroupBConnections:Object.groupBConnections[0].connectionName,
+      GroupCConnections:Object.groupCConnections[0].connectionName,
+      GroupDConnections:Object.groupDConnections[0].connectionName,
+      
+    })
+    
   }
 }

@@ -38,7 +38,7 @@
         <ng-container matColumnDef="Actions">
              <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>            
                 <mat-cell *matCellDef="let row">
-                <button type="button" class="btn btn-primary" (click)="onEdit()">Modify</button>
+                <button type="button" class="btn btn-primary" (click)="editWall(row.wallID)">Modify</button>
                 &nbsp; <!--horizontal space-->
                 <button mat-icon-button color="warn" (click)="DeleteWall(row.wallID)"><mat-icon>delete_outline</mat-icon></button>
                 </mat-cell>

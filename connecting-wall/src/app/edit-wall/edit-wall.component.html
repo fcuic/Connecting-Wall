@@ -1,3 +1,6 @@
+<mat-toolbar>
+    <span>Editing existing wall</span>
+</mat-toolbar>
 <form [formGroup]="service.formModel" class="normal-form">
     <input type="hidden" fromControlName="$key">
             <label>
@@ -27,7 +30,7 @@
     </div>
     <label>
         <div class="text">Group A Connection : 
-        <input type="text" placeholder="Group A Connection" formControlName="GroupAConnections">
+        <input type="text" formControlName="GroupAConnections">
         </div>
     <label class="text-danger" *ngIf="service.formModel.get('GroupAConnections').touched && service.formModel.get('GroupAConnections').errors?.required">This field is required!</label>
     </label>
@@ -53,7 +56,7 @@
     </div>
     <label>
         <div class="text">Group B Connection : 
-        <input type="text" placeholder="Group B Connection" formControlName="GroupBConnections">
+        <input type="text" formControlName="GroupBConnections">
         </div>
     <label class="text-danger" *ngIf="service.formModel.get('GroupBConnections').touched && service.formModel.get('GroupBConnections').errors?.required">This field is required!</label>
     </label>
@@ -79,7 +82,7 @@
     </div>
     <label>
         <div class="text">Group C Connection : 
-        <input type="text" placeholder="Group C Connection" formControlName="GroupCConnections">
+        <input type="text" formControlName="GroupCConnections">
         </div>
     <label class="text-danger" *ngIf="service.formModel.get('GroupCConnections').touched && service.formModel.get('GroupCConnections').errors?.required">This field is required!</label>
     </label>
@@ -105,11 +108,12 @@
     </div>
     <label>
         <div class="text">Group D Connection : 
-        <input type="text" placeholder="Group D Connection" formControlName="GroupDConnections">
+        <input type="text" formControlName="GroupDConnections">
         </div>
     <label class="text-danger" *ngIf="service.formModel.get('GroupDConnections').touched && service.formModel.get('GroupDConnections').errors?.required">This field is required!</label>
     </label>
 </mat-grid-tile>
 </mat-grid-list>
+<br>
 <button type="submit" mat-raised-button color="primary" [disabled]="!service.formModel.valid">Submit Changes</button>
 </form>

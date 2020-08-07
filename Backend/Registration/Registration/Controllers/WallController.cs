@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.IIS.Core;
 using Microsoft.EntityFrameworkCore;
 using Registration.Models;
 
@@ -99,6 +100,39 @@ namespace Registration.Controllers
             }
 
             _context.Entry(wall).State = EntityState.Modified;
+            //MODIFYING entities inside child entities of wall
+            foreach (Term term in wall.groupATerms) 
+            {
+                _context.Entry(term).State = term.termID == null ? EntityState.Added : EntityState.Modified;
+            }
+            foreach (Term term in wall.groupBTerms)
+            {
+                _context.Entry(term).State = term.termID == null ? EntityState.Added : EntityState.Modified;
+            }
+            foreach (Term term in wall.groupCTerms)
+            {
+                _context.Entry(term).State = term.termID == null ? EntityState.Added : EntityState.Modified;
+            }
+            foreach (Term term in wall.groupDTerms)
+            {
+                _context.Entry(term).State = term.termID == null ? EntityState.Added : EntityState.Modified;
+            }
+            foreach (GroupConnections gc in wall.groupAConnections) 
+            {
+                _context.Entry(gc).State = gc.connectionId == null ? EntityState.Added : EntityState.Modified;
+            }
+            foreach (GroupConnections gc in wall.groupBConnections)
+            {
+                _context.Entry(gc).State = gc.connectionId == null ? EntityState.Added : EntityState.Modified;
+            }
+            foreach (GroupConnections gc in wall.groupCConnections)
+            {
+                _context.Entry(gc).State = gc.connectionId == null ? EntityState.Added : EntityState.Modified;
+            }
+            foreach (GroupConnections gc in wall.groupDConnections)
+            {
+                _context.Entry(gc).State = gc.connectionId == null ? EntityState.Added : EntityState.Modified;
+            }
 
             try
             {
@@ -116,7 +150,7 @@ namespace Registration.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(_context.Walls.Find(id));
         }
 
         // POST: api/Wall

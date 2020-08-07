@@ -4,11 +4,12 @@
 - stavit i prikaz i brisanje zidova na admin panel NORMAL SOLVED SOLVED
 - omogućiti dohvaćanje atributa po stranom kljucu iz druge tablice LEGENDARY SOLVED
 -omogućiti brisanje usera, a tako i njegovog zida i njegovih group connectionsa i termova HARD SOLVED
--OMOGUĆITI MODIFY ZIDOVA NA MY QUIZZES TAKO ŠTO SE IZBACI POPUP DIALOG HARD ovo sad radim
+-OMOGUĆITI MODIFY ZIDOVA NA MY QUIZZES TAKO ŠTO SE IZBACI POPUP DIALOG HARD ovo sad radim Solved
+-omogućiti edit zidova na backendu OVO SAD RADIM
 
 
 
 
-- rješavanje kviza :
+- rješavanje kviza : Legendary
 - popup dialog za rješavanje na home komponenti
 ...

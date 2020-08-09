@@ -12,7 +12,7 @@ import { stringify } from 'querystring';
 import { Observable } from 'rxjs';
 import {MatDialog,MatDialogConfig} from '@angular/material/dialog';
 import { EditWallComponent } from '../edit-wall/edit-wall.component';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-my-quizzes',
@@ -21,7 +21,7 @@ import { EditWallComponent } from '../edit-wall/edit-wall.component';
 })
 export class MyQuizzesComponent implements OnInit {
 
-  constructor(private router:Router,private service:WallService,private userService:UserService,private http:HttpClient,private dialog:MatDialog) 
+  constructor(private router:Router,private service:WallService,private userService:UserService,private http:HttpClient,private dialog:MatDialog, private toastr:ToastrService) 
   {
     
   }
@@ -70,6 +70,7 @@ export class MyQuizzesComponent implements OnInit {
     if(confirm("Are you sure you want to delete this wall?")){
       this.service.deleteWall(wallId).subscribe(_ =>{
         this.walls=this.walls.filter(eachWall=>eachWall.wallID!==wallId);
+        this.toastr.success('Wall Deleted!','Wall Deletion Successful!');
       });
     }
   }
@@ -79,7 +80,6 @@ export class MyQuizzesComponent implements OnInit {
     this.WallDetails=this.service.getWallById(wallID).subscribe(//zato sto vraca observable bez subscribea
       res=>{
         this.WallDetails=res;
-        //console.log(this.WallDetails);
         //console.log(this.WallDetails.groupATerms[0].termName);
         //console.log(this.WallDetails.groupBTerms[0].termName);
         this.service.populateForm(this.WallDetails);
@@ -99,6 +99,7 @@ export class MyQuizzesComponent implements OnInit {
     dialogConfig.height="800px";
     this.dialog.open(EditWallComponent,dialogConfig);
   }
+
   
 }
 

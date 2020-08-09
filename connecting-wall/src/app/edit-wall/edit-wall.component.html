@@ -1,8 +1,8 @@
 <mat-toolbar>
     <span>Editing existing wall</span>
 </mat-toolbar>
-<form [formGroup]="service.formModel" class="normal-form">
-    <input type="hidden" fromControlName="$key">
+<form [formGroup]="service.formModel" class="normal-form" (ngSubmit)="onSubmit()" autocomplete="off">
+    <input type="text" formControlName="wallID" readonly>
             <label>
                  Quiz Name : 
                 <input type="text" formControlName="wallName">

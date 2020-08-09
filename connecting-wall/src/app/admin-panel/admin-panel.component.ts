@@ -7,6 +7,7 @@ import {MatSort} from '@angular/material/sort';
 import { Users } from '../../models/users';
 import { WallService } from '../shared/wall.service';
 import { filter } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 /*import {FormControl} from '@angular/forms';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -21,7 +22,7 @@ import {MatIconModule} from '@angular/material/icon';*/
 })
 export class AdminPanelComponent implements OnInit {
 
-  constructor(private router:Router,private service:UserService, private wallService:WallService) {
+  constructor(private router:Router,private service:UserService, private wallService:WallService,private toastr:ToastrService) {
     
    }
   searchField;//za korisnike
@@ -87,6 +88,7 @@ export class AdminPanelComponent implements OnInit {
     if(confirm("Are you sure you want to delete this user?")){
     this.service.deleteUser(userId).subscribe(_ =>{
       this.users=this.users.filter(eachUser => eachUser.id !== userId);
+      this.toastr.warning('User deleted!','All walls created by this user are deleted!');
     });
     
   }
@@ -95,6 +97,7 @@ export class AdminPanelComponent implements OnInit {
     if(confirm("Are you sure you want to delete this wall?")){
       this.wallService.deleteWall(wallId).subscribe(_ =>{
         this.walls=this.walls.filter(eachWall=>eachWall.wallID!==wallId);
+        this.toastr.success('Wall Deleted!','Wall Deletion Successful!');
       });
     }
   }

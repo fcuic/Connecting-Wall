@@ -15,10 +15,9 @@ export class WallService {
 
   readonly BaseURI = 'http://localhost:57392/api';
   private header=new HttpHeaders({'content-type': 'application/json'});
- 
-
+  
   formModel= this.fb.group({
-    //$key:new FormControl(null),//za modify, primarni ključ zida
+    wallID:new FormControl(null),//za modify, primarni ključ zida
     wallName:['',[Validators.required,Validators.minLength(3)]],
     GroupATerms:this.fb.group({
       GroupATerm1:['', Validators.required],
@@ -74,6 +73,7 @@ export class WallService {
   populateForm(Object:Wall)
   {
     this.formModel.patchValue({
+      wallID:Object.wallID,
       wallName:Object.wallName,
       GroupATerms:{
         GroupATerm1:Object.groupATerms[0].termName,
@@ -102,9 +102,8 @@ export class WallService {
       GroupAConnections:Object.groupAConnections[0].connectionName,
       GroupBConnections:Object.groupBConnections[0].connectionName,
       GroupCConnections:Object.groupCConnections[0].connectionName,
-      GroupDConnections:Object.groupDConnections[0].connectionName,
-      
+      GroupDConnections:Object.groupDConnections[0].connectionName,  
     })
-    
   }
+  
 }

@@ -17,8 +17,7 @@ export class EditWallComponent implements OnInit {
   wallID:string;
   wallDetails:any;
   //#region date updated conversion to C# format
-  
-  
+  CurrentDate:Date;
 
 
 
@@ -26,6 +25,7 @@ export class EditWallComponent implements OnInit {
 
   ngOnInit(): void 
   {
+    this.CurrentDate=new Date()
    /*this.service.getWallById(this.service.formModel.value.wallID).subscribe(
     res=>{
       this.WallDetails=res;
@@ -35,7 +35,7 @@ export class EditWallComponent implements OnInit {
     }
   );*/
   this.GetWallData();
-  //this.service.getWallById()
+  console.log(this.CurrentDate.toJSON());
   }
 
   /*public dateToString(date:Date)
@@ -78,6 +78,7 @@ export class EditWallComponent implements OnInit {
       userID:this.wallDetails.userID,
       wallName:this.service.formModel.value.wallName,
       dateCreated:this.wallDetails.dateCreated,
+      dateUpdated:this.CurrentDate.toJSON(),
      groupATerms:[
         {
           termID:this.wallDetails.groupATerms[0].termID,

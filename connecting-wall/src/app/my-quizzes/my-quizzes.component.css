@@ -19,3 +19,10 @@ img{
 {
     background-color: rgb(6, 159, 80);
 }
+.hide{
+    display: none;
+  }
+mat-footer row mat-footer-cell{
+    justify-content: center;
+    font-style: italic;
+  }

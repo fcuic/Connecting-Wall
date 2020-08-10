@@ -12,3 +12,11 @@ img{
     height:50em; background-size:cover; width:150em;
      background-position:50% 50%;
 }
+.hide
+{
+    display: none;
+}
+mat-footer row mat-footer-cell{
+    justify-content: center;
+    font-style: italic;
+  }

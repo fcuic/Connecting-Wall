@@ -49,18 +49,18 @@
         </ng-container>
         <ng-container matColumnDef="loading">
             <mat-footer-cell *matFooterCellDef colspan="5">
-                Loading users...
+                Loading Walls...
             </mat-footer-cell>
         </ng-container>
         <ng-container matColumnDef="noData">
             <mat-footer-cell *matFooterCellDef colspan="5">
-                No data.
+                No Walls Created
             </mat-footer-cell>
         </ng-container>
         <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: columns;"></mat-row>
-        <!--<mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
-        <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}"></mat-footer-row>-->
+        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
+        <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}"></mat-footer-row>
     </mat-table>
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
 </div>

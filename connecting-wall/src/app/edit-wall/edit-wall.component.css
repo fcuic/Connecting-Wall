@@ -7,3 +7,7 @@ form.normal-form
     width: 100%;
     padding: 5%;
 }
+.fill-space
+{
+    flex:1 1 auto;
+}

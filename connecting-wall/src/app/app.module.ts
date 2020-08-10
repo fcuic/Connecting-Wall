@@ -32,6 +32,7 @@ import { WallService } from './shared/wall.service';
 import { MyQuizzesComponent } from './my-quizzes/my-quizzes.component';
 import { AboutComponent } from './about/about.component';
 import { EditWallComponent } from './edit-wall/edit-wall.component';
+import { PlayQuizComponent } from './play-quiz/play-quiz.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { EditWallComponent } from './edit-wall/edit-wall.component';
     MyQuizzesComponent,
     AboutComponent,
     EditWallComponent,
+    PlayQuizComponent,
   ],
   imports: [
     BrowserModule,

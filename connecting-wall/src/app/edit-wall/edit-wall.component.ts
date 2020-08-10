@@ -4,6 +4,7 @@ import { UserService } from '../shared/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { MyQuizzesComponent } from '../my-quizzes/my-quizzes.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-wall',
@@ -21,36 +22,14 @@ export class EditWallComponent implements OnInit {
 
 
 
-  constructor(public service:WallService,private userService:UserService,private toastr:ToastrService, private http:HttpClient) { }
+  constructor(public service:WallService,private userService:UserService,private toastr:ToastrService, private http:HttpClient,public dialogRef:MatDialogRef<EditWallComponent>) { }
 
   ngOnInit(): void 
   {
     this.CurrentDate=new Date()
-   /*this.service.getWallById(this.service.formModel.value.wallID).subscribe(
-    res=>{
-      this.WallDetails=res;
-      //console.log(this.WallDetails.groupATerms[0].termName);
-      //console.log(this.WallDetails.groupBTerms[0].termName);
-      console.log(this.WallDetails);
-    }
-  );*/
-  this.GetWallData();
-  console.log(this.CurrentDate.toJSON());
+    this.GetWallData();
+    console.log(this.CurrentDate.toJSON());
   }
-
-  /*public dateToString(date:Date)
-  {
-    let day=date.getDate();
-    let month=date.getMonth();
-    let year=date.getFullYear();
-    let hours=date.getHours();
-    let minutes=date.getMinutes();
-    let seconds=date.getSeconds();
-    let miliseconds=date.getMilliseconds();
-
-    let dateStringInCFormat=year+'-0'+month+'-0'+day+'T'+hours+':'+minutes+':'+seconds+"."+miliseconds;
-    return dateStringInCFormat;
-  }*/
   GetWallData()
   {
     
@@ -189,6 +168,7 @@ export class EditWallComponent implements OnInit {
     this.UpdateWall().subscribe(
       (res)=>
       {
+        window.location.reload();
         this.toastr.success('Existing Connecting Wall Updated!','Update Successful!');
         console.log(res);
       },
@@ -196,5 +176,9 @@ export class EditWallComponent implements OnInit {
         console.log(err);
       }
     )
+  }
+  onClose()
+  {
+   this.dialogRef.close();//dialog ref klase matdialog ref za zatvaranje prozora!
   }
 }

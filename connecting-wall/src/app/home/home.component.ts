@@ -9,6 +9,8 @@ import { Users } from '../../models/users';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { stringify } from 'querystring';
 import { Observable } from 'rxjs';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { PlayQuizComponent } from '../play-quiz/play-quiz.component';
 
 @Component({
   selector: 'app-home',
@@ -21,9 +23,11 @@ export class HomeComponent implements OnInit {
   searchField;
   columns=["WallName", "Creator FullName", "Creator UserName","Email","Date Created","Actions"];
   dataSource:MatTableDataSource<any>;
+  response:any;
+  WallDetails:any;
   walls=[];//all created walls for playing
 
-  constructor(private router:Router, private service:UserService, private wallService:WallService) { }
+  constructor(private router:Router, private service:UserService, private wallService:WallService,private dialog:MatDialog) { }
 
   ngOnInit(): void {
     this.service.getUserProfile().subscribe(
@@ -59,6 +63,27 @@ export class HomeComponent implements OnInit {
     localStorage.removeItem('token');//removing user token from local storage
     this.router.navigate(['/user/login']);
   }
+  openPlayWindow(wallID:string)
+  {
+    this.response=this.wallService.getWallById(wallID).subscribe(
+      res=>{
+        this.WallDetails=res;
+        //console.log(this.WallDetails);
+      }
+    );
+    const dialogConfig=new MatDialogConfig();
+    dialogConfig.autoFocus=true;
+    //dialogConfig.disableClose=true;
+    dialogConfig.width="60%";
+    dialogConfig.width="1000px";
+    dialogConfig.height="800px";
+    dialogConfig.data=
+    {
+      wallID:this.WallDetails.wallID
+    }
+    this.dialog.open(PlayQuizComponent,dialogConfig);
   }
+  }
+
 
 

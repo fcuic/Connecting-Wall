@@ -70,6 +70,7 @@ export class MyQuizzesComponent implements OnInit {
     if(confirm("Are you sure you want to delete this wall?")){
       this.service.deleteWall(wallId).subscribe(_ =>{
         this.walls=this.walls.filter(eachWall=>eachWall.wallID!==wallId);
+        window.location.reload();
         this.toastr.success('Wall Deleted!','Wall Deletion Successful!');
       });
     }
@@ -92,7 +93,7 @@ export class MyQuizzesComponent implements OnInit {
     //this.service.populateForm(this.service.getWallById(wallID));
     //populateForm(this.walls.id)
     const dialogConfig=new MatDialogConfig();
-   // dialogConfig.disableClose=true;
+    dialogConfig.disableClose=true;
     dialogConfig.autoFocus=true;
     dialogConfig.width="60%";
     dialogConfig.width="1000px";

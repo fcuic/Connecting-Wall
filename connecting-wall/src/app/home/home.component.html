@@ -1,18 +1,10 @@
 <app-header></app-header>
-<!--<div class="card m-5" style="width:20rem" *ngIf="userDetails">
-<ul class="list-group">
-    <li class="list-group-item"><strong>Username : </strong>{{userDetails.userName}}</li>
-    <li class="list-group-item"><strong>Full name : </strong>{{userDetails.fullName}}</li>
-    <li class="list-group-item"><strong>E-mail : </strong>{{userDetails.email}}</li>
-</ul>
-</div>-->
 <div class="container">
 <div class="d-flex justify-content-center" *ngIf="userDetails"><!--moram upisat ngif inace baca error-->
 <h1 class="display-1">Welcome <strong>{{userDetails.userName}} !</strong></h1>
 </div>
 <div class="d-flex justify-content-center">
 <p class="h2">Ready to play?</p></div>
-<!--<img src="/assets/img/quiz-master.jpg">-->
 <div class="search-div">
     <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" autocomplete="off">
@@ -44,7 +36,7 @@
         <ng-container matColumnDef="Actions">
              <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>            
                 <mat-cell *matCellDef="let row">
-                <button type="button" class="btn btn-success">Play Quiz</button>
+                <button type="button" class="btn btn-success" (click)="openPlayWindow(row.wallID)">Play Quiz</button>
                 </mat-cell>
         </ng-container>
         <ng-container matColumnDef="loading">

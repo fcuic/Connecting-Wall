@@ -1,5 +1,8 @@
 <mat-toolbar>
     <span>Editing existing wall</span>
+   <!-- <span class="fill-remaining-space"></span>-->
+   <span class="fill-space"></span>
+    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
 </mat-toolbar>
 <form [formGroup]="service.formModel" class="normal-form" (ngSubmit)="onSubmit()" autocomplete="off">
     <input type="hidden" formControlName="wallID" readonly>

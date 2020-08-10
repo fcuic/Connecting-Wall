@@ -88,6 +88,7 @@ export class AdminPanelComponent implements OnInit {
     if(confirm("Are you sure you want to delete this user?")){
     this.service.deleteUser(userId).subscribe(_ =>{
       this.users=this.users.filter(eachUser => eachUser.id !== userId);
+      window.location.reload();
       this.toastr.warning('User deleted!','All walls created by this user are deleted!');
     });
     
@@ -97,6 +98,7 @@ export class AdminPanelComponent implements OnInit {
     if(confirm("Are you sure you want to delete this wall?")){
       this.wallService.deleteWall(wallId).subscribe(_ =>{
         this.walls=this.walls.filter(eachWall=>eachWall.wallID!==wallId);
+        window.location.reload();
         this.toastr.success('Wall Deleted!','Wall Deletion Successful!');
       });
     }

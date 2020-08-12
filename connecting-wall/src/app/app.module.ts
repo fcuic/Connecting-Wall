@@ -33,6 +33,8 @@ import { MyQuizzesComponent } from './my-quizzes/my-quizzes.component';
 import { AboutComponent } from './about/about.component';
 import { EditWallComponent } from './edit-wall/edit-wall.component';
 import { PlayQuizComponent } from './play-quiz/play-quiz.component';
+import { QuizStartComponent } from './quiz-start/quiz-start.component';
+import { GameComponent } from './game/game.component';
 
 
 @NgModule({
@@ -50,6 +52,8 @@ import { PlayQuizComponent } from './play-quiz/play-quiz.component';
     AboutComponent,
     EditWallComponent,
     PlayQuizComponent,
+    QuizStartComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,

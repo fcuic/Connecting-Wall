@@ -4,7 +4,7 @@ import { UserService } from '../shared/user.service';
 import { ToastrService } from 'ngx-toastr';
 import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { HomeComponent } from '../home/home.component';
-
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-play-quiz',
   templateUrl: './play-quiz.component.html',
@@ -16,7 +16,7 @@ export class PlayQuizComponent implements OnInit {
   wallsUser:string;
   wallName:string;
   WallDetails:any;
-  constructor(private service:WallService,private userService:UserService,private toastr:ToastrService, public dialogRef:MatDialogRef<HomeComponent>, @Inject(MAT_DIALOG_DATA) public receivedData:any) 
+  constructor(private service:WallService,private userService:UserService,private toastr:ToastrService, public dialogRef:MatDialogRef<HomeComponent>, @Inject(MAT_DIALOG_DATA) public receivedData:any,private router:Router,private dialog:MatDialog) 
   {
     this.wallID=receivedData.wallID;
   }
@@ -38,5 +38,6 @@ export class PlayQuizComponent implements OnInit {
   onClose()
   {
     this.dialogRef.close();
+    this.router.navigate(['home']);
   }
 }

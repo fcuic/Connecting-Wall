@@ -10,7 +10,8 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import {CreateQuizComponent} from './create-quiz/create-quiz.component';
 import { MyQuizzesComponent } from './my-quizzes/my-quizzes.component';
 import { AboutComponent } from './about/about.component';
-
+import { QuizStartComponent } from './quiz-start/quiz-start.component';
+import { PlayQuizComponent } from './play-quiz/play-quiz.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,11 @@ const routes: Routes = [
     {path: 'login', component:LoginComponent}
   ]
 },
-  {path : 'home', component:HomeComponent, canActivate:[AuthGuard] }, // for disabling access to unlogged user
+  {path : 'home', component:HomeComponent,
+  children:[
+    {path:'quizstart',component:QuizStartComponent}
+  ]
+}, // for disabling access to unlogged user
   {path : 'forbidden', component:ForbiddenComponent},//public - no auth guard
   {path : 'adminpanel', component:AdminPanelComponent, canActivate:[AuthGuard], data:{permittedRoles:['Admin']} },
   {path : 'create-quiz', component: CreateQuizComponent,canActivate:[AuthGuard]},

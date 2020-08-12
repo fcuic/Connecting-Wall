@@ -11,6 +11,7 @@ import { stringify } from 'querystring';
 import { Observable } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PlayQuizComponent } from '../play-quiz/play-quiz.component';
+import{QuizStartComponent} from '../quiz-start/quiz-start.component';
 
 @Component({
   selector: 'app-home',
@@ -81,7 +82,7 @@ export class HomeComponent implements OnInit {
     {
       wallID:this.WallDetails.wallID
     }
-    this.dialog.open(PlayQuizComponent,dialogConfig);
+    this.dialog.open(QuizStartComponent,dialogConfig);
   }
   }
 

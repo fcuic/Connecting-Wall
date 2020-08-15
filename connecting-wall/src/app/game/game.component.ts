@@ -7,6 +7,7 @@ import { HomeComponent } from '../home/home.component';
 import { Term } from '../../models/term.model';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import {CountdownModule, CountdownConfig} from 'ngx-countdown';
+import {Howl} from 'howler';
 
 @Component({
   selector: 'app-game',
@@ -57,8 +58,20 @@ export class GameComponent implements OnInit {
  isClickedtile15=false;
  isClickedtile16=false;
  //#endregion
-
-
+ //#region sound variables/effects
+  successSound=new Howl({
+    src:['../../assets/soundEffects/success.mp3'],
+    volume: 1
+  });
+  chosenSound=new Howl({
+    src:['../../assets/soundEffects/match.wav'],
+    volume: 1
+  });
+  wrongSound=new Howl({
+    src:['../../assets/soundEffects/wrong.mp3'],
+    volume: 0.5
+  });
+ //#endregion
 
 
   constructor(private service:WallService,private userService:UserService,private toastr:ToastrService, public dialogRef:MatDialogRef<HomeComponent>, @Inject(MAT_DIALOG_DATA) public receivedData:any,private dialog:MatDialog) 
@@ -122,6 +135,13 @@ export class GameComponent implements OnInit {
       } 
     );
     //#endregion
+    //#region Audio testing
+    //example of sound effect
+    /*var sound = new Howl({
+      src: ['../../assets/soundEffects/match.wav']
+    });
+    sound.volume(1);
+    sound.play();*/
     
   }
   Shuffle(Array)//Fisher-Yates shuffle, u dokumentu opisat kako funkcionira
@@ -142,8 +162,10 @@ export class GameComponent implements OnInit {
   {
     if(event.action=="done")
     {
+
       console.log("Time expired!");
     }
   }
+  
 
 }

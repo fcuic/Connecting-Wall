@@ -19,10 +19,6 @@ export class QuizStartComponent implements OnInit {
   OnStart()
   {
     this.Started=true;
-    console.log("prva");
-  }
-  StartTimer(){
-    console.log("druga");
   }
   onClose()
   {

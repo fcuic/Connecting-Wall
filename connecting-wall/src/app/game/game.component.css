@@ -1,0 +1,80 @@
+.tilecontainer
+{
+    width: 700px;
+    height: 520px;
+    left:110px;
+    top:30px;
+    position: relative;
+    display: flex;
+    background-image:url("../../assets/img/background.jpg");
+    justify-content: center;
+    background-size:cover;
+    background-position:50% 50%;
+}
+.tile1, .tile2,.tile3,.tile4, .tile5,.tile6,.tile7, .tile8,.tile9,.tile10, .tile11,.tile12,.tile13, .tile14,.tile15,.tile16
+{
+    width: 148px;
+    left: 250px;
+    top: 240px;
+    text-align: center;
+    line-height: 30px;
+    background: #e9e8f2;
+    font-weight: 600;
+    height: 98px;
+    border: 2px solid #74708f;
+    border: 1px solid #938DBD;
+    padding: 2px;
+    border-radius: 4px;
+    background-position: center;
+    display: block;
+    position: absolute;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 600;
+}
+.ClickedTile
+{
+    background: #e1ec06;
+}
+.tile1:hover,.tile2:hover,.tile3:hover,.tile4:hover,.tile5:hover,.tile6:hover,.tile7:hover,.tile8:hover,.tile9:hover,.tile10:hover,.tile11:hover,.tile12:hover,.tile13:hover,.tile14:hover,.tile15:hover,.tile16:hover
+{
+    background: #a4a0c4;
+}
+.p
+{
+    text-align: center;
+    line-height: 85px;
+}
+.ScoreAndCountdown
+{
+    left:110px;
+    width: 700px;
+    height: 50px;
+    position: relative;
+    display: flex;
+    font-size: 15px;
+}
+.ScoreAndCountdown p
+{
+    text-decoration: cyan;
+}
+.fill-space
+{
+    flex:1 1 auto;
+}
+.lives
+{
+    position: absolute;
+    left: 710px;
+    height: 300px;
+    width: 100px;
+    top: 250px;
+    color: #e70606;
+    font-size: 70px;
+}
+.life1,.life2,.life3
+{
+    margin:30px;
+}

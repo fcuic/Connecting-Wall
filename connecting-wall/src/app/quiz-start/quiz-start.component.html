@@ -7,5 +7,5 @@
 <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
 </mat-toolbar>
 <app-play-quiz *ngIf="!Started"></app-play-quiz>
-<button type="button" class="btn btn-primary btn-lg btn-block" (click)="OnStart();StartTimer();" *ngIf="!Started">Start</button>
+<button type="button" class="btn btn-primary btn-lg btn-block" (click)="OnStart();" *ngIf="!Started">Start</button>
 <app-game *ngIf="Started"></app-game>

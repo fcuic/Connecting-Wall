@@ -12,7 +12,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatDialogConfig} from '@angular/material/dialog';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatGridListModule} from '@angular/material/grid-list';
-
+import {CountdownModule} from 'ngx-countdown';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -69,6 +69,7 @@ import { GameComponent } from './game/game.component';
     MatDialogModule,
     MatToolbarModule,
     MatGridListModule,
+    CountdownModule,
     ToastrModule.forRoot({
       progressBar:true
     }),

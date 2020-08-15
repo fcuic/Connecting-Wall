@@ -1,1 +1,78 @@
-<p>game works!</p>
+<br>
+<div class="ScoreAndCountdown">
+    <div class="Created">
+        <label>Quiz by :</label>
+        <p><strong>{{this.wallDetails.user.fullName}}</strong></p>
+    </div>
+    <span class="fill-space"></span>
+    <div class="Score">
+        <label>Score : </label>
+        <p><strong>{{this.score}}</strong></p>
+    </div>
+    <span class="fill-space"></span>
+    <div class="Time">
+    <label>Time left : </label>
+    <p><strong><countdown [config]="{ leftTime: 180, format: 'm:s' }" (event)="timesUp($event)"></countdown></strong></p>
+    </div>
+</div>
+<div class="tilecontainer">
+    <div class="tile1" style="left:40px;top:55px;" (click)="isClickedtile1=!isClickedtile1" [class.ClickedTile]="isClickedtile1">
+        <p>{{this.terms[0].termName}}</p>
+    </div>
+    <div class="tile2" style="left:200px;top:55px;" (click)="isClickedtile2=!isClickedtile2" [class.ClickedTile]="isClickedtile2">
+        <p>{{this.terms[1].termName}}</p>
+    </div>
+    <div class="tile3" style="left:360px;top:55px;" (click)="isClickedtile3=!isClickedtile3" [class.ClickedTile]="isClickedtile3">
+        <p>{{this.terms[2].termName}}</p>
+    </div>
+    <div class="tile4" style="left:520px;top:55px;" (click)="isClickedtile4=!isClickedtile4" [class.ClickedTile]="isClickedtile4">
+        <p>{{this.terms[3].termName}}</p>
+    </div>
+    <div class="tile5" style="left:40px;top:165px;" (click)="isClickedtile5=!isClickedtile5" [class.ClickedTile]="isClickedtile5">
+        <p>{{this.terms[4].termName}}</p>
+    </div>
+    <div class="tile6" style="left:200px;top:165px;" (click)="isClickedtile6=!isClickedtile6" [class.ClickedTile]="isClickedtile6">
+        <p>{{this.terms[5].termName}}</p>
+    </div>
+    <div class="tile7" style="left:360px;top:165px;"(click)="isClickedtile7=!isClickedtile7" [class.ClickedTile]="isClickedtile7">
+        <p>{{this.terms[6].termName}}</p>
+    </div>
+    <div class="tile8" style="left:520px;top:165px;" (click)="isClickedtile8=!isClickedtile8" [class.ClickedTile]="isClickedtile8">
+        <p>{{this.terms[7].termName}}</p>
+    </div>
+    <div class="tile9" style="left:40px;top:275px;" (click)="isClickedtile9=!isClickedtile9" [class.ClickedTile]="isClickedtile9">
+        <p>{{this.terms[8].termName}}</p>
+    </div>
+    <div class="tile10" style="left:200px;top:275px;" (click)="isClickedtile10=!isClickedtile10" [class.ClickedTile]="isClickedtile10">
+        <p>{{this.terms[9].termName}}</p>
+    </div>
+    <div class="tile11" style="left:360px;top:275px;" (click)="isClickedtile11=!isClickedtile11" [class.ClickedTile]="isClickedtile11">
+        <p>{{this.terms[10].termName}}</p>
+    </div>
+    <div class="tile12" style="left:520px;top:275px;" (click)="isClickedtile12=!isClickedtile12" [class.ClickedTile]="isClickedtile12">
+        <p>{{this.terms[11].termName}}</p>
+    </div>
+    <div class="tile13" style="left:40px;top:385px;" (click)="isClickedtile13=!isClickedtile13" [class.ClickedTile]="isClickedtile13">
+        <p>{{this.terms[12].termName}}</p>
+    </div>
+    <div class="tile14" style="left:200px;top:385px;" (click)="isClickedtile14=!isClickedtile14" [class.ClickedTile]="isClickedtile14">
+        <p>{{this.terms[13].termName}}</p>
+    </div>
+    <div class="tile15" style="left:360px;top:385px;" (click)="isClickedtile15=!isClickedtile15" [class.ClickedTile]="isClickedtile15">
+        <p>{{this.terms[14].termName}}</p>
+    </div>
+    <div class="tile16" style="left:520px;top:385px;" (click)="isClickedtile16=!isClickedtile16" [class.ClickedTile]="isClickedtile16">
+        <p>{{this.terms[15].termName}}</p>
+    </div>
+    <div class="lives">
+        <div class="life1">
+            &#x2665;
+        </div>
+        <div class="life2">
+            &#x2665;
+        </div>
+        <div class="life3">
+            &#x2665;
+        </div>
+    </div>
+</div>

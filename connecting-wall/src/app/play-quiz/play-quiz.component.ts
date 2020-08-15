@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject,EventEmitter,Output } from '@angular/core';
+import { Component, OnInit, Inject} from '@angular/core';
 import { WallService } from '../shared/wall.service';
 import { UserService } from '../shared/user.service';
 import { ToastrService } from 'ngx-toastr';

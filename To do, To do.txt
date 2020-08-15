@@ -11,5 +11,19 @@
 
 
 - rješavanje kviza : Legendary
-- popup dialog za rješavanje na home komponenti
+- popup dialog za rješavanje na home komponenti DONE
+
+- napraviti klasu i njen objekt(polje objekata) za ime pojma i konekciju (grupu kojoj pripada)Easy Solved
+- omogućiti shuffle tog polja objekata Easy SOLVED
+-timer i countdown(Done), dodati jos jednu komponentu u popup dialog kad coundown dosegne 0(event odrađen), u njoj prikazati broj bodeva
+- stilizirati malo buttone, dodati onclick on hover eventove HARD
+-tranzicija na odabir 4 pojma koji imaju isti connection, drukčije obojati svaku grupu pri tranziciji(opcionalno) LEGENDARY
+stilizacija pozadine da nebude simple bijela
 ...
+
+Popraviti performanse home komponente kad se otvara play!!! Tribalo bi bit easy
+
+radim: - stilizirati onclick onhover eventove na buttone
+- audiokontroler klasa koja će igrati zvuk odabira buttona, zvuk pravog odabira i zvuk krivog odabira
+- kad istekne vrijeme prebacit na komponentu pogađanja konekcija za dodatne bodeve
+- matching pojmova na 45:00 minuti videa how to code a card game in javascript

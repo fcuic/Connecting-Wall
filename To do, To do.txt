@@ -27,3 +27,6 @@ radim: - stilizirati onclick onhover eventove na buttone
 - audiokontroler klasa koja će igrati zvuk odabira buttona, zvuk pravog odabira i zvuk krivog odabira
 - kad istekne vrijeme prebacit na komponentu pogađanja konekcija za dodatne bodeve
 - matching pojmova na 45:00 minuti videa how to code a card game in javascript
+
+
+KOD SORTIRANJA Mat Tablea row.feature i ime rowa moraju imat isto ime, zbog cega neradi sort

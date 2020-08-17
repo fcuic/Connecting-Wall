@@ -30,6 +30,9 @@ export class HomeComponent implements OnInit {
 
   constructor(private router:Router, private service:UserService, private wallService:WallService,private dialog:MatDialog) { }
 
+  @ViewChild(MatPaginator) quizPaginator: MatPaginator;
+  @ViewChild(MatSort) quizSort:MatSort;
+
   ngOnInit(): void {
     this.service.getUserProfile().subscribe(
       res=>{
@@ -44,6 +47,8 @@ export class HomeComponent implements OnInit {
       res=>{
         this.walls=res;
         this.dataSource=new MatTableDataSource(this.walls);
+        this.dataSource.paginator=this.quizPaginator;
+        this.dataSource.sort=this.quizSort;
         console.log(this.walls);
       }
     )

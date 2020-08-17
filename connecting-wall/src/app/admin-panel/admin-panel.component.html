@@ -48,7 +48,7 @@
         <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
         <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}"></mat-footer-row>
     </mat-table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+    <mat-paginator #UserPaginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
 </div>
 <br>
 
@@ -104,23 +104,5 @@
         <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':dataSource2!=null}"></mat-footer-row>
         <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(dataSource2!=null && dataSource2.data.length==0)}"></mat-footer-row>
     </mat-table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+    <mat-paginator #QuizPaginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
 </div>
-
-
-<!--<table id="Users">
-    <tr>
-        <th *ngFor="let col of columns">
-            {{col}}
-        </th>
-        <th>Option</th>
-    </tr>
-    <tr *ngFor="let user of users">
-        <td *ngFor="let col of index">
-            {{user[col]}}
-        </td>
-        <td>
-            
-        </td>
-    </tr>
-</table>-->

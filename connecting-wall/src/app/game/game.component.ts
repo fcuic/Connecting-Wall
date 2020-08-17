@@ -8,6 +8,7 @@ import { Term } from '../../models/term.model';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import {CountdownModule, CountdownConfig} from 'ngx-countdown';
 import {Howl} from 'howler';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-game',
@@ -65,7 +66,7 @@ export class GameComponent implements OnInit {
   });
   chosenSound=new Howl({
     src:['../../assets/soundEffects/match.wav'],
-    volume: 1
+    volume: 0.2
   });
   wrongSound=new Howl({
     src:['../../assets/soundEffects/wrong.mp3'],
@@ -81,14 +82,14 @@ export class GameComponent implements OnInit {
 
   ngOnInit(): void {
     //#region DataGetting
-    console.log(this.wallID);
+    //console.log(this.wallID);
     this.service.getWallById(this.wallID).subscribe(
       res=>
       {
         this.wallDetails=res;
         this.wallName=this.wallDetails.wallName;
-        console.log(this.wallDetails);
-        console.log(this.wallDetails.groupATerms[0].termName)
+        /*console.log(this.wallDetails);
+        console.log(this.wallDetails.groupATerms[0].termName)*/
         this.termA1.termName=this.wallDetails.groupATerms[0].termName;
         this.termA1.connectionName=this.wallDetails.groupAConnections[0].connectionName;
         this.termA2.termName=this.wallDetails.groupATerms[1].termName;
@@ -121,7 +122,7 @@ export class GameComponent implements OnInit {
         this.termD3.connectionName=this.wallDetails.groupDConnections[0].connectionName;
         this.termD4.termName=this.wallDetails.groupDTerms[3].termName;
         this.termD4.connectionName=this.wallDetails.groupDConnections[0].connectionName;
-        this.terms = [ this.termA1,this.termA2,this.termA3,this.termA4,
+        this.terms = [ this.termA1,this.termA2,this.termA3,this.termA4, //array that is displayed
                       this.termB1,this.termB2,this.termB3,this.termB4,
                       this.termC1,this.termC2,this.termC3,this.termC4,
                       this.termD1,this.termD2,this.termD3,this.termD4
@@ -141,7 +142,9 @@ export class GameComponent implements OnInit {
       src: ['../../assets/soundEffects/match.wav']
     });
     sound.volume(1);
-    sound.play();*/
+    sound.play();
+    //#endregion*/
+    
     
   }
   Shuffle(Array)//Fisher-Yates shuffle, u dokumentu opisat kako funkcionira
@@ -165,6 +168,17 @@ export class GameComponent implements OnInit {
 
       console.log("Time expired!");
     }
+  }
+  checkForTermMatch(term1,term2,term3,term4)
+  {
+
+  }
+  getTermConnection(event)
+  {
+    var id;
+if(this.isClickedtile1== true || this.isClickedtile2== true || this.isClickedtile3== true || this.isClickedtile4== true || this.isClickedtile5== true || this.isClickedtile6== true || this.isClickedtile7== true || this.isClickedtile8== true || this.isClickedtile9== true || this.isClickedtile10== true || this.isClickedtile11== true || this.isClickedtile12== true || this.isClickedtile13== true || this.isClickedtile14== true || this.isClickedtile15== true || this.isClickedtile16 == true){
+    id=event.target.id;
+    console.log(id);}
   }
   
 

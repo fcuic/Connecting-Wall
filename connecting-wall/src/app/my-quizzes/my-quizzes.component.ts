@@ -32,9 +32,8 @@ export class MyQuizzesComponent implements OnInit {
   searchField;
   columns=["WallName", "Creator FullName", "Creator UserName","Email","Date Created","Actions"];
   dataSource:MatTableDataSource<any>;
-
   walls=[];
-
+  @ViewChild(MatPaginator) paginator: MatPaginator;
  
   ngOnInit(): void {
     this.userService.getUserProfile().pipe(
@@ -46,6 +45,7 @@ export class MyQuizzesComponent implements OnInit {
    ).subscribe(res => {
        this.walls = res;
        this.dataSource=new MatTableDataSource(this.walls);
+       this.dataSource.paginator=this.paginator;
        console.log(res);
     });
 

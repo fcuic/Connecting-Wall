@@ -31,11 +31,10 @@ export class AdminPanelComponent implements OnInit {
   columns2=["WallName", "Creator FullName", "Creator UserName","Email","Date Created","Actions"];//zidovi
   dataSource:MatTableDataSource<Users>;//korisnici
   dataSource2:MatTableDataSource<any>;//zidovi
-  //searchKey:string;
 
- // index=["id","fullName","userName","email"];
- // @ViewChild(MatPaginator) paginator: MatPaginator;
- // @ViewChild(MatSort) sort:MatSort;
+  @ViewChild('UserPaginator',{static:true}) UserPaginator : MatPaginator;
+  @ViewChild('QuizPaginator',{static:true}) QuizPaginator : MatPaginator;
+   
 
   users : Users[] = [];
   walls=[];
@@ -45,8 +44,7 @@ export class AdminPanelComponent implements OnInit {
       {
         this.users=response;//this.users je polje
         this.dataSource=new MatTableDataSource(this.users);
-        //this.dataSource.paginator=this.paginator;
-        //this.dataSource.sort=this.sort;
+        this.dataSource.paginator=this.UserPaginator;
         //console.log(response);
         //console.log(this.users[0].id); pristup idu usera
       },
@@ -56,6 +54,9 @@ export class AdminPanelComponent implements OnInit {
        (response)=>{
          this.walls=response;
          this.dataSource2=new MatTableDataSource(this.walls);
+         this.dataSource2.paginator=this.QuizPaginator;
+        
+        
        }
      )
   }

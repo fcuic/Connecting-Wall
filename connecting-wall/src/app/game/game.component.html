@@ -16,7 +16,7 @@
     </div>
 </div>
 <div class="tilecontainer">
-    <div class="tile" style="left:40px;top:55px;" (click)="isClickedtile1=!isClickedtile1; chosenSound.play();PushInCheckArray($event,isClickedtile1);getParagraphText($event)" [class.ClickedTile]="isClickedtile1" id="{{this.terms[0].connectionName}}">
+    <div class="tile" style="left:40px;top:55px;" (click)="isClickedtile1=!isClickedtile1; chosenSound.play();PushInCheckArray($event,isClickedtile1);getParagraphText($event);" [class.ClickedTile]="isClickedtile1" id="{{this.terms[0].connectionName}}">
         <p hidden>{{this.terms[0].connectionName}}</p>
         <p>{{this.terms[0].termName}}</p>
     </div>

@@ -78,6 +78,9 @@ export class GameComponent implements OnInit {
  firstGroup=[];
  matchedProperly=false; //varijabla za sakrivanje matchanih pojmova
  //#endregion
+ //#region Variable to check whather the group is done
+ numOfPairedGroupTerms=0;
+ //#endregion
 
 
   constructor(private service:WallService,private userService:UserService,private toastr:ToastrService, public dialogRef:MatDialogRef<HomeComponent>, @Inject(MAT_DIALOG_DATA) public receivedData:any,private dialog:MatDialog) 
@@ -87,14 +90,11 @@ export class GameComponent implements OnInit {
 
   ngOnInit(): void {
     //#region DataGetting
-    //console.log(this.wallID);
     this.service.getWallById(this.wallID).subscribe(
       res=>
       {
         this.wallDetails=res;
         this.wallName=this.wallDetails.wallName;
-        /*console.log(this.wallDetails);
-        console.log(this.wallDetails.groupATerms[0].termName)*/
         this.termA1.termName=this.wallDetails.groupATerms[0].termName;
         this.termA1.connectionName=this.wallDetails.groupAConnections[0].connectionName;
         this.termA2.termName=this.wallDetails.groupATerms[1].termName;
@@ -141,18 +141,9 @@ export class GameComponent implements OnInit {
       } 
     );
     //#endregion
-    //#region Audio testing
-    //example of sound effect
-    /*var sound = new Howl({
-      src: ['../../assets/soundEffects/match.wav']
-    });
-    sound.volume(1);
-    sound.play();
-    //#endregion*/
-    //#region Variables for Quiz
-
-    
-    
+    //#region Variable to check whather the group is done
+    numOfPairedGroupTerms:Number;
+    //#endregion
   }
   Shuffle(Array)//Fisher-Yates shuffle, u dokumentu opisat kako funkcionira
   {
@@ -185,8 +176,15 @@ export class GameComponent implements OnInit {
       console.log("Konekcija :"+Connection);
       console.log("Matched properly!");
       this.score++;
-      this.successSound.play();
+      this.numOfPairedGroupTerms++;
       this.numOfClickedTerms=0;
+      this.successSound.play();
+      this.hideElement(Connection);
+
+      if(this.numOfPairedGroupTerms==3)
+      {
+        this.score=4;
+      }
     }
     else if(array.length==4 && allEqual(array)==false)
     {
@@ -195,6 +193,16 @@ export class GameComponent implements OnInit {
       this.NotMatchedProperly();
       this.numOfClickedTerms=0;
     }
+  }
+  hideElement(connectionName)
+  {
+   var elms=document.querySelectorAll("[id='"+connectionName+"']");//sick
+   console.log(elms);
+   for(var i=0;i<elms.length;i++)
+   {
+    elms[i].className="tile NotClickable";
+   }
+
   }
   NotMatchedProperly()//kad zezne, postavlja sve clickove u false!!
   {
@@ -214,10 +222,6 @@ export class GameComponent implements OnInit {
     this.isClickedtile14=false;
     this.isClickedtile15=false;
     this.isClickedtile16=false;
-  }
-  hideElements()
-  {
-
   }
 
   PushInCheckArray(event,isClicked)

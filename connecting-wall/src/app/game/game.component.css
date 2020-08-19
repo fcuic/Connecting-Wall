@@ -34,6 +34,11 @@
     line-height: 30px;
     font-weight: 600;
 }
+.NotClickable
+{
+    background: green;
+    pointer-events: none;
+}
 .ClickedTile
 {
     background: #edf557;

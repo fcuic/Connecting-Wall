@@ -16,52 +16,68 @@
     </div>
 </div>
 <div class="tilecontainer">
-    <div class="tile" style="left:40px;top:55px;" (click)="isClickedtile1=!isClickedtile1; chosenSound.play(); getTermConnection($event)" [class.ClickedTile]="isClickedtile1" id="{{this.terms[0].connectionName}}">
+    <div class="tile" style="left:40px;top:55px;" (click)="isClickedtile1=!isClickedtile1; chosenSound.play();PushInCheckArray($event,isClickedtile1);getParagraphText($event)" [class.ClickedTile]="isClickedtile1" id="{{this.terms[0].connectionName}}">
+        <p hidden>{{this.terms[0].connectionName}}</p>
         <p>{{this.terms[0].termName}}</p>
     </div>
-    <div class="tile" style="left:200px;top:55px;" (click)="isClickedtile2=!isClickedtile2;chosenSound.play();getTermConnection($event)" [class.ClickedTile]="isClickedtile2" id="{{this.terms[1].connectionName}}">
+    <div class="tile" style="left:200px;top:55px;" (click)="isClickedtile2=!isClickedtile2;chosenSound.play();PushInCheckArray($event,isClickedtile2);getParagraphText($event)" [class.ClickedTile]="isClickedtile2" id="{{this.terms[1].connectionName}}">
+        <p hidden>{{this.terms[1].connectionName}}</p>
         <p>{{this.terms[1].termName}}</p>
     </div>
-    <div class="tile" style="left:360px;top:55px;" (click)="isClickedtile3=!isClickedtile3;chosenSound.play();getTermConnection($event)" [class.ClickedTile]="isClickedtile3" id="{{this.terms[2].connectionName}}">
+    <div class="tile" style="left:360px;top:55px;" (click)="isClickedtile3=!isClickedtile3;chosenSound.play();PushInCheckArray($event,isClickedtile3);getParagraphText($event)" [class.ClickedTile]="isClickedtile3" id="{{this.terms[2].connectionName}}">
+        <p hidden>{{this.terms[2].connectionName}}</p>
         <p>{{this.terms[2].termName}}</p>
     </div>
-    <div class="tile" style="left:520px;top:55px;" (click)="isClickedtile4=!isClickedtile4;chosenSound.play();getTermConnection($event)" [class.ClickedTile]="isClickedtile4" id="{{this.terms[3].connectionName}}">
+    <div class="tile" style="left:520px;top:55px;" (click)="isClickedtile4=!isClickedtile4;chosenSound.play();PushInCheckArray($event,isClickedtile4);getParagraphText($event)" [class.ClickedTile]="isClickedtile4" id="{{this.terms[3].connectionName}}">
+        <p hidden>{{this.terms[3].connectionName}}</p>
         <p>{{this.terms[3].termName}}</p>
     </div>
-    <div class="tile" style="left:40px;top:165px;" (click)="isClickedtile5=!isClickedtile5;chosenSound.play();getTermConnection($event)" [class.ClickedTile]="isClickedtile5" id="{{this.terms[4].connectionName}}">
+    <div class="tile" style="left:40px;top:165px;" (click)="isClickedtile5=!isClickedtile5;chosenSound.play();PushInCheckArray($event,isClickedtile5);getParagraphText($event)" [class.ClickedTile]="isClickedtile5" id="{{this.terms[4].connectionName}}">
+        <p hidden>{{this.terms[4].connectionName}}</p>
         <p>{{this.terms[4].termName}}</p>
     </div>
-    <div class="tile" style="left:200px;top:165px;" (click)="isClickedtile6=!isClickedtile6;chosenSound.play();getTermConnection($event)" [class.ClickedTile]="isClickedtile6" id="{{this.terms[5].connectionName}}">
+    <div class="tile" style="left:200px;top:165px;" (click)="isClickedtile6=!isClickedtile6;chosenSound.play();PushInCheckArray($event,isClickedtile6);getParagraphText($event)" [class.ClickedTile]="isClickedtile6" id="{{this.terms[5].connectionName}}">
+        <p hidden>{{this.terms[5].connectionName}}</p>
         <p>{{this.terms[5].termName}}</p>
     </div>
-    <div class="tile" style="left:360px;top:165px;"(click)="isClickedtile7=!isClickedtile7;chosenSound.play();getTermConnection($event)" [class.ClickedTile]="isClickedtile7" id="{{this.terms[6].connectionName}}">
+    <div class="tile" style="left:360px;top:165px;"(click)="isClickedtile7=!isClickedtile7;chosenSound.play();PushInCheckArray($event,isClickedtile7);getParagraphText($event)" [class.ClickedTile]="isClickedtile7" id="{{this.terms[6].connectionName}}">
+        <p hidden>{{this.terms[6].connectionName}}</p>
         <p>{{this.terms[6].termName}}</p>
     </div>
-    <div class="tile" style="left:520px;top:165px;" (click)="isClickedtile8=!isClickedtile8;chosenSound.play();getTermConnection($event)" [class.ClickedTile]="isClickedtile8" id="{{this.terms[7].connectionName}}">
+    <div class="tile" style="left:520px;top:165px;" (click)="isClickedtile8=!isClickedtile8;chosenSound.play();PushInCheckArray($event,isClickedtile8);getParagraphText($event)" [class.ClickedTile]="isClickedtile8" id="{{this.terms[7].connectionName}}">
+        <p hidden>{{this.terms[7].connectionName}}</p>
         <p>{{this.terms[7].termName}}</p>
     </div>
-    <div class="tile" style="left:40px;top:275px;" (click)="isClickedtile9=!isClickedtile9;chosenSound.play();getTermConnection($event)" [class.ClickedTile]="isClickedtile9" id="{{this.terms[8].connectionName}}">
+    <div class="tile" style="left:40px;top:275px;" (click)="isClickedtile9=!isClickedtile9;chosenSound.play();PushInCheckArray($event,isClickedtile9);getParagraphText($event)" [class.ClickedTile]="isClickedtile9" id="{{this.terms[8].connectionName}}">
+        <p hidden>{{this.terms[8].connectionName}}</p>
         <p>{{this.terms[8].termName}}</p>
     </div>
-    <div class="tile" style="left:200px;top:275px;" (click)="isClickedtile10=!isClickedtile10;chosenSound.play();getTermConnection($event)" [class.ClickedTile]="isClickedtile10" id="{{this.terms[9].connectionName}}">
+    <div class="tile" style="left:200px;top:275px;" (click)="isClickedtile10=!isClickedtile10;chosenSound.play();PushInCheckArray($event,isClickedtile10);getParagraphText($event)" [class.ClickedTile]="isClickedtile10" id="{{this.terms[9].connectionName}}">
+        <p hidden>{{this.terms[9].connectionName}}</p>
         <p>{{this.terms[9].termName}}</p>
     </div>
-    <div class="tile" style="left:360px;top:275px;" (click)="isClickedtile11=!isClickedtile11;chosenSound.play();getTermConnection($event)" [class.ClickedTile]="isClickedtile11" id="{{this.terms[10].connectionName}}">
+    <div class="tile" style="left:360px;top:275px;" (click)="isClickedtile11=!isClickedtile11;chosenSound.play();PushInCheckArray($event,isClickedtile11);getParagraphText($event)" [class.ClickedTile]="isClickedtile11" id="{{this.terms[10].connectionName}}">
+        <p hidden>{{this.terms[10].connectionName}}</p>
         <p>{{this.terms[10].termName}}</p>
     </div>
-    <div class="tile" style="left:520px;top:275px;" (click)="isClickedtile12=!isClickedtile12;chosenSound.play();getTermConnection($event)" [class.ClickedTile]="isClickedtile12" id="{{this.terms[11].connectionName}}">
+    <div class="tile" style="left:520px;top:275px;" (click)="isClickedtile12=!isClickedtile12;chosenSound.play();PushInCheckArray($event,isClickedtile12);getParagraphText($event)" [class.ClickedTile]="isClickedtile12" id="{{this.terms[11].connectionName}}">
+        <p hidden>{{this.terms[11].connectionName}}</p>
         <p>{{this.terms[11].termName}}</p>
     </div>
-    <div class="tile" style="left:40px;top:385px;" (click)="isClickedtile13=!isClickedtile13;chosenSound.play();getTermConnection($event)" [class.ClickedTile]="isClickedtile13" id="{{this.terms[12].connectionName}}">
+    <div class="tile" style="left:40px;top:385px;" (click)="isClickedtile13=!isClickedtile13;chosenSound.play();PushInCheckArray($event,isClickedtile13);getParagraphText($event)" [class.ClickedTile]="isClickedtile13" id="{{this.terms[12].connectionName}}">
+        <p hidden>{{this.terms[12].connectionName}}</p>
         <p>{{this.terms[12].termName}}</p>
     </div>
-    <div class="tile" style="left:200px;top:385px;" (click)="isClickedtile14=!isClickedtile14;chosenSound.play();getTermConnection($event)" [class.ClickedTile]="isClickedtile14" id="{{this.terms[13].connectionName}}">
+    <div class="tile" style="left:200px;top:385px;" (click)="isClickedtile14=!isClickedtile14;chosenSound.play();PushInCheckArray($event,isClickedtile14);getParagraphText($event)" [class.ClickedTile]="isClickedtile14" id="{{this.terms[13].connectionName}}">
+        <p hidden>{{this.terms[13].connectionName}}</p>
         <p>{{this.terms[13].termName}}</p>
     </div>
-    <div class="tile" style="left:360px;top:385px;" (click)="isClickedtile15=!isClickedtile15;chosenSound.play();getTermConnection($event)" [class.ClickedTile]="isClickedtile15" id="{{this.terms[14].connectionName}}">
+    <div class="tile" style="left:360px;top:385px;" (click)="isClickedtile15=!isClickedtile15;chosenSound.play();PushInCheckArray($event,isClickedtile15);getParagraphText($event)" [class.ClickedTile]="isClickedtile15" id="{{this.terms[14].connectionName}}">
+        <p hidden>{{this.terms[14].connectionName}}</p>
         <p>{{this.terms[14].termName}}</p>
     </div>
-    <div class="tile" style="left:520px;top:385px;" (click)="isClickedtile16=!isClickedtile16;chosenSound.play();getTermConnection($event)" [class.ClickedTile]="isClickedtile16" id="{{this.terms[15].connectionName}}">
+    <div class="tile" style="left:520px;top:385px;" (click)="isClickedtile16=!isClickedtile16;chosenSound.play();PushInCheckArray($event,isClickedtile16);getParagraphText($event)" [class.ClickedTile]="isClickedtile16" id="{{this.terms[15].connectionName}}">
+        <p hidden>{{this.terms[15].connectionName}}</p>
         <p>{{this.terms[15].termName}}</p>
     </div>
     <div class="lives">

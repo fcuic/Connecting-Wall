@@ -30,3 +30,6 @@ radim: - stilizirati onclick onhover eventove na buttone
 
 
 KOD SORTIRANJA Mat Tablea row.feature i ime rowa moraju imat isto ime, zbog cega neradi sort
+
+Conektanje nekad dohvaća dobro, nekad ne. Ideja je da nakon svakog matcha hideam sve one koji pripadaju tom matchu tako da ih user više ne može kliknit!!!!
+Iplementirati safe navigation operator!

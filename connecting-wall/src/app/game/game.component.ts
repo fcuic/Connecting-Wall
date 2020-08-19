@@ -73,6 +73,11 @@ export class GameComponent implements OnInit {
     volume: 0.5
   });
  //#endregion
+ //#region Quiz Variables
+ numOfClickedTerms=0;
+ firstGroup=[];
+ matchedProperly=false; //varijabla za sakrivanje matchanih pojmova
+ //#endregion
 
 
   constructor(private service:WallService,private userService:UserService,private toastr:ToastrService, public dialogRef:MatDialogRef<HomeComponent>, @Inject(MAT_DIALOG_DATA) public receivedData:any,private dialog:MatDialog) 
@@ -144,6 +149,8 @@ export class GameComponent implements OnInit {
     sound.volume(1);
     sound.play();
     //#endregion*/
+    //#region Variables for Quiz
+
     
     
   }
@@ -169,17 +176,90 @@ export class GameComponent implements OnInit {
       console.log("Time expired!");
     }
   }
-  checkForTermMatch(term1,term2,term3,term4)
+  checkForTermMatch(array)
+  {
+   const allEqual=array=>array.every(v=>v===array[0]);//checks if all array elements are equal - function allEqual(array)
+    if(array.length==4 && allEqual(array)==true)
+    {
+      var Connection=array[0];
+      console.log("Konekcija :"+Connection);
+      console.log("Matched properly!");
+      this.score++;
+      this.successSound.play();
+      this.numOfClickedTerms=0;
+    }
+    else if(array.length==4 && allEqual(array)==false)
+    {
+      console.log("Not matched properly!");
+      this.wrongSound.play();
+      this.NotMatchedProperly();
+      this.numOfClickedTerms=0;
+    }
+  }
+  NotMatchedProperly()//kad zezne, postavlja sve clickove u false!!
+  {
+    this.isClickedtile1=false;
+    this.isClickedtile2=false;
+    this.isClickedtile3=false;
+    this.isClickedtile4=false;
+    this.isClickedtile5=false;
+    this.isClickedtile6=false;
+    this.isClickedtile7=false;
+    this.isClickedtile8=false;
+    this.isClickedtile9=false;
+    this.isClickedtile10=false;
+    this.isClickedtile11=false;
+    this.isClickedtile12=false;
+    this.isClickedtile13=false;
+    this.isClickedtile14=false;
+    this.isClickedtile15=false;
+    this.isClickedtile16=false;
+  }
+  hideElements()
   {
 
   }
-  getTermConnection(event)
+
+  PushInCheckArray(event,isClicked)
   {
-    var id;
-if(this.isClickedtile1== true || this.isClickedtile2== true || this.isClickedtile3== true || this.isClickedtile4== true || this.isClickedtile5== true || this.isClickedtile6== true || this.isClickedtile7== true || this.isClickedtile8== true || this.isClickedtile9== true || this.isClickedtile10== true || this.isClickedtile11== true || this.isClickedtile12== true || this.isClickedtile13== true || this.isClickedtile14== true || this.isClickedtile15== true || this.isClickedtile16 == true){
-    id=event.target.id;
-    console.log(id);}
+    var con=this.getTermConnection(event);
+    if(isClicked==true)
+    {
+    if(con=="")
+    {
+      this.toastr.warning("Please unselect and Select the term again","Could not get id!");
+    }
+    this.numOfClickedTerms++;
+    this.firstGroup.push(con);
+    console.log(this.firstGroup);
+    console.log(this.numOfClickedTerms);
+      if(this.firstGroup.length==4)
+      {
+        this.checkForTermMatch(this.firstGroup);
+        this.firstGroup=[];
+        console.log(this.firstGroup);
+      }
+    }
+    else if(isClicked==false)
+    {
+      this.numOfClickedTerms--;
+      this.firstGroup.splice(this.numOfClickedTerms,1);
+      console.log(this.firstGroup);
+      console.log(this.numOfClickedTerms);
+    }
   }
   
+  getTermConnection(event)
+  {
+    var conn;
+    conn=event.target.id;
+    return conn;
+  }
+  getParagraphText(event)
+  {
+    var conn;
+    conn=event.target.firstElementChild.innerHTML;
+    console.log(conn);
+  }
 
 }

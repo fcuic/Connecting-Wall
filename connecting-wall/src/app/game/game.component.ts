@@ -77,9 +77,13 @@ export class GameComponent implements OnInit {
  numOfClickedTerms=0;
  firstGroup=[];
  matchedProperly=false; //varijabla za sakrivanje matchanih pojmova
- //#endregion
- //#region Variable to check whather the group is done
  numOfPairedGroupTerms=0;
+ numOfLives=3;
+ firstLifeWasted=false;
+ secondLifeWasted=false;
+ thirdLifeWasted=false;
+ showLives=false;
+ gameOver=false; //game over za html
  //#endregion
 
 
@@ -163,8 +167,8 @@ export class GameComponent implements OnInit {
   {
     if(event.action=="done")
     {
-
       console.log("Time expired!");
+      this.gameOver=true;
     }
   }
   checkForTermMatch(array)
@@ -177,9 +181,15 @@ export class GameComponent implements OnInit {
       console.log("Matched properly!");
       this.score++;
       this.numOfPairedGroupTerms++;
+      console.log(this.numOfPairedGroupTerms);
       this.numOfClickedTerms=0;
       this.successSound.play();
       this.hideElement(Connection);
+      this.AllIsUnclicked();
+      if(this.numOfPairedGroupTerms==2)
+      {
+        this.showLives=true;
+      }
 
       if(this.numOfPairedGroupTerms==3)
       {
@@ -190,8 +200,27 @@ export class GameComponent implements OnInit {
     {
       console.log("Not matched properly!");
       this.wrongSound.play();
-      this.NotMatchedProperly();
+      this.AllIsUnclicked();
       this.numOfClickedTerms=0;
+      if(this.numOfPairedGroupTerms>=2)
+      {
+        this.numOfLives--;
+        console.log("Lives:"+this.numOfLives);
+        if(this.numOfLives==2)
+        {
+          this.firstLifeWasted=true;
+        }
+        else if(this.numOfLives==1)
+        {
+          this.secondLifeWasted=true;
+        }
+        else if(this.numOfLives==0)
+        {
+          this.thirdLifeWasted=true;
+          console.log("Game Over");//ovdje funkcija za game over
+          this.gameOver=true;
+        }
+      }
     }
   }
   hideElement(connectionName)
@@ -204,7 +233,7 @@ export class GameComponent implements OnInit {
    }
 
   }
-  NotMatchedProperly()//kad zezne, postavlja sve clickove u false!!
+  AllIsUnclicked()//kad zezne, postavlja sve clickove u false!!
   {
     this.isClickedtile1=false;
     this.isClickedtile2=false;
@@ -231,7 +260,7 @@ export class GameComponent implements OnInit {
     {
     if(con=="")
     {
-      this.toastr.warning("Please unselect and Select the term again","Could not get id!");
+      this.toastr.warning("Please Unselect and Select the term again","Could not get ID of clicked Term!");
     }
     this.numOfClickedTerms++;
     this.firstGroup.push(con);
@@ -265,5 +294,4 @@ export class GameComponent implements OnInit {
     conn=event.target.firstElementChild.innerHTML;
     console.log(conn);
   }
-
 }

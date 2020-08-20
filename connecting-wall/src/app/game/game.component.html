@@ -15,7 +15,7 @@
     <p><strong><countdown [config]="{ leftTime: 180, format: 'm:s' }" (event)="timesUp($event)"></countdown></strong></p>
     </div>
 </div>
-<div class="tilecontainer">
+<div class="tilecontainer" *ngIf="gameOver==false">
     <div class="tile" style="left:40px;top:55px;" (click)="isClickedtile1=!isClickedtile1; chosenSound.play();PushInCheckArray($event,isClickedtile1);getParagraphText($event);" [class.ClickedTile]="isClickedtile1" id="{{this.terms[0].connectionName}}">
         <p hidden>{{this.terms[0].connectionName}}</p>
         <p>{{this.terms[0].termName}}</p>
@@ -81,13 +81,13 @@
         <p>{{this.terms[15].termName}}</p>
     </div>
     <div class="lives">
-        <div class="life1">
+        <div class="life1" *ngIf="showLives==true && firstLifeWasted==false">
             &#x2665;
         </div>
-        <div class="life2">
+        <div class="life2" *ngIf="showLives==true && secondLifeWasted==false">
             &#x2665;
         </div>
-        <div class="life3">
+        <div class="life3" *ngIf="showLives==true && thirdLifeWasted==false">
             &#x2665;
         </div>
     </div>

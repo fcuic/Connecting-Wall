@@ -10,11 +10,12 @@
         <p><strong>{{this.score}}</strong></p>
     </div>
     <span class="fill-space"></span>
-    <div class="Time">
+    <div class="Time" *ngIf="gameOver==false">
     <label>Time left : </label>
     <p><strong><countdown [config]="{ leftTime: 180, format: 'm:s' }" (event)="timesUp($event)"></countdown></strong></p>
     </div>
 </div>
+<!--Dio za uparivanje pojmova-->
 <div class="tilecontainer" *ngIf="gameOver==false">
     <div class="tile" style="left:40px;top:55px;" (click)="isClickedtile1=!isClickedtile1; chosenSound.play();PushInCheckArray($event,isClickedtile1);getParagraphText($event);" [class.ClickedTile]="isClickedtile1" id="{{this.terms[0].connectionName}}">
         <p hidden>{{this.terms[0].connectionName}}</p>
@@ -92,3 +93,102 @@
         </div>
     </div>
 </div>
+<!--Dio za ispitivanje kako je user završio uparivanje-->
+<br>
+<div class="container" *ngIf="gameOver==true && goToConnectionGuessing==false">
+    <div class="d-flex justify-content-center">
+    <h1>Matching terms in Group Done!</h1>
+    </div>
+    <div class="d-flex justify-content-center">
+    <h2>Time to Guess the Connection between terms and potentially win extra points!</h2>
+    </div>
+    <div class="d-flex justify-content-center">
+        <h2 *ngIf="ranOutOfTime==true">You ran out of time!!</h2>
+        <h2 *ngIf="wastedLives==true">You wasted all three lives!</h2>    
+        <h2 *ngIf="successfullyGroupedTheTerms==true">You matched all the terms well in given time!!</h2>
+    </div>
+    <div class="d-flex justify-content-center">
+    <button (click)="this.goToConnectionGuessing=true;">To Connection Gueesing!</button>
+    </div>
+</div>
+<br>
+<!--Dio za pogađanje konekcija kod pojmova kad je uparivanje završeno-->
+<div class="guessContainer" *ngIf="gameOver==true && goToConnectionGuessing==true">
+    <div class="tilegroup1" style="left:40px;top:55px;">
+        <p>{{this.sortedTerms[0].termName}}</p>
+    </div>
+    <div class="tilegroup1" style="left:200px;top:55px;">
+        <p>{{this.sortedTerms[1].termName}}</p>
+    </div>
+    <div class="tilegroup1" style="left:360px;top:55px;">
+        <p>{{this.sortedTerms[2].termName}}</p>
+    </div>
+    <div class="tilegroup1" style="left:520px;top:55px;">
+        <p>{{this.sortedTerms[3].termName}}</p>
+    </div>
+    <div class="GuessTile1" style="left:680px;top:45px;">
+        <label>Group A Connection:</label>
+        <input id="conn1" type="text" placeholder="Group A Connection">
+        <label class="text-danger" *ngIf="(guessedConnection1!=null) && (guessedConnection1!=this.termA1.connectionName)">Wrong! Answer is {{this.termA1.connectionName}}</label>
+        <label class="text-success" *ngIf="(guessedConnection1!=null) && (guessedConnection1==this.termA1.connectionName)">Correct!</label>
+        <button *ngIf="firstConnectionGuessed==false" (click)="getConnection1()">Confirm</button>
+    </div>
+    <div class="tilegroup2" style="left:40px;top:165px;">
+        <p>{{this.sortedTerms[4].termName}}</p>
+    </div>
+    <div class="tilegroup2" style="left:200px;top:165px;">
+        <p>{{this.sortedTerms[5].termName}}</p>
+    </div>
+    <div class="tilegroup2" style="left:360px;top:165px;">
+        <p>{{this.sortedTerms[6].termName}}</p>
+    </div>
+    <div class="tilegroup2" style="left:520px;top:165px;">
+        <p>{{this.sortedTerms[7].termName}}</p>
+    </div>
+    <div class="GuessTile2" style="left:680px;top:155px;">
+        <label>Group B Connection:</label>
+        <input id="conn2" type="text" placeholder="Group B Connection">
+        <label class="text-danger" *ngIf="(guessedConnection2!=null) && (guessedConnection2!=this.termB1.connectionName)">Wrong! Answer is {{this.termB1.connectionName}}</label>
+        <label class="text-success" *ngIf="(guessedConnection2!=null) && (guessedConnection2==this.termB1.connectionName)">Correct!</label>
+        <button *ngIf="secondConnectionGuessed==false" (click)="getConnection2()">Confirm</button>
+    </div>
+    <div class="tilegroup3" style="left:40px;top:275px;">
+        <p>{{this.sortedTerms[8].termName}}</p>
+    </div>
+    <div class="tilegroup3" style="left:200px;top:275px;">
+        <p>{{this.sortedTerms[9].termName}}</p>
+    </div>
+    <div class="tilegroup3" style="left:360px;top:275px;">
+        <p>{{this.sortedTerms[10].termName}}</p>
+    </div>
+    <div class="tilegroup3" style="left:520px;top:275px;">
+        <p>{{this.sortedTerms[11].termName}}</p>
+    </div>
+    <div class="GuessTile3" style="left:680px;top:265px;">
+        <label>Group C Connection:</label>
+        <input id="conn3" type="text" placeholder="Group C Connection">
+        <label class="text-danger" *ngIf="(guessedConnection3!=null) && (guessedConnection3!=this.termC1.connectionName)">Wrong! Answer is {{this.termC1.connectionName}}</label>
+        <label class="text-success" *ngIf="(guessedConnection3!=null) && (guessedConnection3==this.termC1.connectionName)">Correct!</label>
+        <button *ngIf="thirdConnectionGuessed==false" (click)="getConnection3()">Confirm</button>
+    </div>
+    <div class="tilegroup4" style="left:40px;top:385px;">
+        <p>{{this.sortedTerms[12].termName}}</p>
+    </div>
+    <div class="tilegroup4" style="left:200px;top:385px;">
+        <p>{{this.sortedTerms[13].termName}}</p>
+    </div>
+    <div class="tilegroup4" style="left:360px;top:385px;">
+        <p>{{this.sortedTerms[14].termName}}</p>
+    </div>
+    <div class="tilegroup4" style="left:520px;top:385px;">
+        <p>{{this.sortedTerms[15].termName}}</p>
+    </div>
+    <div class="GuessTile4" style="left:680px;top:375px;">
+        <label>Group D Connection:</label>
+        <input id="conn4" type="text" placeholder="Group D Connection">
+        <label class="text-danger" *ngIf="(guessedConnection4!=null) && (guessedConnection4!=this.termD1.connectionName)">Wrong! Answer is {{this.termD1.connectionName}}</label>
+        <label class="text-success" *ngIf="(guessedConnection4!=null) && (guessedConnection4==this.termD1.connectionName)">Correct!</label>
+        <button *ngIf="fourthConnectionGuessed==false" (click)="getConnection4()">Confirm</button>
+    </div>
+</div>
+<!--Score Div-->

@@ -21,6 +21,7 @@ export class GameComponent implements OnInit {
   wallDetails:any;
   wallName:string;
   terms:Array<Term>;
+  sortedTerms:Array<Term>;
   termA1={} as Term;
   termA2={} as Term;
   termA3={} as Term;
@@ -79,11 +80,24 @@ export class GameComponent implements OnInit {
  matchedProperly=false; //varijabla za sakrivanje matchanih pojmova
  numOfPairedGroupTerms=0;
  numOfLives=3;
- firstLifeWasted=false;
+ firstLifeWasted=false;//for displaying hearts
  secondLifeWasted=false;
  thirdLifeWasted=false;
- showLives=false;
+ showLives=false; //should be activated when 2 groups are paired
  gameOver=false; //game over za html
+ guessedConnection1=null; //strings for guessing connections
+ guessedConnection2=null;
+ guessedConnection3=null;
+ guessedConnection4=null;
+ //variables that check how user finished grouping
+ successfullyGroupedTheTerms=false;
+ wastedLives=false;
+ ranOutOfTime=false;
+ goToConnectionGuessing=false;
+ firstConnectionGuessed=false; //variables which check whether user guessed connections
+ secondConnectionGuessed=false;
+ thirdConnectionGuessed=false;
+ fourthConnectionGuessed=false;
  //#endregion
 
 
@@ -131,13 +145,20 @@ export class GameComponent implements OnInit {
         this.termD3.connectionName=this.wallDetails.groupDConnections[0].connectionName;
         this.termD4.termName=this.wallDetails.groupDTerms[3].termName;
         this.termD4.connectionName=this.wallDetails.groupDConnections[0].connectionName;
-        this.terms = [ this.termA1,this.termA2,this.termA3,this.termA4, //array that is displayed
-                      this.termB1,this.termB2,this.termB3,this.termB4,
-                      this.termC1,this.termC2,this.termC3,this.termC4,
-                      this.termD1,this.termD2,this.termD3,this.termD4
+        this.terms = [ 
+          this.termA1,this.termA2,this.termA3,this.termA4, //array that is displayed
+          this.termB1,this.termB2,this.termB3,this.termB4,
+          this.termC1,this.termC2,this.termC3,this.termC4,
+          this.termD1,this.termD2,this.termD3,this.termD4
         ];
+        this.sortedTerms=[
+          this.termA1,this.termA2,this.termA3,this.termA4,//for displaying when matching is done!
+          this.termB1,this.termB2,this.termB3,this.termB4,
+          this.termC1,this.termC2,this.termC3,this.termC4,
+          this.termD1,this.termD2,this.termD3,this.termD4
+        ];
+        console.log(this.sortedTerms);
         console.log(this.Shuffle(this.terms));
-        
       },
       err=>
       {
@@ -169,6 +190,7 @@ export class GameComponent implements OnInit {
     {
       console.log("Time expired!");
       this.gameOver=true;
+      this.ranOutOfTime=true;
     }
   }
   checkForTermMatch(array)
@@ -188,12 +210,14 @@ export class GameComponent implements OnInit {
       this.AllIsUnclicked();
       if(this.numOfPairedGroupTerms==2)
       {
-        this.showLives=true;
+        this.showLives=true; //pokazi zivote
       }
 
       if(this.numOfPairedGroupTerms==3)
       {
         this.score=4;
+        this.gameOver=true; //idi na pogađanje konekcija
+        this.successfullyGroupedTheTerms=true;
       }
     }
     else if(array.length==4 && allEqual(array)==false)
@@ -219,6 +243,7 @@ export class GameComponent implements OnInit {
           this.thirdLifeWasted=true;
           console.log("Game Over");//ovdje funkcija za game over
           this.gameOver=true;
+          this.wastedLives=true;
         }
       }
     }
@@ -293,5 +318,71 @@ export class GameComponent implements OnInit {
     var conn;
     conn=event.target.firstElementChild.innerHTML;
     console.log(conn);
+  }
+  //functions for getting connections written in input
+  getConnection1()
+  {
+    var conn=(<HTMLInputElement>document.getElementById("conn1")).value;
+    this.guessedConnection1=conn;
+    if(this.guessedConnection1==this.termA1.connectionName)
+    {
+      this.score++;
+      this.successSound.play();
+    }
+    else
+    {
+      this.wrongSound.play();
+    }
+    this.firstConnectionGuessed=true;
+    console.log(this.guessedConnection1);
+  }
+  getConnection2()
+  {
+    var conn=(<HTMLInputElement>document.getElementById("conn2")).value;
+    this.guessedConnection2=conn;
+    if(this.guessedConnection2==this.termB1.connectionName)
+    {
+      this.score++;
+      this.successSound.play();
+    }
+    else
+    {
+      this.wrongSound.play();
+    }
+    
+    this.secondConnectionGuessed=true;
+    console.log(this.guessedConnection2);
+  }
+  getConnection3()
+  {
+    var conn=(<HTMLInputElement>document.getElementById("conn3")).value;
+    this.guessedConnection3=conn;
+    if(this.guessedConnection3==this.termC1.connectionName)
+    {
+      this.score++;
+      this.successSound.play();
+    }
+    else
+    {
+      this.wrongSound.play();
+    }
+    this.thirdConnectionGuessed=true;
+    console.log(this.guessedConnection3);
+  }
+  getConnection4()
+  {
+    var conn=(<HTMLInputElement>document.getElementById("conn4")).value;
+    this.guessedConnection4=conn;
+    if(this.guessedConnection4==this.termD1.connectionName)
+    {
+      this.score++;
+      this.successSound.play();
+    }
+    else
+    {
+      this.wrongSound.play();
+    }
+    this.fourthConnectionGuessed=true;
+    console.log(this.guessedConnection4);
   }
 }

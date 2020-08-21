@@ -11,7 +11,20 @@
     background-size:cover;
     background-position:50% 50%;
 }
-.tile/*, .tile2,.tile3,.tile4, .tile5,.tile6,.tile7, .tile8,.tile9,.tile10, .tile11,.tile12,.tile13, .tile14,.tile15,.tile16*/
+.guessContainer
+{
+    width:900px;
+    height:600px;
+    left:10px;
+    top:30px;
+    position: relative;
+    display: flex;
+    background-image:url("../../assets/img/makeTheConnection.png");
+    justify-content: center;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+.tile
 {
     width: 148px;
     left: 250px;
@@ -34,6 +47,180 @@
     line-height: 30px;
     font-weight: 600;
 }
+/*For guessing the connections*/
+.tilegroup1
+{
+    width: 148px;
+    left: 250px;
+    top: 240px;
+    text-align: center;
+    line-height: 30px;
+    background: #047b16;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    height: 98px;
+    border: 2px solid #74708f;
+    border: 1px solid #938DBD;
+    padding: 2px;
+    border-radius: 4px;
+    background-position: center;
+    display: block;
+    position: absolute;
+    font-size: 16px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 600;
+}
+.tilegroup2
+{
+    width: 148px;
+    left: 250px;
+    top: 240px;
+    text-align: center;
+    line-height: 30px;
+    background: #1c07df;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    height: 98px;
+    border: 2px solid #74708f;
+    border: 1px solid #938DBD;
+    padding: 2px;
+    border-radius: 4px;
+    background-position: center;
+    display: block;
+    position: absolute;
+    font-size: 16px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 600;
+}
+.tilegroup3
+{
+    width: 148px;
+    left: 250px;
+    top: 240px;
+    text-align: center;
+    line-height: 30px;
+    background: #df2007;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    height: 98px;
+    border: 2px solid #74708f;
+    border: 1px solid #938DBD;
+    padding: 2px;
+    border-radius: 4px;
+    background-position: center;
+    display: block;
+    position: absolute;
+    font-size: 16px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 600;
+}
+.tilegroup4
+{
+    width: 148px;
+    left: 250px;
+    top: 240px;
+    text-align: center;
+    line-height: 30px;
+    background: #07dfd1;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    height: 98px;
+    border: 2px solid #74708f;
+    border: 1px solid #938DBD;
+    padding: 2px;
+    border-radius: 4px;
+    background-position: center;
+    display: block;
+    position: absolute;
+    font-size: 16px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 600;
+}
+.GuessTile1
+{
+    width: 148px;
+    left: 250px;
+    top: 240px;
+    text-align: center;
+    line-height: 30px;
+    background: #047b16;
+    color: rgb(255, 255, 255);
+    height: 50px;
+    padding: 1px;
+    border-radius: 4px;
+    background-position: center;
+    display: block;
+    position: absolute;
+    font-size: 12px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 600;
+}
+.GuessTile2
+{
+    width: 148px;
+    left: 250px;
+    top: 240px;
+    text-align: center;
+    line-height: 30px;
+    background: #1c07df;
+    color: rgb(255, 255, 255);
+    height: 50px;
+    padding: 1px;
+    border-radius: 4px;
+    background-position: center;
+    display: block;
+    position: absolute;
+    font-size: 12px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 600;
+}
+.GuessTile3
+{
+    width: 148px;
+    left: 250px;
+    top: 240px;
+    text-align: center;
+    line-height: 30px;
+    background: #df2007;
+    color: rgb(255, 255, 255);
+    height: 50px;
+    padding: 1px;
+    border-radius: 4px;
+    background-position: center;
+    display: block;
+    position: absolute;
+    font-size: 12px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 600;
+}
+.GuessTile4
+{
+    width: 148px;
+    left: 250px;
+    top: 240px;
+    text-align: center;
+    line-height: 30px;
+    background: #07dfd1;
+    color: rgb(255, 255, 255);
+    height: 50px;
+    padding: 1px;
+    border-radius: 4px;
+    background-position: center;
+    display: block;
+    position: absolute;
+    font-size: 12px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 600;
+}
+
 .NotClickable
 {
     background: green;
@@ -43,7 +230,7 @@
 {
     background: #edf557;
 }
-.tile:hover/*,.tile2:hover,.tile3:hover,.tile4:hover,.tile5:hover,.tile6:hover,.tile7:hover,.tile8:hover,.tile9:hover,.tile10:hover,.tile11:hover,.tile12:hover,.tile13:hover,.tile14:hover,.tile15:hover,.tile16:hover*/
+.tile:hover
 {
     background: #a4a0c4;
 }

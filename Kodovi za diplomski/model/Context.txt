@@ -1,0 +1,91 @@
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace Registration.Models
+{
+    public class APIDBContext : DbContext
+    {
+        public DbSet<ApplicationUser> AspNetUsers { get; set; }
+        public DbSet<Wall> Walls { get; set; }
+        public DbSet<GroupConnections> GroupConnections { get; set; }
+        public DbSet<Term> Terms { get; set; }
+        public APIDBContext(DbContextOptions<APIDBContext> options) : base(options)
+        {
+
+        }
+        protected override void OnModelCreating(ModelBuilder mb) 
+        {
+
+            base.OnModelCreating(mb);
+            mb.Entity<Wall>().Property(x => x.wallID).HasDefaultValueSql("NEWID()");
+            mb.Entity<Term>().Property(x => x.termID).HasDefaultValueSql("NEWID()");
+            mb.Entity<GroupConnections>().Property(x => x.connectionId).HasDefaultValueSql("NEWID()");
+
+            mb.Entity<Wall>()
+                .HasOne<ApplicationUser>(u => u.User)
+                .WithMany(w => w.Wall)
+                .HasForeignKey(w => w.userID)
+                .OnDelete(DeleteBehavior.Cascade);
+            // .WillCascadeOnDelete(true);
+
+            mb.Entity<Term>()
+                .HasOne<Wall>(w => w.Wall1)
+                .WithMany(t => t.groupATerms)
+                .HasForeignKey(t => t.wallID1)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            mb.Entity<Term>()
+                .HasOne<Wall>(w => w.Wall2)
+                .WithMany(t => t.groupBTerms)
+                .HasForeignKey(t => t.wallID2)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            mb.Entity<Term>()
+                .HasOne<Wall>(w => w.Wall3)
+                .WithMany(t => t.groupCTerms)
+                .HasForeignKey(t => t.wallID3)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            mb.Entity<Term>()
+                .HasOne<Wall>(w => w.Wall4)
+                .WithMany(t => t.groupDTerms)
+                .HasForeignKey(t => t.wallID4)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            mb.Entity<GroupConnections>()
+                .HasOne<Wall>(w => w.Wall1)
+                .WithMany(t => t.groupAConnections)
+                .HasForeignKey(t => t.wallID1)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            mb.Entity<GroupConnections>()
+               .HasOne<Wall>(w => w.Wall2)
+               .WithMany(t => t.groupBConnections)
+               .HasForeignKey(t => t.wallID2)
+               .OnDelete(DeleteBehavior.Cascade);
+
+            mb.Entity<GroupConnections>()
+               .HasOne<Wall>(w => w.Wall3)
+               .WithMany(t => t.groupCConnections)
+               .HasForeignKey(t => t.wallID3)
+               .OnDelete(DeleteBehavior.Cascade);
+
+            mb.Entity<GroupConnections>()
+               .HasOne<Wall>(w => w.Wall4)
+               .WithMany(t => t.groupDConnections)
+               .HasForeignKey(t => t.wallID4)
+               .OnDelete(DeleteBehavior.Cascade);
+
+            mb.Entity<Wall>().HasData(//testing inserting into table
+           new Wall() { wallID = Guid.NewGuid(), wallName="PremierLeague",dateCreated=DateTime.Now },
+           new Wall() { wallID = Guid.NewGuid(), wallName = "PremierLeague1", dateCreated = DateTime.Now },
+           new Wall() { wallID = Guid.NewGuid(), wallName = "PremierLeague2", dateCreated = DateTime.Now }
+           );
+        }
+    }
+}

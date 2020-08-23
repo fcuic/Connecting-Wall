@@ -1,0 +1,29 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
+
+namespace Registration.Models
+{
+    public class GroupConnections
+    {
+        [Key]
+        public Guid connectionId { get; set; }
+        public string connectionName { get; set; }
+        [ForeignKey("wallID1")]
+        public Guid wallID1 { get; set; }
+        public virtual Wall Wall1 { get; set; }
+        [ForeignKey("wallID2")]
+        public Guid wallID2 { get; set; }
+        public virtual Wall Wall2 { get; set; }
+        [ForeignKey("wallID3")]
+        public Guid wallID3 { get; set; }
+        public virtual Wall Wall3 { get; set; }
+        [ForeignKey("wallID4")]
+        public Guid wallID4 { get; set; }
+        public virtual Wall Wall4 { get; set; }
+    }
+}

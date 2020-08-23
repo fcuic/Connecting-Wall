@@ -1,0 +1,45 @@
+CREATE TRIGGER Trigger_Users
+	ON [dbo].AspNetUsers
+	INSTEAD OF DELETE 
+	AS
+	BEGIN
+	SET NOCOUNT ON;
+	UPDATE Walls
+	SET Walls.userID=null
+	from [dbo].Walls Walls inner join
+	deleted d on d.Id=Walls.userID
+	UPDATE Terms
+	set Terms.wallID=null
+	from [dbo].Walls Walls inner join
+	deleted d on d.Id=Walls.userID
+	UPDATE Terms
+	set Terms.wallID1=null
+	from [dbo].Walls Walls inner join
+	deleted d on d.Id=Walls.userID
+	UPDATE Terms
+	set Terms.wallID2=null
+	from [dbo].Walls Walls inner join
+	deleted d on d.Id=Walls.userID
+	UPDATE Terms
+	set Terms.wallID3=null
+	from [dbo].Walls Walls inner join
+	deleted d on d.Id=Walls.userID
+	UPDATE GroupConnections
+	set GroupConnections.wallID=null
+	from [dbo].Walls Walls inner join
+	deleted d on d.Id=Walls.userID
+	UPDATE GroupConnections
+	set GroupConnections.wallID1=null
+	from [dbo].Walls Walls inner join
+	deleted d on d.Id=Walls.userID
+	UPDATE GroupConnections
+	set GroupConnections.wallID2=null
+	from [dbo].Walls Walls inner join
+	deleted d on d.Id=Walls.userID
+	UPDATE GroupConnections
+	set GroupConnections.wallID3=null
+	from [dbo].Walls Walls inner join
+	deleted d on d.Id=Walls.userID
+	end;
+	delete from AspNetUsers where Id in (SELECT Id FROM deleted)
+	delete from Walls where (userID is null)

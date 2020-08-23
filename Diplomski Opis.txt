@@ -1,0 +1,7 @@
+Kolega
+tema bi bila:
+Interaktivni online kviz
+An interactive online quiz
+
+Opis: Potrebno je napraviti interaktivni online kviz po specificiranim pravilima. Kviz treba sadržavati 16 polja od kojih su 4*4 međusobno povezana. Student može koristiti bilo koju tehnologiju. Kviz mora biti objavljen online.
+inspirarano connecting wallom BBC-evog kviza Only Connect

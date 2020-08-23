@@ -1,0 +1,35 @@
+- obirsati usera sa foerign keyom u wall tablici, sve wallove s userid-om i usera,HARD SOLVED
+- getati wall po user id-u,Hard SOLVED
+- dizajnirati posting wall,LOW SOLVED
+- stavit i prikaz i brisanje zidova na admin panel NORMAL SOLVED SOLVED
+- omogućiti dohvaćanje atributa po stranom kljucu iz druge tablice LEGENDARY SOLVED
+-omogućiti brisanje usera, a tako i njegovog zida i njegovih group connectionsa i termova HARD SOLVED
+-OMOGUĆITI MODIFY ZIDOVA NA MY QUIZZES TAKO ŠTO SE IZBACI POPUP DIALOG HARD ovo sad radim Solved
+-omogućiti edit zidova na backendu OVO SAD RADIM
+
+
+
+
+- rješavanje kviza : Legendary
+- popup dialog za rješavanje na home komponenti DONE
+
+- napraviti klasu i njen objekt(polje objekata) za ime pojma i konekciju (grupu kojoj pripada)Easy Solved
+- omogućiti shuffle tog polja objekata Easy SOLVED
+-timer i countdown(Done), dodati jos jednu komponentu u popup dialog kad coundown dosegne 0(event odrađen), u njoj prikazati broj bodeva
+- stilizirati malo buttone, dodati onclick on hover eventove HARD
+-tranzicija na odabir 4 pojma koji imaju isti connection, drukčije obojati svaku grupu pri tranziciji(opcionalno) LEGENDARY
+stilizacija pozadine da nebude simple bijela
+...
+
+Popraviti performanse home komponente kad se otvara play!!! Tribalo bi bit easy
+
+radim: - stilizirati onclick onhover eventove na buttone
+- audiokontroler klasa koja će igrati zvuk odabira buttona, zvuk pravog odabira i zvuk krivog odabira
+- kad istekne vrijeme prebacit na komponentu pogađanja konekcija za dodatne bodeve
+- matching pojmova na 45:00 minuti videa how to code a card game in javascript
+
+
+KOD SORTIRANJA Mat Tablea row.feature i ime rowa moraju imat isto ime, zbog cega neradi sort
+
+Conektanje nekad dohvaća dobro, nekad ne. Ideja je da nakon svakog matcha hideam sve one koji pripadaju tom matchu tako da ih user više ne može kliknit!!!!
+Iplementirati safe navigation operator!

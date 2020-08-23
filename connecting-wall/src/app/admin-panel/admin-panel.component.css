@@ -1,0 +1,29 @@
+.search-div{
+  margin: 10px;
+    }
+
+.example-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+}
+
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+.hide{
+  display: none;
+}
+mat-footer row mat-footer-cell{
+  justify-content: center;
+  font-style: italic;
+}
+/*body{
+  background-image:url("../../assets/img/admin.jpg");
+}*/
+.display-1{
+  color: blue;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 30px;
+}

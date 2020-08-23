@@ -1,0 +1,178 @@
+import { Injectable } from '@angular/core';
+import { Wall } from '../../models/wall';
+import { FormBuilder, Validators, FormGroup, FormControl, FormArray, MinLengthValidator } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class WallService {
+
+
+
+  constructor(private fb:FormBuilder,private http:HttpClient ) { }
+
+  readonly BaseURI = 'http://localhost:57392/api';
+
+  formModel= this.fb.group({
+    wallName:['',[Validators.required,Validators.minLength(3)]],
+    GroupATerms:this.fb.group({
+      GroupATerm1:['', Validators.required],
+      GroupATerm2:['', Validators.required],
+      GroupATerm3:['', Validators.required],
+      GroupATerm4:['', Validators.required]
+    }),
+    GroupAConnections:['',[Validators.required,Validators.minLength(3)]],
+    GroupBTerms:this.fb.group({
+      GroupBTerm1:['', Validators.required],
+      GroupBTerm2:['', Validators.required],
+      GroupBTerm3:['', Validators.required],
+      GroupBTerm4:['', Validators.required]
+    }),
+    GroupBConnections:['',[Validators.required,Validators.minLength(3)]],
+    GroupCTerms:this.fb.group({
+      GroupCTerm1:['', Validators.required],
+      GroupCTerm2:['', Validators.required],
+      GroupCTerm3:['', Validators.required],
+      GroupCTerm4:['', Validators.required]
+    }),
+    GroupCConnections:['',[Validators.required,Validators.minLength(3)]],
+    GroupDTerms:this.fb.group({
+      GroupDTerm1:['', Validators.required],
+      GroupDTerm2:['', Validators.required],
+      GroupDTerm3:['', Validators.required],
+      GroupDTerm4:['', Validators.required]
+    }),
+    GroupDConnections:['',[Validators.required,Validators.minLength(3)]]
+  })
+
+  /*formModel= new FormGroup({
+    wallName: new FormControl('',Validators.required),
+    groupATerms:new FormGroup({
+      GroupATerm1:new FormControl(''),
+      GroupATerm2:new FormControl(''),
+      GroupATerm3:new FormControl(''),
+      GroupATerm4:new FormControl(''),
+    }),
+    groupAConnections:new FormArray([]),
+    groupBTerms:new FormGroup({
+      GroupBTerm1:new FormControl(''),
+      GroupBTerm2:new FormControl(''),
+      GroupBTerm3:new FormControl(''),
+      GroupBTerm4:new FormControl(''),
+    }),
+    groupBConnections:new FormArray([]),
+    groupCTerms:new FormGroup({
+      GroupCTerm1:new FormControl(''),
+      GroupCTerm2:new FormControl(''),
+      GroupCTerm3:new FormControl(''),
+      GroupCTerm4:new FormControl(''),
+    }),
+    groupCConnections:new FormArray([]),
+    groupDTerms:new FormGroup({
+      GroupDTerm1:new FormControl(''),
+      GroupDTerm2:new FormControl(''),
+      GroupDTerm3:new FormControl(''),
+      GroupDTerm4:new FormControl(''),
+    }),
+    groupDConnections:new FormArray([]),
+  })*/
+
+ /* formModel=this.fb.group({
+   
+    wallName:["",[Validators.required]],
+    
+    groupATerms:this.fb.group({
+      GroupATerm1:['',[Validators.required]],
+      GroupATerm2:['',[Validators.required]],
+      GroupATerm3:['',[Validators.required]],
+      GroupATerm4:['',[Validators.required]],
+    }),
+    groupBTerms:this.fb.group({
+      GroupBTerm1:['',[Validators.required]],
+      GroupBTerm2:['',[Validators.required]],
+      GroupBTerm3:['',[Validators.required]],
+      GroupBTerm4:['',[Validators.required]],
+    }),
+    groupCTerms:this.fb.group({
+      GroupCTerm1:['',[Validators.required]],
+      GroupCTerm2:['',[Validators.required]],
+      GroupCTerm3:['',[Validators.required]],
+      GroupCTerm4:['',[Validators.required]],
+    }),
+    groupDTerms:this.fb.group({
+      GroupDTerm1:['',[Validators.required]],
+      GroupDTerm2:['',[Validators.required]],
+      GroupTerm3:['',[Validators.required]],
+      GroupBTerm4:['',[Validators.required]],
+    }),*/
+
+
+    /*groupATerms:this.fb.array([new FormControl()],Validators.required),
+    groupBTerms:this.fb.array([new FormControl()],Validators.required),
+    groupCTerms:this.fb.array([new FormControl()],Validators.required),
+    groupDTerms:this.fb.array([new FormControl()],Validators.required),*/
+    /*groupAConnections:this.fb.array([new FormControl()],Validators.required),
+    groupBConnections:this.fb.array([new FormControl()],Validators.required),
+    groupCConnections:this.fb.array([new FormControl()],Validators.required),
+    groupDConnections:this.fb.array([new FormControl()],Validators.required)
+    */
+    /*GroupATerm1:['',Validators.required],
+    GroupATerm2:['',Validators.required],
+    GroupATerm3:['',Validators.required],
+    GroupATerm4:['',Validators.required],
+    GroupBTerm1:['',Validators.required],
+    GroupBTerm2:['',Validators.required],
+    GroupBTerm3:['',Validators.required],
+    GroupBTerm4:['',Validators.required],
+    GroupCTerm1:['',Validators.required],
+    GroupCTerm2:['',Validators.required],
+    GroupCTerm3:['',Validators.required],
+    GroupCTerm4:['',Validators.required],
+    GroupDTerm1:['',Validators.required],
+    GroupDTerm2:['',Validators.required],
+    GroupDTerm3:['',Validators.required],
+    GroupDTerm4:['',Validators.required],
+    GroupAConnections:['',Validators.required],
+    GroupBConnections:['',Validators.required],
+    GroupCConnections:['',Validators.required],
+    GroupDConnections:['',Validators.required]*/
+  
+
+
+  //HTTP Post
+  CreateQuiz()
+  {
+  
+   var body={
+     /* wallName:this.formModel.value.wallName,
+      groupATerms:this.formModel.value.groupATerms,
+      groupBTerms:this.formModel.value.groupBTerms,
+      groupCTerms:this.formModel.value.groupCTerms,
+      groupDTerms:this.formModel.value.groupDTerms,*/
+
+
+     /* GroupATerm1:this.formModel.value.GroupATerm1,
+      GroupATerm2:this.formModel.value.GroupATerm1,
+      GroupATerm3:this.formModel.value.GroupATerm1,
+      GroupATerm4:this.formModel.value.GroupATerm1,
+      GroupBTerm1:this.formModel.value.GroupATerm1,
+      GroupBTerm2:this.formModel.value.GroupATerm1,
+      GroupBTerm3:this.formModel.value.GroupATerm1,
+      GroupBTerm4:this.formModel.value.GroupATerm1,
+      GroupCTerm1:this.formModel.value.GroupATerm1,
+      GroupCTerm2:this.formModel.value.GroupATerm1,
+      GroupCTerm3:this.formModel.value.GroupATerm1,
+      GroupCTerm4:this.formModel.value.GroupATerm1,
+      GroupDTerm1:this.formModel.value.GroupATerm1,
+      GroupDTerm2:this.formModel.value.GroupATerm1,
+      GroupDTerm3:this.formModel.value.GroupATerm1,
+      GroupDTerm4:this.formModel.value.GroupATerm1,
+      GroupAConnections:this.formModel.value.GroupAConnections,
+      GroupBConnections:this.formModel.value.GroupAConnections,
+      GroupCConnections:this.formModel.value.GroupAConnections,
+      GroupDConnections:this.formModel.value.GroupAConnections,*/
+    };
+   // return this.http.post(this.BaseURI+'/Wall', body)//neznam jos adresu
+  }
+}

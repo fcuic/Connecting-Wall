@@ -1,0 +1,43 @@
+CREATE TRIGGER TRIGGER_Walls
+	ON [dbo].Walls
+	INSTEAD OF DELETE
+	AS
+	BEGIN
+	SET NOCOUNT ON;
+	UPDATE Terms
+	SET Terms.wallID = null
+	from [dbo].Terms Terms inner join
+	deleted d on d.wallID=Terms.wallID
+	UPDATE Terms
+	SET Terms.wallID1 = null
+	from [dbo].Terms Terms inner join
+	deleted d on d.wallID=Terms.wallID1
+	UPDATE Terms
+	SET Terms.wallID2 = null
+	from [dbo].Terms Terms inner join
+	deleted d on d.wallID=Terms.wallID2
+	UPDATE Terms
+	SET Terms.wallID3 = null
+	from [dbo].Terms Terms inner join
+	deleted d on d.wallID=Terms.wallID3
+	UPDATE GroupConnections
+	SET GroupConnections.wallID=null
+	from [dbo].GroupConnections GroupConnections inner join
+	deleted g on g.wallID=GroupConnections.wallID
+	UPDATE GroupConnections
+	SET GroupConnections.wallID1=null
+	from [dbo].GroupConnections GroupConnections inner join
+	deleted g on g.wallID=GroupConnections.wallID1
+	UPDATE GroupConnections
+	SET GroupConnections.wallID2=null
+	from [dbo].GroupConnections GroupConnections inner join
+	deleted g on g.wallID=GroupConnections.wallID2
+	UPDATE GroupConnections
+	SET GroupConnections.wallID3=null
+	from [dbo].GroupConnections GroupConnections inner join
+	deleted g on g.wallID=GroupConnections.wallID3
+	END;
+	delete from Walls where wallID in (select wallID from deleted)
+	delete from Terms where (wallID IS NULL and wallID1 IS NULL and wallID2 IS NULL and wallID3 IS NULL)--OVO SAN DODA
+	delete from GroupConnections where (wallID IS NULL and wallID1 IS NULL and wallID2 IS NULL and wallID3 IS NULL)--OVO SAN DODA
+	GO

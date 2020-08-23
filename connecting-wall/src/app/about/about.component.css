@@ -1,0 +1,30 @@
+h1
+{
+    color: crimson;
+    font-size: 30px;
+}
+.disclaimer
+{
+    color: crimson;
+    font-size: 16px;
+}
+mat-icon
+{
+    padding:10px;
+}
+a
+{
+    color: black;
+    margin-right: 6em;
+}
+.foot
+{
+    background:rgb(3, 71, 71);
+}
+.container
+{
+    padding-left: 290px;
+}
+.footer-copyright{
+    color: blanchedalmond;
+}

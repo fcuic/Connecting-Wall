@@ -1,0 +1,275 @@
+<app-header></app-header>
+<div class="jumbotron jumbotron-fluid">
+    <h3 class="display-4 text-center">Create your own Connecting Wall!</h3>
+    <img src="/assets/img/quiz.png">
+</div>
+
+<form [formGroup]="wallService.formModel" (ngSubmit)="onSubmit()">
+    <label>
+        Quiz Creator : 
+        <input type="text" placeholder="{{userDetails?.userName}}" readonly>
+    </label>
+    <br>
+    <label>
+        Quiz Name : 
+        <input type="text" placeholder="Quiz Name" formControlName="wallName">
+        <label class="text-danger" *ngIf="wallService.formModel.get('wallName').touched && wallService.formModel.get('wallName').errors?.required">This field is required!</label>
+    </label>
+    <br>
+   <div formGroupName="GroupATerms">
+    <label>Enter the four terms of the same group (First group):</label>
+    <br>
+       <label>
+           Group A Term 1 :
+           <input type="text" placeholder="GroupATerm1" formControlName="GroupATerm1">
+           <label class="text-danger" *ngIf="wallService.formModel.get('GroupATerms').get('GroupATerm1').touched && wallService.formModel.get('GroupATerms').get('GroupATerm1').errors?.required">This field is required!</label>
+       </label>
+       <label>
+        Group A Term 2 :
+        <input type="text" placeholder="GroupATerm2" formControlName="GroupATerm2">
+        <label class="text-danger" *ngIf="wallService.formModel.get('GroupATerms').get('GroupATerm2').touched && wallService.formModel.get('GroupATerms').get('GroupATerm2').errors?.required">This field is required!</label>
+        </label>
+        <label>
+            Group A Term 3 :
+            <input type="text" placeholder="GroupATerm3" formControlName="GroupATerm3">
+            <label class="text-danger" *ngIf="wallService.formModel.get('GroupATerms').get('GroupATerm3').touched && wallService.formModel.get('GroupATerms').get('GroupATerm3').errors?.required">This field is required!</label>
+        </label>
+        <label>
+            Group A Term 4 :
+            <input type="text" placeholder="GroupATerm4" formControlName="GroupATerm4">
+            <label class="text-danger" *ngIf="wallService.formModel.get('GroupATerms').get('GroupATerm4').touched && wallService.formModel.get('GroupATerms').get('GroupATerm4').errors?.required">This field is required!</label>
+        </label>
+   </div>
+    <label>
+    Group A Connections : 
+    <input type="text" placeholder="Group A Connections" formControlName="GroupAConnections">
+    <label class="text-danger" *ngIf="wallService.formModel.get('GroupAConnections').touched && wallService.formModel.get('GroupAConnections').errors?.required">This field is required!</label>
+    </label>
+    <div formGroupName="GroupBTerms">
+        <label>Enter the four terms of the same group (Second group):</label>
+        <br>
+        <label>
+            Group B Term 1 :
+            <input type="text" placeholder="GroupBTerm1" formControlName="GroupBTerm1">
+            <label class="text-danger" *ngIf="wallService.formModel.get('GroupBTerms').get('GroupBTerm1').touched && wallService.formModel.get('GroupBTerms').get('GroupBTerm1').errors?.required">This field is required!</label>
+        </label>
+        <label>
+         Group B Term 2 :
+         <input type="text" placeholder="GroupBTerm2" formControlName="GroupBTerm2">
+         <label class="text-danger" *ngIf="wallService.formModel.get('GroupBTerms').get('GroupBTerm2').touched && wallService.formModel.get('GroupBTerms').get('GroupBTerm2').errors?.required">This field is required!</label>
+         </label>
+         <label>
+             Group B Term 3 :
+             <input type="text" placeholder="GroupBTerm3" formControlName="GroupBTerm3">
+             <label class="text-danger" *ngIf="wallService.formModel.get('GroupBTerms').get('GroupBTerm3').touched && wallService.formModel.get('GroupBTerms').get('GroupBTerm3').errors?.required">This field is required!</label>
+         </label>
+         <label>
+             Group B Term 4 :
+             <input type="text" placeholder="GroupBTerm4" formControlName="GroupBTerm4">
+             <label class="text-danger" *ngIf="wallService.formModel.get('GroupBTerms').get('GroupBTerm4').touched && wallService.formModel.get('GroupBTerms').get('GroupBTerm4').errors?.required">This field is required!</label>
+         </label>
+    </div>
+     <label>
+     Group B Connections : 
+     <input type="text" placeholder="Group B Connections" formControlName="GroupBConnections">
+     <label class="text-danger" *ngIf="wallService.formModel.get('GroupBConnections').touched && wallService.formModel.get('GroupBConnections').errors?.required">This field is required!</label>
+     </label>
+     <div formGroupName="GroupCTerms">
+        <label>Enter the four terms of the same group (Third group):</label>
+        <br>
+        <label>
+            Group C Term 1 :
+            <input type="text" placeholder="GroupCTerm1" formControlName="GroupCTerm1">
+            <label class="text-danger" *ngIf="wallService.formModel.get('GroupCTerms').get('GroupCTerm1').touched && wallService.formModel.get('GroupCTerms').get('GroupCTerm1').errors?.required">This field is required!</label>
+        </label>
+        <label>
+         Group C Term 2 :
+         <input type="text" placeholder="GroupCTerm2" formControlName="GroupCTerm2">
+         <label class="text-danger" *ngIf="wallService.formModel.get('GroupCTerms').get('GroupCTerm2').touched && wallService.formModel.get('GroupCTerms').get('GroupCTerm2').errors?.required">This field is required!</label>
+         </label>
+         <label>
+             Group C Term 3 :
+             <input type="text" placeholder="GroupCTerm3" formControlName="GroupCTerm3">
+             <label class="text-danger" *ngIf="wallService.formModel.get('GroupCTerms').get('GroupCTerm3').touched && wallService.formModel.get('GroupCTerms').get('GroupCTerm3').errors?.required">This field is required!</label>
+         </label>
+         <label>
+             Group C Term 4 :
+             <input type="text" placeholder="GroupCTerm4" formControlName="GroupCTerm4">
+             <label class="text-danger" *ngIf="wallService.formModel.get('GroupCTerms').get('GroupCTerm4').touched && wallService.formModel.get('GroupCTerms').get('GroupCTerm4').errors?.required">This field is required!</label>
+         </label>
+    </div>
+     <label>
+     Group C Connections : 
+     <input type="text" placeholder="Group C Connections" formControlName="GroupCConnections">
+     <label class="text-danger" *ngIf="wallService.formModel.get('GroupCConnections').touched && wallService.formModel.get('GroupCConnections').errors?.required">This field is required!</label>
+     </label>
+     <div formGroupName="GroupDTerms">
+        <label>Enter the four terms of the same group (Third group):</label>
+        <br>
+        <label>
+            Group D Term 1 :
+            <input type="text" placeholder="GroupDTerm1" formControlName="GroupDTerm1">
+            <label class="text-danger" *ngIf="wallService.formModel.get('GroupDTerms').get('GroupDTerm1').touched && wallService.formModel.get('GroupDTerms').get('GroupDTerm1').errors?.required">This field is required!</label>
+        </label>
+        <label>
+         Group D Term 2 :
+         <input type="text" placeholder="GroupDTerm2" formControlName="GroupDTerm2">
+         <label class="text-danger" *ngIf="wallService.formModel.get('GroupDTerms').get('GroupDTerm2').touched && wallService.formModel.get('GroupDTerms').get('GroupDTerm2').errors?.required">This field is required!</label>
+         </label>
+         <label>
+             Group D Term 3 :
+             <input type="text" placeholder="GroupDTerm3" formControlName="GroupDTerm3">
+             <label class="text-danger" *ngIf="wallService.formModel.get('GroupDTerms').get('GroupDTerm3').touched && wallService.formModel.get('GroupDTerms').get('GroupDTerm3').errors?.required">This field is required!</label>
+         </label>
+         <label>
+             Group D Term 4 :
+             <input type="text" placeholder="GroupDTerm4" formControlName="GroupDTerm4">
+             <label class="text-danger" *ngIf="wallService.formModel.get('GroupDTerms').get('GroupDTerm4').touched && wallService.formModel.get('GroupDTerms').get('GroupDTerm4').errors?.required">This field is required!</label>
+         </label>
+    </div>
+     <label>
+     Group D Connections : 
+     <input type="text" placeholder="Group D Connections" formControlName="GroupDConnections">
+     <label class="text-danger" *ngIf="wallService.formModel.get('GroupDConnections').touched && wallService.formModel.get('GroupDConnections').errors?.required">This field is required!</label>
+     </label>
+     <button type="submit" class="btn btn-lg btn-block" [disabled]="!wallService.formModel.valid">Submit Quiz</button>
+</form>
+<!--
+<form [formGroup]="wallService.formModel" autocomplete="off">
+    <div class="form-group">
+        <label>Quiz Creator :</label>
+        <input class="form-control" placeholder={{userDetails?.userName}} readonly>
+    </div>
+    <div class="form-group">
+        <label>Quiz Name :</label>
+        <input class="form-control" placeholder="Quiz Name" formControlName="wallName">
+        <label class="text-danger" *ngIf="wallService.formModel.get('wallName').touched && wallService.formModel.get('wallName').errors?.required">This field is required!</label>
+    </div> -->
+    <!--Group A-->
+    <!--<div class="form-group">
+        <label>Group A</label>
+    </div>
+    <div class="form-group" formGroupName="GroupATerms">
+        <label>Enter the four terms of the same group (Please capitalise the first letter) :</label>
+            <div class="row">
+                <div class="col">
+                    <input class="form-control" formControlName="GroupATerm1" placeholder="First term">
+                    <label class="text-danger" *ngIf="wallService.formModel.get('GroupATerm1').touched && wallService.formModel.get('GroupATerm1').errors?.required">This field is required!</label>
+                </div>
+                <div class="col">
+                    <input class="form-control" placeholder="Second term" formControlName="groupATerm2">
+                    <label class="text-danger" *ngIf="wallService.formModel.get('GroupATerm2').touched && wallService.formModel.get('GroupATerm2').errors?.required">This field is required!</label>
+                </div>
+                <div class="col">
+                    <input class="form-control" placeholder="Third term" formControlName="groupATerm3">
+                    <label class="text-danger" *ngIf="wallService.formModel.get('GroupATerm3').touched && wallService.formModel.get('GroupATerm3').errors?.required">This field is required!</label>
+                </div>
+                <div class="col">
+                    <input class="form-control" placeholder="Fourth term" formControlName="groupATerm4">
+                    <label class="text-danger" *ngIf="wallService.formModel.get('GroupATerm4').touched && wallService.formModel.get('GroupATerm4').errors?.required">This field is required!</label>
+                </div>
+            </div>
+    </div>
+    <div class="form-group" [formGroup]="wallService.formModel">
+        <label>Enter the acceptable linking terms between 4 members (use commas to separate the terms, e.g. football, footballers) : </label>
+        <input class="form-control" placeholder="Group A Connections" formControlName="GroupAConnections">
+        <label class="text-danger" *ngIf="wallService.formModel.get('GroupAConnections').touched && wallService.formModel.get('GroupAConnections').errors?.required">This field is required!</label>
+    </div>-->
+    <!--Group B-->
+   <!-- <div class="form-group">
+        <label>Group B</label>
+    </div>
+    <div class="form-group">
+        <label>Enter the four terms of the same group (Please capitalise the first letter) :</label>
+            <div class="row">
+                <div class="col" [formGroup]="wallService.formModel">
+                    <input class="form-control" placeholder="First term" formControlName="groupBTerm1">
+                    <label class="text-danger" *ngIf="wallService.formModel.get('GroupBTerm1').touched && wallService.formModel.get('GroupBTerm1').errors?.required">This field is required!</label>
+                </div>
+                <div class="col" [formGroup]="wallService.formModel">
+                    <input class="form-control" placeholder="Second term" formControlName="groupBTerm2">
+                    <label class="text-danger" *ngIf="wallService.formModel.get('GroupBTerm2').touched && wallService.formModel.get('GroupBTerm2').errors?.required">This field is required!</label>
+                </div>
+                <div class="col" [formGroup]="wallService.formModel">
+                    <input class="form-control" placeholder="Third term" formControlName="groupBTerm3">
+                    <label class="text-danger" *ngIf="wallService.formModel.get('GroupBTerm3').touched && wallService.formModel.get('GroupBTerm3').errors?.required">This field is required!</label>
+                </div>
+                <div class="col" [formGroup]="wallService.formModel">
+                    <input class="form-control" placeholder="Fourth term" formControlName="groupBTerm4">
+                    <label class="text-danger" *ngIf="wallService.formModel.get('GroupBTerm4').touched && wallService.formModel.get('GroupBTerm4').errors?.required">This field is required!</label>
+                </div>
+            </div>
+    </div>
+    <div class="form-group" [formGroup]="wallService.formModel">
+        <label>Enter the acceptable linking terms between 4 members (use commas to separate the terms, e.g. football, footballers) : </label>
+        <input class="form-control"  placeholder="Group B Connections" formControlName="GroupBConnections">
+        <label class="text-danger" *ngIf="wallService.formModel.get('GroupBConnections').touched && wallService.formModel.get('GroupBConnections').errors?.required">This field is required!</label>
+    </div>-->
+    <!--Group C-->
+  <!--  <div class="form-group">
+        <label>Group C</label>
+    </div>
+    <div class="form-group">
+        <label>Enter the four terms of the same group (Please capitalise the first letter) :</label>
+            <div class="row">
+                <div class="col" [formGroup]="wallService.formModel">
+                    <input class="form-control" placeholder="First term"  formControlName="groupCTerm1">
+                    <label class="text-danger" *ngIf="wallService.formModel.get('GroupCTerm1').touched && wallService.formModel.get('GroupCTerm1').errors?.required">This field is required!</label>
+                </div>
+                <div class="col" [formGroup]="wallService.formModel">
+                    <input class="form-control" placeholder="Second term"  formControlName="groupCTerm2">
+                    <label class="text-danger" *ngIf="wallService.formModel.get('GroupCTerm2').touched && wallService.formModel.get('GroupCTerm2').errors?.required">This field is required!</label>
+                </div>
+                <div class="col" [formGroup]="wallService.formModel">
+                    <input class="form-control" placeholder="Third term"  formControlName="groupCTerm3">
+                    <label class="text-danger" *ngIf="wallService.formModel.get('GroupCTerm3').touched && wallService.formModel.get('GroupCTerm3').errors?.required">This field is required!</label>
+                </div>
+                <div class="col" [formGroup]="wallService.formModel">
+                    <input class="form-control" placeholder="Fourth term"  formControlName="groupCTerm4">
+                    <label class="text-danger" *ngIf="wallService.formModel.get('GroupCTerm4').touched && wallService.formModel.get('GroupCTerm4').errors?.required">This field is required!</label>
+                </div>
+            </div>
+    </div>
+    <div class="form-group" [formGroup]="wallService.formModel">
+        <label>Enter the acceptable linking terms between 4 members (use commas to separate the terms, e.g. football, footballers) : </label>
+        <input class="form-control" placeholder="Group C Connections" formControlName="GroupCConnections">
+        <label class="text-danger" *ngIf="wallService.formModel.get('GroupCConnections').touched && wallService.formModel.get('GroupCConnections').errors?.required">This field is required!</label>
+    </div>-->
+    <!--Group D-->
+   <!-- <div class="form-group">
+        <label>Group D</label>
+    </div>
+    <div class="form-group">
+        <label>Enter the four terms of the same group (Please capitalise the first letter) :</label>
+            <div class="row">
+                <div class="col" [formGroup]="wallService.formModel">
+                    <input class="form-control" placeholder="First term"  formControlName="groupDTerm1">
+                    <label class="text-danger" *ngIf="wallService.formModel.get('GroupDTerm1').touched && wallService.formModel.get('GroupDTerm1').errors?.required">This field is required!</label>
+                </div>
+                <div class="col" [formGroup]="wallService.formModel">
+                    <input class="form-control" placeholder="Second term" formControlName="groupDTerm2">
+                    <label class="text-danger" *ngIf="wallService.formModel.get('GroupDTerm2').touched && wallService.formModel.get('GroupDTerm2').errors?.required">This field is required!</label>
+                </div>
+                <div class="col" [formGroup]="wallService.formModel">
+                    <input class="form-control" placeholder="Third term" formControlName="groupDTerm3">
+                    <label class="text-danger" *ngIf="wallService.formModel.get('GroupDTerm3').touched && wallService.formModel.get('GroupDTerm3').errors?.required">This field is required!</label>
+                </div>
+                <div class="col" [formGroup]="wallService.formModel">
+                    <input class="form-control" placeholder="Fourth term" formControlName="groupDTerm4">
+                    <label class="text-danger" *ngIf="wallService.formModel.get('GroupDTerm4').touched && wallService.formModel.get('GroupDTerm4').errors?.required">This field is required!</label>
+                </div>
+            </div>
+    </div>
+    <div class="form-group" [formGroup]="wallService.formModel">
+        <label>Enter the acceptable linking terms between 4 members (use commas to separate the terms, e.g. football, footballers) : </label>
+        <input class="form-control" placeholder="Group D Connections" formControlName="GroupDConnections">
+        <label class="text-danger" *ngIf="wallService.formModel.get('GroupDConnections').touched && wallService.formModel.get('GroupDConnections').errors?.required">This field is required!</label>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-8-offset-md-2">
+            <label>Please check your entries before pressing : </label>
+            <button type="submit" class="btn btn-lg btn-block" [disabled]="!wallService.formModel.valid">Submit Quiz</button>
+        </div>
+    </div>
+</form> -->
+

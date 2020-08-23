@@ -1,0 +1,316 @@
+.tilecontainer
+{
+    width: 700px;
+    height: 520px;
+    left:110px;
+    top:30px;
+    position: relative;
+    display: flex;
+    background-image:url("../../assets/img/background.jpg");
+    justify-content: center;
+    background-size:cover;
+    background-position:50% 50%;
+}
+.guessContainer
+{
+    width:900px;
+    height:600px;
+    left:10px;
+    top:30px;
+    position: relative;
+    display: flex;
+    background-image:url("../../assets/img/makeTheConnection.png");
+    justify-content: center;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+.tile
+{
+    width: 148px;
+    left: 250px;
+    top: 240px;
+    text-align: center;
+    line-height: 30px;
+    background: #e9e8f2;
+    font-weight: 600;
+    height: 98px;
+    border: 2px solid #74708f;
+    border: 1px solid #938DBD;
+    padding: 2px;
+    border-radius: 4px;
+    background-position: center;
+    display: block;
+    position: absolute;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 600;
+}
+/*For guessing the connections*/
+.tilegroup1
+{
+    width: 148px;
+    left: 250px;
+    top: 240px;
+    text-align: center;
+    line-height: 30px;
+    background: #047b16;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    height: 98px;
+    border: 2px solid #74708f;
+    border: 1px solid #938DBD;
+    padding: 2px;
+    border-radius: 4px;
+    background-position: center;
+    display: block;
+    position: absolute;
+    font-size: 16px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 600;
+}
+.tilegroup2
+{
+    width: 148px;
+    left: 250px;
+    top: 240px;
+    text-align: center;
+    line-height: 30px;
+    background: #1c07df;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    height: 98px;
+    border: 2px solid #74708f;
+    border: 1px solid #938DBD;
+    padding: 2px;
+    border-radius: 4px;
+    background-position: center;
+    display: block;
+    position: absolute;
+    font-size: 16px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 600;
+}
+.tilegroup3
+{
+    width: 148px;
+    left: 250px;
+    top: 240px;
+    text-align: center;
+    line-height: 30px;
+    background: #df2007;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    height: 98px;
+    border: 2px solid #74708f;
+    border: 1px solid #938DBD;
+    padding: 2px;
+    border-radius: 4px;
+    background-position: center;
+    display: block;
+    position: absolute;
+    font-size: 16px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 600;
+}
+.tilegroup4
+{
+    width: 148px;
+    left: 250px;
+    top: 240px;
+    text-align: center;
+    line-height: 30px;
+    background: #07dfd1;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    height: 98px;
+    border: 2px solid #74708f;
+    border: 1px solid #938DBD;
+    padding: 2px;
+    border-radius: 4px;
+    background-position: center;
+    display: block;
+    position: absolute;
+    font-size: 16px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 600;
+}
+.GuessTile1
+{
+    width: 148px;
+    left: 250px;
+    top: 240px;
+    text-align: center;
+    line-height: 30px;
+    background: #047b16;
+    color: rgb(255, 255, 255);
+    height: 50px;
+    padding: 1px;
+    border-radius: 4px;
+    background-position: center;
+    display: block;
+    position: absolute;
+    font-size: 12px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 600;
+}
+.GuessTile2
+{
+    width: 148px;
+    left: 250px;
+    top: 240px;
+    text-align: center;
+    line-height: 30px;
+    background: #1c07df;
+    color: rgb(255, 255, 255);
+    height: 50px;
+    padding: 1px;
+    border-radius: 4px;
+    background-position: center;
+    display: block;
+    position: absolute;
+    font-size: 12px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 600;
+}
+.GuessTile3
+{
+    width: 148px;
+    left: 250px;
+    top: 240px;
+    text-align: center;
+    line-height: 30px;
+    background: #df2007;
+    color: rgb(255, 255, 255);
+    height: 50px;
+    padding: 1px;
+    border-radius: 4px;
+    background-position: center;
+    display: block;
+    position: absolute;
+    font-size: 12px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 600;
+}
+.GuessTile4
+{
+    width: 148px;
+    left: 250px;
+    top: 240px;
+    text-align: center;
+    line-height: 30px;
+    background: #07dfd1;
+    color: rgb(255, 255, 255);
+    height: 50px;
+    padding: 1px;
+    border-radius: 4px;
+    background-position: center;
+    display: block;
+    position: absolute;
+    font-size: 12px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 600;
+}
+
+.NotClickable
+{
+    background: green;
+    pointer-events: none;
+}
+.ClickedTile
+{
+    background: #edf557;
+}
+.tile:hover
+{
+    background: #a4a0c4;
+}
+.p
+{
+    text-align: center;
+    line-height: 85px;
+}
+p
+{
+    color:black;
+}
+.ScoreAndCountdown
+{
+    left:110px;
+    width: 700px;
+    height: 50px;
+    position: relative;
+    display: flex;
+    font-size: 15px;
+}
+.ScoreAndCountdown p
+{
+    text-decoration: cyan;
+}
+.Created
+{
+    color: white;
+}
+.Score
+{
+    color: white;
+}
+.Time
+{
+    color: white;
+}
+.Created p
+{
+    color: white;
+}
+.ScoreAndCountdown p
+{
+    color: white;
+}
+.container
+{
+    color: white;
+}
+.container h1
+{
+    color: white;
+}
+.container h2
+{
+    color: seashell;
+}
+.fill-space
+{
+    flex:1 1 auto;
+}
+.lives
+{
+    position: absolute;
+    left: 710px;
+    height: 300px;
+    width: 100px;
+    top: 250px;
+    color: #e70606;
+    font-size: 70px;
+}
+.life1,.life2,.life3
+{
+    margin:30px;
+}
+.hidden
+{
+    display: none;
+}
+.text-light
+{
+    font-size: 9px;
+}

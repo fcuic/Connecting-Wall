@@ -1,0 +1,16 @@
+.fill-space
+{
+    flex:1 1 auto;
+}
+.container p
+{
+    color: white;
+}
+.container h1
+{
+    color: orange;
+}
+.container h2
+{
+    color: orange;
+}

@@ -1,0 +1,11 @@
+<mat-toolbar>
+    <span class="headings">
+    <h1 *ngIf="!Started">Get ready!</h1>
+    <h1 *ngIf="Started">Think hard!</h1>
+    </span>
+<span class="fill-space"></span>
+<button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<app-play-quiz *ngIf="!Started"></app-play-quiz>
+<button type="button" class="btn btn-primary btn-lg btn-block" (click)="OnStart();" *ngIf="!Started">Start</button>
+<app-game *ngIf="Started"></app-game>

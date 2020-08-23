@@ -1,0 +1,216 @@
+<br>
+<div class="ScoreAndCountdown">
+    <div class="Created">
+        <label>Quiz by :</label>
+        <p><strong>{{this.wallDetails.user.fullName}}</strong></p>
+    </div>
+    <span class="fill-space"></span>
+    <div class="Score">
+        <label>Score : </label>
+        <p><strong>{{this.score}}</strong></p>
+    </div>
+    <span class="fill-space"></span>
+    <div class="Time" *ngIf="gameOver==false">
+    <label>Time left : </label>
+    <p><strong><countdown [config]="{ leftTime: 180, format: 'm:s' }" (event)="timesUp($event)"></countdown></strong></p>
+    </div>
+</div>
+<!--Dio za uparivanje pojmova-->
+<div class="tilecontainer" *ngIf="gameOver==false">
+    <div class="tile" style="left:40px;top:55px;" (click)="isClickedtile1=!isClickedtile1; chosenSound.play();PushInCheckArray($event,isClickedtile1);getParagraphText($event);" [class.ClickedTile]="isClickedtile1" id="{{this.terms[0].connectionName}}">
+        <p hidden>{{this.terms[0].connectionName}}</p>
+        <p>{{this.terms[0].termName}}</p>
+    </div>
+    <div class="tile" style="left:200px;top:55px;" (click)="isClickedtile2=!isClickedtile2;chosenSound.play();PushInCheckArray($event,isClickedtile2);getParagraphText($event)" [class.ClickedTile]="isClickedtile2" id="{{this.terms[1].connectionName}}">
+        <p hidden>{{this.terms[1].connectionName}}</p>
+        <p>{{this.terms[1].termName}}</p>
+    </div>
+    <div class="tile" style="left:360px;top:55px;" (click)="isClickedtile3=!isClickedtile3;chosenSound.play();PushInCheckArray($event,isClickedtile3);getParagraphText($event)" [class.ClickedTile]="isClickedtile3" id="{{this.terms[2].connectionName}}">
+        <p hidden>{{this.terms[2].connectionName}}</p>
+        <p>{{this.terms[2].termName}}</p>
+    </div>
+    <div class="tile" style="left:520px;top:55px;" (click)="isClickedtile4=!isClickedtile4;chosenSound.play();PushInCheckArray($event,isClickedtile4);getParagraphText($event)" [class.ClickedTile]="isClickedtile4" id="{{this.terms[3].connectionName}}">
+        <p hidden>{{this.terms[3].connectionName}}</p>
+        <p>{{this.terms[3].termName}}</p>
+    </div>
+    <div class="tile" style="left:40px;top:165px;" (click)="isClickedtile5=!isClickedtile5;chosenSound.play();PushInCheckArray($event,isClickedtile5);getParagraphText($event)" [class.ClickedTile]="isClickedtile5" id="{{this.terms[4].connectionName}}">
+        <p hidden>{{this.terms[4].connectionName}}</p>
+        <p>{{this.terms[4].termName}}</p>
+    </div>
+    <div class="tile" style="left:200px;top:165px;" (click)="isClickedtile6=!isClickedtile6;chosenSound.play();PushInCheckArray($event,isClickedtile6);getParagraphText($event)" [class.ClickedTile]="isClickedtile6" id="{{this.terms[5].connectionName}}">
+        <p hidden>{{this.terms[5].connectionName}}</p>
+        <p>{{this.terms[5].termName}}</p>
+    </div>
+    <div class="tile" style="left:360px;top:165px;"(click)="isClickedtile7=!isClickedtile7;chosenSound.play();PushInCheckArray($event,isClickedtile7);getParagraphText($event)" [class.ClickedTile]="isClickedtile7" id="{{this.terms[6].connectionName}}">
+        <p hidden>{{this.terms[6].connectionName}}</p>
+        <p>{{this.terms[6].termName}}</p>
+    </div>
+    <div class="tile" style="left:520px;top:165px;" (click)="isClickedtile8=!isClickedtile8;chosenSound.play();PushInCheckArray($event,isClickedtile8);getParagraphText($event)" [class.ClickedTile]="isClickedtile8" id="{{this.terms[7].connectionName}}">
+        <p hidden>{{this.terms[7].connectionName}}</p>
+        <p>{{this.terms[7].termName}}</p>
+    </div>
+    <div class="tile" style="left:40px;top:275px;" (click)="isClickedtile9=!isClickedtile9;chosenSound.play();PushInCheckArray($event,isClickedtile9);getParagraphText($event)" [class.ClickedTile]="isClickedtile9" id="{{this.terms[8].connectionName}}">
+        <p hidden>{{this.terms[8].connectionName}}</p>
+        <p>{{this.terms[8].termName}}</p>
+    </div>
+    <div class="tile" style="left:200px;top:275px;" (click)="isClickedtile10=!isClickedtile10;chosenSound.play();PushInCheckArray($event,isClickedtile10);getParagraphText($event)" [class.ClickedTile]="isClickedtile10" id="{{this.terms[9].connectionName}}">
+        <p hidden>{{this.terms[9].connectionName}}</p>
+        <p>{{this.terms[9].termName}}</p>
+    </div>
+    <div class="tile" style="left:360px;top:275px;" (click)="isClickedtile11=!isClickedtile11;chosenSound.play();PushInCheckArray($event,isClickedtile11);getParagraphText($event)" [class.ClickedTile]="isClickedtile11" id="{{this.terms[10].connectionName}}">
+        <p hidden>{{this.terms[10].connectionName}}</p>
+        <p>{{this.terms[10].termName}}</p>
+    </div>
+    <div class="tile" style="left:520px;top:275px;" (click)="isClickedtile12=!isClickedtile12;chosenSound.play();PushInCheckArray($event,isClickedtile12);getParagraphText($event)" [class.ClickedTile]="isClickedtile12" id="{{this.terms[11].connectionName}}">
+        <p hidden>{{this.terms[11].connectionName}}</p>
+        <p>{{this.terms[11].termName}}</p>
+    </div>
+    <div class="tile" style="left:40px;top:385px;" (click)="isClickedtile13=!isClickedtile13;chosenSound.play();PushInCheckArray($event,isClickedtile13);getParagraphText($event)" [class.ClickedTile]="isClickedtile13" id="{{this.terms[12].connectionName}}">
+        <p hidden>{{this.terms[12].connectionName}}</p>
+        <p>{{this.terms[12].termName}}</p>
+    </div>
+    <div class="tile" style="left:200px;top:385px;" (click)="isClickedtile14=!isClickedtile14;chosenSound.play();PushInCheckArray($event,isClickedtile14);getParagraphText($event)" [class.ClickedTile]="isClickedtile14" id="{{this.terms[13].connectionName}}">
+        <p hidden>{{this.terms[13].connectionName}}</p>
+        <p>{{this.terms[13].termName}}</p>
+    </div>
+    <div class="tile" style="left:360px;top:385px;" (click)="isClickedtile15=!isClickedtile15;chosenSound.play();PushInCheckArray($event,isClickedtile15);getParagraphText($event)" [class.ClickedTile]="isClickedtile15" id="{{this.terms[14].connectionName}}">
+        <p hidden>{{this.terms[14].connectionName}}</p>
+        <p>{{this.terms[14].termName}}</p>
+    </div>
+    <div class="tile" style="left:520px;top:385px;" (click)="isClickedtile16=!isClickedtile16;chosenSound.play();PushInCheckArray($event,isClickedtile16);getParagraphText($event)" [class.ClickedTile]="isClickedtile16" id="{{this.terms[15].connectionName}}">
+        <p hidden>{{this.terms[15].connectionName}}</p>
+        <p>{{this.terms[15].termName}}</p>
+    </div>
+    <div class="lives">
+        <div class="life1" *ngIf="showLives==true && firstLifeWasted==false">
+            &#x2665;
+        </div>
+        <div class="life2" *ngIf="showLives==true && secondLifeWasted==false">
+            &#x2665;
+        </div>
+        <div class="life3" *ngIf="showLives==true && thirdLifeWasted==false">
+            &#x2665;
+        </div>
+    </div>
+</div>
+<!--Dio za ispitivanje kako je user završio uparivanje-->
+<br>
+<div class="container" *ngIf="gameOver==true && goToConnectionGuessing==false">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="d-flex justify-content-center">
+    <h1>Matching terms in Group Done!</h1>
+    </div>
+    <div class="d-flex justify-content-center">
+        <h2 *ngIf="ranOutOfTime==true">You ran out of time!!</h2>
+        <h2 *ngIf="wastedLives==true">You wasted all three lives!</h2>    
+        <h2 *ngIf="successfullyGroupedTheTerms==true">You matched all the terms well in given time!!</h2>
+    </div>
+    <div class="d-flex justify-content-center">
+    <h2>Time to Guess the Connection between terms and potentially win extra points!</h2>
+    </div>
+    <div class="d-flex justify-content-center">
+    <button class="btn btn-lg btn-primary" (click)="this.goToConnectionGuessing=true;">To Connection Gueesing!</button>
+    </div>
+</div>
+<br>
+<!--Dio za pogađanje konekcija kod pojmova kad je uparivanje završeno-->
+<div class="guessContainer" *ngIf="gameOver==true && goToConnectionGuessing==true && checkIfUserGuessedAllConnections()==false">
+    <div class="tilegroup1" style="left:40px;top:55px;">
+        <p>{{this.sortedTerms[0].termName}}</p>
+    </div>
+    <div class="tilegroup1" style="left:200px;top:55px;">
+        <p>{{this.sortedTerms[1].termName}}</p>
+    </div>
+    <div class="tilegroup1" style="left:360px;top:55px;">
+        <p>{{this.sortedTerms[2].termName}}</p>
+    </div>
+    <div class="tilegroup1" style="left:520px;top:55px;">
+        <p>{{this.sortedTerms[3].termName}}</p>
+    </div>
+    <div class="GuessTile1" style="left:680px;top:45px;">
+        <label>Group A Connection:</label>
+        <input id="conn1" type="text" placeholder="Group A Connection">
+        <label class="text-light bg-dark" *ngIf="(guessedConnection1!=null) && (guessedConnection1!=this.termA1.connectionName)">Wrong! Answer is {{this.termA1.connectionName}}</label>
+        <label class="text-success" *ngIf="(guessedConnection1!=null) && (guessedConnection1==this.termA1.connectionName)">Correct!</label>
+        <button *ngIf="firstConnectionGuessed==false" (click)="getConnection1()">Confirm</button>
+    </div>
+    <div class="tilegroup2" style="left:40px;top:165px;">
+        <p>{{this.sortedTerms[4].termName}}</p>
+    </div>
+    <div class="tilegroup2" style="left:200px;top:165px;">
+        <p>{{this.sortedTerms[5].termName}}</p>
+    </div>
+    <div class="tilegroup2" style="left:360px;top:165px;">
+        <p>{{this.sortedTerms[6].termName}}</p>
+    </div>
+    <div class="tilegroup2" style="left:520px;top:165px;">
+        <p>{{this.sortedTerms[7].termName}}</p>
+    </div>
+    <div class="GuessTile2" style="left:680px;top:155px;">
+        <label>Group B Connection:</label>
+        <input id="conn2" type="text" placeholder="Group B Connection">
+        <label class="text-light bg-dark" *ngIf="(guessedConnection2!=null) && (guessedConnection2!=this.termB1.connectionName)">Wrong! Answer is {{this.termB1.connectionName}}</label>
+        <label class="text-success" *ngIf="(guessedConnection2!=null) && (guessedConnection2==this.termB1.connectionName)">Correct!</label>
+        <button *ngIf="secondConnectionGuessed==false" (click)="getConnection2()">Confirm</button>
+    </div>
+    <div class="tilegroup3" style="left:40px;top:275px;">
+        <p>{{this.sortedTerms[8].termName}}</p>
+    </div>
+    <div class="tilegroup3" style="left:200px;top:275px;">
+        <p>{{this.sortedTerms[9].termName}}</p>
+    </div>
+    <div class="tilegroup3" style="left:360px;top:275px;">
+        <p>{{this.sortedTerms[10].termName}}</p>
+    </div>
+    <div class="tilegroup3" style="left:520px;top:275px;">
+        <p>{{this.sortedTerms[11].termName}}</p>
+    </div>
+    <div class="GuessTile3" style="left:680px;top:265px;">
+        <label>Group C Connection:</label>
+        <input id="conn3" type="text" placeholder="Group C Connection">
+        <label class="text-light bg-dark" *ngIf="(guessedConnection3!=null) && (guessedConnection3!=this.termC1.connectionName)">Wrong! Answer is {{this.termC1.connectionName}}</label>
+        <label class="text-success" *ngIf="(guessedConnection3!=null) && (guessedConnection3==this.termC1.connectionName)">Correct!</label>
+        <button *ngIf="thirdConnectionGuessed==false" (click)="getConnection3()">Confirm</button>
+    </div>
+    <div class="tilegroup4" style="left:40px;top:385px;">
+        <p>{{this.sortedTerms[12].termName}}</p>
+    </div>
+    <div class="tilegroup4" style="left:200px;top:385px;">
+        <p>{{this.sortedTerms[13].termName}}</p>
+    </div>
+    <div class="tilegroup4" style="left:360px;top:385px;">
+        <p>{{this.sortedTerms[14].termName}}</p>
+    </div>
+    <div class="tilegroup4" style="left:520px;top:385px;">
+        <p>{{this.sortedTerms[15].termName}}</p>
+    </div>
+    <div class="GuessTile4" style="left:680px;top:375px;">
+        <label>Group D Connection:</label>
+        <input id="conn4" type="text" placeholder="Group D Connection">
+        <label class="text-light bg-dark" *ngIf="(guessedConnection4!=null) && (guessedConnection4!=this.termD1.connectionName)">Wrong! Answer is {{this.termD1.connectionName}}</label>
+        <label class="text-success" *ngIf="(guessedConnection4!=null) && (guessedConnection4==this.termD1.connectionName)">Correct!</label>
+        <button *ngIf="fourthConnectionGuessed==false" (click)="getConnection4()">Confirm</button>
+    </div>
+</div>
+<!--Score Div-->
+<div class=container *ngIf="checkIfUserGuessedAllConnections()==true">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="d-flex justify-content-center">
+        <h1>Your Final Score is : {{this.score}}/8</h1>
+    </div>
+    <div class="d-flex justify-content-center">
+    <h2 *ngIf="(score>=0) && (score<=2)">That was pretty bad! 😣</h2>
+    <h2 *ngIf="(score>2) && (score<=4)">You can do better than that! 🤨</h2>
+    <h2 *ngIf="(score>4) && (score<=6)">Almost there! 🙂</h2>
+    <h2 *ngIf="(score>6) && (score<8)">Almost Perfect! 😀</h2>
+    <h2 *ngIf="score==8">Perfect Score! 😤</h2>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+img{
+    display: block;
+    max-width:400px;
+    max-height:300px;
+    width: auto;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+.container{
+    background-image:url("../../assets/img/quiz-master.jpg");
+    height:50em; background-size:cover; width:150em;
+     background-position:50% 50%;
+}
+.hide
+{
+    display: none;
+}
+mat-footer row mat-footer-cell{
+    justify-content: center;
+    font-style: italic;
+}
+::ng-deep.mat-dialog-container 
+{
+    background-color: rgb(55, 6, 159);
+}

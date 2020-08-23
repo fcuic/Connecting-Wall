@@ -385,4 +385,15 @@ export class GameComponent implements OnInit {
     this.fourthConnectionGuessed=true;
     console.log(this.guessedConnection4);
   }
+  checkIfUserGuessedAllConnections()
+  {
+    if(this.guessedConnection1!=null && this.guessedConnection2!=null && this.guessedConnection3!=null && this.guessedConnection4!=null)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
 }

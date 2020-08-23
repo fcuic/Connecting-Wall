@@ -239,6 +239,10 @@
     text-align: center;
     line-height: 85px;
 }
+p
+{
+    color:black;
+}
 .ScoreAndCountdown
 {
     left:110px;
@@ -251,6 +255,38 @@
 .ScoreAndCountdown p
 {
     text-decoration: cyan;
+}
+.Created
+{
+    color: white;
+}
+.Score
+{
+    color: white;
+}
+.Time
+{
+    color: white;
+}
+.Created p
+{
+    color: white;
+}
+.ScoreAndCountdown p
+{
+    color: white;
+}
+.container
+{
+    color: white;
+}
+.container h1
+{
+    color: white;
+}
+.container h2
+{
+    color: seashell;
 }
 .fill-space
 {
@@ -273,4 +309,8 @@
 .hidden
 {
     display: none;
+}
+.text-light
+{
+    font-size: 9px;
 }

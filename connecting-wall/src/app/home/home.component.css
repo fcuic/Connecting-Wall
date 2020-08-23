@@ -19,4 +19,8 @@ img{
 mat-footer row mat-footer-cell{
     justify-content: center;
     font-style: italic;
-  }
+}
+::ng-deep.mat-dialog-container 
+{
+    background-color: rgb(55, 6, 159);
+}

@@ -24,13 +24,13 @@ namespace Registration.Controllers
         public async Task<ActionResult<IEnumerable<Wall>>> GetWalls()
         {
             return await _context.Walls
-                .Include(p=>p.User)
-                .Include(p=>p.groupATerms)
-                .Include(p=>p.groupBTerms)
+                .Include(p => p.User)
+                .Include(p => p.groupATerms)
+                .Include(p => p.groupBTerms)
                 .Include(p => p.groupCTerms)
                 .Include(p => p.groupDTerms)
                 .Include(p => p.groupAConnections)
-                .Include(p=>p.groupBConnections)
+                .Include(p => p.groupBConnections)
                 .Include(p => p.groupCConnections)
                 .Include(p => p.groupDConnections)
                 .ToListAsync();
@@ -41,7 +41,7 @@ namespace Registration.Controllers
         {
             return await _context.Walls
                 .Where(w => w.userID == userId)
-                .Include(p=>p.User)
+                .Include(p => p.User)
                 .Include(p => p.groupATerms)
                 .Include(p => p.groupBTerms)
                 .Include(p => p.groupCTerms)

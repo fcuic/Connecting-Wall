@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Registration.Models;
 
 namespace Registration
@@ -60,10 +61,18 @@ namespace Registration
                     options.Password.RequireLowercase = false;
                     options.Password.RequireUppercase = false;
                     options.Password.RequiredLength = 6;
-
                 }
             );
             services.AddCors();//Cors policy
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Connecting Wall API",
+                    Version = "v1",
+                    Description = "Description for the API goes here."
+                });
+            });
 
             //JWT authentication
             var key = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JWT_Secret"].ToString());// authentication key 
@@ -86,11 +95,9 @@ namespace Registration
                     ValidateIssuer = false,
                     ValidateAudience = false,
                     ClockSkew = TimeSpan.Zero
-
                 };
             }
             );
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -103,6 +110,18 @@ namespace Registration
             app.UseCors(builder =>
             builder.WithOrigins(Configuration["ApplicationSettings:ClientURL"].ToString()).AllowAnyHeader().AllowAnyMethod()
             );
+
+            app.UseSwagger(option =>
+            {
+                option.RouteTemplate = "registration/{documentName}/swagger.json";
+            });
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/registration/v1/swagger.json", "Connecting Wall API V1");
+                c.RoutePrefix = "registration";
+            });
+
             app.UseAuthentication();
 
             app.UseRouting();

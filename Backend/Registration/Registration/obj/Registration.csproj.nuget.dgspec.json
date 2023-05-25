@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\filip\\OneDrive\\Desktop\\Connecting-Wall-develop\\Backend\\Registration\\Registration\\Registration.csproj": {}
+    "C:\\Users\\filip\\OneDrive\\Desktop\\DiplomskiBetter\\Connecting-Wall\\Backend\\Registration\\Registration\\Registration.csproj": {}
   },
   "projects": {
-    "C:\\Users\\filip\\OneDrive\\Desktop\\Connecting-Wall-develop\\Backend\\Registration\\Registration\\Registration.csproj": {
+    "C:\\Users\\filip\\OneDrive\\Desktop\\DiplomskiBetter\\Connecting-Wall\\Backend\\Registration\\Registration\\Registration.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\filip\\OneDrive\\Desktop\\Connecting-Wall-develop\\Backend\\Registration\\Registration\\Registration.csproj",
+        "projectUniqueName": "C:\\Users\\filip\\OneDrive\\Desktop\\DiplomskiBetter\\Connecting-Wall\\Backend\\Registration\\Registration\\Registration.csproj",
         "projectName": "Registration",
-        "projectPath": "C:\\Users\\filip\\OneDrive\\Desktop\\Connecting-Wall-develop\\Backend\\Registration\\Registration\\Registration.csproj",
+        "projectPath": "C:\\Users\\filip\\OneDrive\\Desktop\\DiplomskiBetter\\Connecting-Wall\\Backend\\Registration\\Registration\\Registration.csproj",
         "packagesPath": "C:\\Users\\filip\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\filip\\OneDrive\\Desktop\\Connecting-Wall-develop\\Backend\\Registration\\Registration\\obj\\",
+        "outputPath": "C:\\Users\\filip\\OneDrive\\Desktop\\DiplomskiBetter\\Connecting-Wall\\Backend\\Registration\\Registration\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\filip\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -26,6 +26,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -37,6 +38,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.AspNet.Mvc": {
               "target": "Package",
@@ -101,7 +103,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -113,7 +116,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }

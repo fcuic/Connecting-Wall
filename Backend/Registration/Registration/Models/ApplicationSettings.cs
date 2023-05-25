@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Registration.Models
+﻿namespace Registration.Models
 {
     public class ApplicationSettings
     {

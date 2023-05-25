@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Registration.Models
 {
@@ -18,7 +13,7 @@ namespace Registration.Models
         {
 
         }
-        protected override void OnModelCreating(ModelBuilder mb) 
+        protected override void OnModelCreating(ModelBuilder mb)
         {
 
             base.OnModelCreating(mb);
@@ -36,7 +31,7 @@ namespace Registration.Models
                 .HasKey(s => s.connectionId);
 
             mb.Entity<Wall>().HasData(//testing inserting into table
-           new Wall() { wallID = Guid.NewGuid(), wallName="PremierLeague",dateCreated=DateTime.Now },
+           new Wall() { wallID = Guid.NewGuid(), wallName = "PremierLeague", dateCreated = DateTime.Now },
            new Wall() { wallID = Guid.NewGuid(), wallName = "PremierLeague1", dateCreated = DateTime.Now },
            new Wall() { wallID = Guid.NewGuid(), wallName = "PremierLeague2", dateCreated = DateTime.Now }
            );

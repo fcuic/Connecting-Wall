@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Server.IIS.Core;
 using Microsoft.EntityFrameworkCore;
 using Registration.Models;
 
@@ -26,15 +23,7 @@ namespace Registration.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Wall>>> GetWalls()
         {
-            /*var result = await _context.Walls
-                .Include(p => p.User)
-                .Select(usr => new WallViewModel()
-                {
-                    UserName = usr.User.UserName,
-                    Email=usr.User.Email,
-                    FullName=usr.User.FullName
-                }).ToListAsync();*/
-            return await _context.Walls //kad se sve dohvaca
+            return await _context.Walls
                 .Include(p=>p.User)
                 .Include(p=>p.groupATerms)
                 .Include(p=>p.groupBTerms)
@@ -45,8 +34,8 @@ namespace Registration.Controllers
                 .Include(p => p.groupCConnections)
                 .Include(p => p.groupDConnections)
                 .ToListAsync();
-           
         }
+
         [HttpGet("GetWallsByUserId/{userId}")]
         public async Task<ActionResult<IEnumerable<Wall>>> GetWallsByUserId(string userId) 
         {

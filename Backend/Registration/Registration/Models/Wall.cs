@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Registration.Models
 {
@@ -14,7 +11,7 @@ namespace Registration.Models
         public Guid wallID { get; set; }
         [Required]
         public string wallName { get; set; }
-        public DateTime dateCreated { get; set; } = DateTime.Now;
+        public DateTime dateCreated { get; set; };
         public DateTime? dateUpdated { get; set; }
         [ForeignKey("userID")]
         public string userID { get; set; }

@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { QuizStartComponent } from '../quiz-start/quiz-start.component';
+import { Wall } from 'src/models/wall';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +28,7 @@ export class HomeComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   response: any;
   WallDetails: any;
-  walls = []; //all created walls for playing
+  walls : Wall[];
 
   constructor(
     private router: Router,

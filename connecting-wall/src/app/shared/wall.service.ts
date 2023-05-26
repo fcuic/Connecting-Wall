@@ -51,18 +51,18 @@ export class WallService {
   });
 
   getAllWalls() {
-    return this.http.get<any>(this.BaseURI + '/Wall');
+    return this.http.get<Wall>(this.BaseURI + '/Wall');
   }
 
   getWallById(id: any) {
     return this.http
-      .get<any>(this.BaseURI + '/Wall/' + id)
+      .get<Wall>(this.BaseURI + '/Wall/' + id)
       .pipe(catchError((Error) => of(null)));
   }
 
   getWallByUserId(id: any) {
     return this.http
-      .get<any>(this.BaseURI + '/Wall/GetWallsByUserId/' + id)
+      .get<Wall>(this.BaseURI + '/Wall/GetWallsByUserId/' + id)
       .pipe(catchError((Error) => of(null)));
   }
 

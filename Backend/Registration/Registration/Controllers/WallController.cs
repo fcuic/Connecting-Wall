@@ -21,23 +21,37 @@ namespace Registration.Controllers
 
         // GET: api/Wall
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Wall>>> GetWalls()
+        public async Task<ActionResult<IEnumerable<Wall>>> GetWalls(string userId)
         {
-            return await _context.Walls
+            var walls = _context.Walls
                 .Include(p => p.User)
-                .Include(p => p.groupATerms)
-                .Include(p => p.groupBTerms)
-                .Include(p => p.groupCTerms)
-                .Include(p => p.groupDTerms)
-                .Include(p => p.groupAConnections)
-                .Include(p => p.groupBConnections)
-                .Include(p => p.groupCConnections)
-                .Include(p => p.groupDConnections)
-                .ToListAsync();
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(userId))
+            {
+                walls = walls.Where(x => string.Equals(x.userID, userId));
+            }
+
+            //var groupAConnections = _context.GroupConnections
+            //    .Where(x => x.wallID1 == );
+
+            //return await _context.Walls
+            //    .Include(p => p.User)
+            //    .Include(p => p.groupATerms)
+            //    .Include(p => p.groupBTerms)
+            //    .Include(p => p.groupCTerms)
+            //    .Include(p => p.groupDTerms)
+            //    .Include(p => p.groupAConnections)
+            //    .Include(p => p.groupBConnections)
+            //    .Include(p => p.groupCConnections)
+            //    .Include(p => p.groupDConnections)
+            //    .ToListAsync();
+
+            return (await walls.ToListAsync());
         }
 
         [HttpGet("GetWallsByUserId/{userId}")]
-        public async Task<ActionResult<IEnumerable<Wall>>> GetWallsByUserId(string userId) 
+        public async Task<ActionResult<IEnumerable<Wall>>> GetWallsByUserId(string userId)
         {
             return await _context.Walls
                 .Where(w => w.userID == userId)
@@ -57,24 +71,70 @@ namespace Registration.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Wall>> GetWall(Guid id)
         {
-            var wall = await _context.Walls
-                .Include(p => p.User)
-                .Include(p => p.groupATerms)
-                .Include(p => p.groupBTerms)
-                .Include(p => p.groupCTerms)
-                .Include(p => p.groupDTerms)
-                .Include(p => p.groupAConnections)
-                .Include(p => p.groupBConnections)
-                .Include(p => p.groupCConnections)
-                .Include(p => p.groupDConnections)
-                .FirstOrDefaultAsync(i => i.wallID == id);//bolje nego findbyid
-
-            if (wall == null)
+            try
             {
-                return NotFound();
-            }
+                var wall = await _context.Walls
+                    .Include(p => p.User)
+                    .Include(p => p.groupATerms)
+                    .Include(p => p.groupBTerms)
+                    .Include(p => p.groupCTerms)
+                    .Include(p => p.groupDTerms)
+                    .Include(p => p.groupAConnections)
+                    .Include(p => p.groupBConnections)
+                    .Include(p => p.groupCConnections)
+                    .Include(p => p.groupDConnections)
+                    .Where(x => x.wallID == id)
+                    .FirstOrDefaultAsync();
 
-            return wall;
+                if (wall == null)
+                {
+                    return NotFound();
+                }
+
+                // Fill-in the group connections and terms
+                //wall.groupAConnections = await _context.GroupConnections
+                //    .Where(x => x.wallID == wall.wallID)
+                //    .ToListAsync();
+
+                //wall.groupBConnections = await _context.GroupConnections
+                //    .Where(x => x.wallID1 == wall.wallID)
+                //    .ToListAsync();
+
+                //wall.groupCConnections = await _context.GroupConnections
+                //    .Where(x => x.wallID2 == wall.wallID)
+                //    .ToListAsync();
+
+                //wall.groupDConnections = await _context.GroupConnections
+                //    .Where(x => x.wallID3 == wall.wallID)
+                //    .ToListAsync();
+
+                //wall.groupATerms = await _context.Terms
+                //    .Where(x => x.wallID == wall.wallID)
+                //    .ToListAsync();
+
+                //wall.groupBTerms = await _context.Terms
+                //    .Where(x => x.wallID1 == wall.wallID)
+                //    .ToListAsync();
+
+                //wall.groupCTerms = await _context.Terms
+                //    .Where(x => x.wallID2 == wall.wallID)
+                //    .ToListAsync();
+
+                //wall.groupDTerms = await _context.Terms
+                //    .Where(x => x.wallID3 == wall.wallID)
+                //    .ToListAsync();
+
+                if (wall == null)
+                {
+                    return NotFound();
+                }
+
+                return wall;
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         // PUT: api/Wall/5
@@ -90,7 +150,7 @@ namespace Registration.Controllers
 
             _context.Entry(wall).State = EntityState.Modified;
             //MODIFYING entities inside child entities of wall
-            foreach (Term term in wall.groupATerms) 
+            foreach (Term term in wall.groupATerms)
             {
                 _context.Entry(term).State = term.termID == null ? EntityState.Added : EntityState.Modified;
             }
@@ -106,7 +166,7 @@ namespace Registration.Controllers
             {
                 _context.Entry(term).State = term.termID == null ? EntityState.Added : EntityState.Modified;
             }
-            foreach (GroupConnections gc in wall.groupAConnections) 
+            foreach (GroupConnections gc in wall.groupAConnections)
             {
                 _context.Entry(gc).State = gc.connectionId == null ? EntityState.Added : EntityState.Modified;
             }

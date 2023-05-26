@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Registration.Models;
+using Registration.Requests;
 
 namespace Registration.Controllers
 {
@@ -206,12 +207,131 @@ namespace Registration.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Wall>> PostWall(Wall wall)
+        public async Task<ActionResult<Wall>> PostWall(WallRequestModel wallCreateRequest)
         {
-            _context.Walls.Add(wall);
-            await _context.SaveChangesAsync();
+            using var transaction = _context.Database.BeginTransaction();
+            try
+            {
+                var newWall = new Wall()
+                {
+                    WallID = new Guid(),
+                    DateCreated = DateTime.Now,
+                    UserID = wallCreateRequest.UserId,
+                    WallName = wallCreateRequest.WallName
+                };
 
-            return CreatedAtAction("GetWall", new { id = wall.WallID }, wall);
+                _context.Walls.Add(newWall);
+
+                #region GroupA
+
+                var groupAConnection = new GroupConnection()
+                {
+                    ConnectionID = new Guid(),
+                    ConnectionName = wallCreateRequest.GroupAConnectionName,
+                    WallID = newWall.WallID
+                };
+
+                _context.GroupConnections.Add(groupAConnection);
+
+                foreach (var groupATerm in wallCreateRequest.GroupATerms) 
+                {
+                    var term = new Term()
+                    {
+                        TermID = new Guid(),
+                        TermName = groupATerm,
+                        GroupConnectionID = groupAConnection.ConnectionID
+                    };
+
+                    _context.Terms.Add(term);
+                }
+
+                #endregion
+
+                #region GroupB
+
+                var groupBConnection = new GroupConnection()
+                {
+                    ConnectionID = new Guid(),
+                    ConnectionName = wallCreateRequest.GroupBConnectionName,
+                    WallID = newWall.WallID
+                };
+
+                _context.GroupConnections.Add(groupBConnection);
+
+                foreach (var groupBTerm in wallCreateRequest.GroupBTerms)
+                {
+                    var term = new Term()
+                    {
+                        TermID = new Guid(),
+                        TermName = groupBTerm,
+                        GroupConnectionID = groupBConnection.ConnectionID
+                    };
+
+                    _context.Terms.Add(term);
+                }
+
+                #endregion
+
+                #region GroupC
+
+                var groupCConnection = new GroupConnection()
+                {
+                    ConnectionID = new Guid(),
+                    ConnectionName = wallCreateRequest.GroupCConnectionName,
+                    WallID = newWall.WallID
+                };
+
+                _context.GroupConnections.Add(groupCConnection);
+
+                foreach (var groupCTerm in wallCreateRequest.GroupCTerms)
+                {
+                    var term = new Term()
+                    {
+                        TermID = new Guid(),
+                        TermName = groupCTerm,
+                        GroupConnectionID = groupCConnection.ConnectionID
+                    };
+
+                    _context.Terms.Add(term);
+                }
+
+                #endregion
+
+                #region GroupD
+
+                var groupDConnection = new GroupConnection()
+                {
+                    ConnectionID = new Guid(),
+                    ConnectionName = wallCreateRequest.GroupDConnectionName,
+                    WallID = newWall.WallID
+                };
+
+                _context.GroupConnections.Add(groupDConnection);
+
+                foreach (var groupDTerm in wallCreateRequest.GroupDTerms)
+                {
+                    var term = new Term()
+                    {
+                        TermID = new Guid(),
+                        TermName = groupDTerm,
+                        GroupConnectionID = groupDConnection.ConnectionID
+                    };
+
+                    _context.Terms.Add(term);
+                }
+
+                #endregion
+
+                await _context.SaveChangesAsync();
+                transaction.Commit();
+
+                return newWall;
+            }
+            catch
+            {
+                transaction.Rollback();
+                throw;
+            }
         }
 
         // DELETE: api/Wall/5

@@ -10,7 +10,7 @@ namespace Registration.Models
         public Guid TermID { get; set; }
         [Required]
         public string TermName { get; set; }
-        [ForeignKey("ConnectionID"), Required]
+        [ForeignKey("GroupConnectionID"), Required]
         public Guid GroupConnectionID { get; set; }
         public virtual GroupConnection GroupConnection { get; set; }
     }

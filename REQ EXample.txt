@@ -1,0 +1,32 @@
+{
+  "wallName": "test",
+  "userId": "22f208a9-3717-40ba-8f61-88d0df98ecd1",
+  "groupAConnectionName": "test1",
+  "groupBConnectionName": "test2",
+  "groupCConnectionName": "test3",
+  "groupDConnectionName": "test4",
+  "groupATerms": [
+    "stringA1",
+    "stringA2",
+    "stringA3",
+    "stringA4"
+  ],
+  "groupBTerms": [
+    "stringB1",
+    "stringB2",
+    "stringB3",
+    "stringB4"
+  ],
+  "groupCTerms": [
+    "stringC1",
+    "stringC2",
+    "stringC3",
+    "stringC4"
+  ],
+  "groupDTerms": [
+    "stringD1",
+    "stringD2",
+    "stringD3",
+    "stringD4"
+  ]
+}

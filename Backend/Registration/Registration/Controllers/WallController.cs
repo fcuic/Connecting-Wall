@@ -29,7 +29,7 @@ namespace Registration.Controllers
 
             if (!string.IsNullOrEmpty(userId))
             {
-                walls = walls.Where(x => string.Equals(x.userID, userId));
+                walls = walls.Where(x => string.Equals(x.UserID, userId));
             }
 
             //var groupAConnections = _context.GroupConnections
@@ -54,16 +54,16 @@ namespace Registration.Controllers
         public async Task<ActionResult<IEnumerable<Wall>>> GetWallsByUserId(string userId)
         {
             return await _context.Walls
-                .Where(w => w.userID == userId)
+                .Where(w => w.UserID == userId)
                 .Include(p => p.User)
-                .Include(p => p.groupATerms)
-                .Include(p => p.groupBTerms)
-                .Include(p => p.groupCTerms)
-                .Include(p => p.groupDTerms)
-                .Include(p => p.groupAConnections)
-                .Include(p => p.groupBConnections)
-                .Include(p => p.groupCConnections)
-                .Include(p => p.groupDConnections)
+                //.Include(p => p.groupATerms)
+                //.Include(p => p.groupBTerms)
+                //.Include(p => p.groupCTerms)
+                //.Include(p => p.groupDTerms)
+                //.Include(p => p.groupAConnections)
+                //.Include(p => p.groupBConnections)
+                //.Include(p => p.groupCConnections)
+                //.Include(p => p.groupDConnections)
                 .ToListAsync();
         }
 
@@ -75,15 +75,15 @@ namespace Registration.Controllers
             {
                 var wall = await _context.Walls
                     .Include(p => p.User)
-                    .Include(p => p.groupATerms)
-                    .Include(p => p.groupBTerms)
-                    .Include(p => p.groupCTerms)
-                    .Include(p => p.groupDTerms)
-                    .Include(p => p.groupAConnections)
-                    .Include(p => p.groupBConnections)
-                    .Include(p => p.groupCConnections)
-                    .Include(p => p.groupDConnections)
-                    .Where(x => x.wallID == id)
+                    //.Include(p => p.groupATerms)
+                    //.Include(p => p.groupBTerms)
+                    //.Include(p => p.groupCTerms)
+                    //.Include(p => p.groupDTerms)
+                    //.Include(p => p.groupAConnections)
+                    //.Include(p => p.groupBConnections)
+                    //.Include(p => p.groupCConnections)
+                    //.Include(p => p.groupDConnections)
+                    .Where(x => x.WallID == id)
                     .FirstOrDefaultAsync();
 
                 if (wall == null)
@@ -143,45 +143,45 @@ namespace Registration.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutWall(Guid id, Wall wall)
         {
-            if (id != wall.wallID)
+            if (id != wall.WallID)
             {
                 return BadRequest();
             }
 
             _context.Entry(wall).State = EntityState.Modified;
             //MODIFYING entities inside child entities of wall
-            foreach (Term term in wall.groupATerms)
-            {
-                _context.Entry(term).State = term.termID == null ? EntityState.Added : EntityState.Modified;
-            }
-            foreach (Term term in wall.groupBTerms)
-            {
-                _context.Entry(term).State = term.termID == null ? EntityState.Added : EntityState.Modified;
-            }
-            foreach (Term term in wall.groupCTerms)
-            {
-                _context.Entry(term).State = term.termID == null ? EntityState.Added : EntityState.Modified;
-            }
-            foreach (Term term in wall.groupDTerms)
-            {
-                _context.Entry(term).State = term.termID == null ? EntityState.Added : EntityState.Modified;
-            }
-            foreach (GroupConnections gc in wall.groupAConnections)
-            {
-                _context.Entry(gc).State = gc.connectionId == null ? EntityState.Added : EntityState.Modified;
-            }
-            foreach (GroupConnections gc in wall.groupBConnections)
-            {
-                _context.Entry(gc).State = gc.connectionId == null ? EntityState.Added : EntityState.Modified;
-            }
-            foreach (GroupConnections gc in wall.groupCConnections)
-            {
-                _context.Entry(gc).State = gc.connectionId == null ? EntityState.Added : EntityState.Modified;
-            }
-            foreach (GroupConnections gc in wall.groupDConnections)
-            {
-                _context.Entry(gc).State = gc.connectionId == null ? EntityState.Added : EntityState.Modified;
-            }
+            //foreach (Term term in wall.groupATerms)
+            //{
+            //    _context.Entry(term).State = term.TermID == null ? EntityState.Added : EntityState.Modified;
+            //}
+            //foreach (Term term in wall.groupBTerms)
+            //{
+            //    _context.Entry(term).State = term.TermID == null ? EntityState.Added : EntityState.Modified;
+            //}
+            //foreach (Term term in wall.groupCTerms)
+            //{
+            //    _context.Entry(term).State = term.TermID == null ? EntityState.Added : EntityState.Modified;
+            //}
+            //foreach (Term term in wall.groupDTerms)
+            //{
+            //    _context.Entry(term).State = term.TermID == null ? EntityState.Added : EntityState.Modified;
+            //}
+            //foreach (GroupConnection gc in wall.groupAConnections)
+            //{
+            //    _context.Entry(gc).State = gc.ConnectionId == null ? EntityState.Added : EntityState.Modified;
+            //}
+            //foreach (GroupConnection gc in wall.groupBConnections)
+            //{
+            //    _context.Entry(gc).State = gc.ConnectionId == null ? EntityState.Added : EntityState.Modified;
+            //}
+            //foreach (GroupConnection gc in wall.groupCConnections)
+            //{
+            //    _context.Entry(gc).State = gc.ConnectionId == null ? EntityState.Added : EntityState.Modified;
+            //}
+            //foreach (GroupConnection gc in wall.groupDConnections)
+            //{
+            //    _context.Entry(gc).State = gc.ConnectionId == null ? EntityState.Added : EntityState.Modified;
+            //}
 
             try
             {
@@ -211,7 +211,7 @@ namespace Registration.Controllers
             _context.Walls.Add(wall);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetWall", new { id = wall.wallID }, wall);
+            return CreatedAtAction("GetWall", new { id = wall.WallID }, wall);
         }
 
         // DELETE: api/Wall/5
@@ -232,7 +232,7 @@ namespace Registration.Controllers
 
         private bool WallExists(Guid id)
         {
-            return _context.Walls.Any(e => e.wallID == id);
+            return _context.Walls.Any(e => e.WallID == id);
         }
     }
 }

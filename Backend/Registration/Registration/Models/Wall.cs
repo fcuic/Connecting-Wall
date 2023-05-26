@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,23 +7,18 @@ namespace Registration.Models
     public class Wall
     {
         [Key]
-        public Guid wallID { get; set; }
+        public Guid WallID { get; set; }
         [Required]
-        public string wallName { get; set; }
-        public DateTime dateCreated { get; set; }
-        public DateTime? dateUpdated { get; set; }
-        [ForeignKey("userID")]
-        public string userID { get; set; }
+        public string WallName { get; set; }
+        [Required]
+        public DateTime DateCreated { get; set; }
+        public DateTime? DateUpdated { get; set; }
+        [ForeignKey("UserID"), Required]
+        public string UserID { get; set; }
         public virtual ApplicationUser User { get; set; }
-
-        public List<Term> groupATerms { get; set; }
-        public List<Term> groupBTerms { get; set; }
-        public List<Term> groupCTerms { get; set; }
-        public List<Term> groupDTerms { get; set; }
-        public List<GroupConnections> groupAConnections { get; set; }
-        public List<GroupConnections> groupBConnections { get; set; }
-        public List<GroupConnections> groupCConnections { get; set; }
-        public List<GroupConnections> groupDConnections { get; set; }
-
+        //public GroupConnection GroupAConnection { get; set; }
+        //public GroupConnection GroupBConnection { get; set; }
+        //public GroupConnection GroupCConnection { get; set; }
+        //public GroupConnection GroupDConnection { get; set; }
     }
 }

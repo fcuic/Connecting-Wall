@@ -7,7 +7,7 @@ namespace Registration.Models
     {
         public DbSet<ApplicationUser> AspNetUsers { get; set; }
         public DbSet<Wall> Walls { get; set; }
-        public DbSet<GroupConnections> GroupConnections { get; set; }
+        public DbSet<GroupConnection> GroupConnections { get; set; }
         public DbSet<Term> Terms { get; set; }
         public APIDBContext(DbContextOptions<APIDBContext> options) : base(options)
         {
@@ -17,24 +17,19 @@ namespace Registration.Models
         {
 
             base.OnModelCreating(mb);
-            mb.Entity<Wall>().Property(x => x.wallID).HasDefaultValueSql("NEWID()");
-            mb.Entity<Term>().Property(x => x.termID).HasDefaultValueSql("NEWID()");
-            mb.Entity<GroupConnections>().Property(x => x.connectionId).HasDefaultValueSql("NEWID()");
+            mb.Entity<Wall>().Property(x => x.WallID).HasDefaultValueSql("NEWID()");
+            mb.Entity<Term>().Property(x => x.TermID).HasDefaultValueSql("NEWID()");
+            mb.Entity<GroupConnection>().Property(x => x.ConnectionID).HasDefaultValueSql("NEWID()");
 
             mb.Entity<Wall>()
-                .HasKey(s => s.wallID);
-
+                .HasKey(s => s.WallID);
+           
             mb.Entity<Term>()
-                .HasKey(s => s.termID);
+                .HasKey(s => s.TermID);
 
-            mb.Entity<GroupConnections>()
-                .HasKey(s => s.connectionId);
+            mb.Entity<GroupConnection>()
+                .HasKey(s => s.ConnectionID);
 
-            mb.Entity<Wall>().HasData(//testing inserting into table
-           new Wall() { wallID = Guid.NewGuid(), wallName = "PremierLeague", dateCreated = DateTime.Now },
-           new Wall() { wallID = Guid.NewGuid(), wallName = "PremierLeague1", dateCreated = DateTime.Now },
-           new Wall() { wallID = Guid.NewGuid(), wallName = "PremierLeague2", dateCreated = DateTime.Now }
-           );
         }
     }
 }

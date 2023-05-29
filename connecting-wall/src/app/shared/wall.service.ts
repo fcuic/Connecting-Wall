@@ -9,16 +9,13 @@ import { Wall } from '../../models/wall';
   providedIn: 'root',
 })
 export class WallService {
-  constructor(
-    private fb: FormBuilder,
-    private http: HttpClient
-  ) {}
+  constructor(private fb: FormBuilder, private http: HttpClient) {}
 
   readonly BaseURI = 'http://localhost:57392/api';
   private header = new HttpHeaders({ 'content-type': 'application/json' });
 
   formModel = this.fb.group({
-    wallID: new FormControl(null), //za modify, primarni ključ zida
+    wallID: new FormControl(null),
     wallName: ['', [Validators.required, Validators.minLength(3)]],
     GroupATerms: this.fb.group({
       GroupATerm1: ['', Validators.required],
@@ -26,37 +23,37 @@ export class WallService {
       GroupATerm3: ['', Validators.required],
       GroupATerm4: ['', Validators.required],
     }),
-    GroupAConnections: ['', [Validators.required, Validators.minLength(3)]],
+    GroupAConnectionName: ['', [Validators.required, Validators.minLength(3)]],
     GroupBTerms: this.fb.group({
       GroupBTerm1: ['', Validators.required],
       GroupBTerm2: ['', Validators.required],
       GroupBTerm3: ['', Validators.required],
       GroupBTerm4: ['', Validators.required],
     }),
-    GroupBConnections: ['', [Validators.required, Validators.minLength(3)]],
+    GroupBConnectionName: ['', [Validators.required, Validators.minLength(3)]],
     GroupCTerms: this.fb.group({
       GroupCTerm1: ['', Validators.required],
       GroupCTerm2: ['', Validators.required],
       GroupCTerm3: ['', Validators.required],
       GroupCTerm4: ['', Validators.required],
     }),
-    GroupCConnections: ['', [Validators.required, Validators.minLength(3)]],
+    GroupCConnectionName: ['', [Validators.required, Validators.minLength(3)]],
     GroupDTerms: this.fb.group({
       GroupDTerm1: ['', Validators.required],
       GroupDTerm2: ['', Validators.required],
       GroupDTerm3: ['', Validators.required],
       GroupDTerm4: ['', Validators.required],
     }),
-    GroupDConnections: ['', [Validators.required, Validators.minLength(3)]],
+    GroupDConnectionName: ['', [Validators.required, Validators.minLength(3)]],
   });
 
   getAllWalls() {
-    return this.http.get<Wall>(this.BaseURI + '/Wall');
+    return this.http.get<any>(this.BaseURI + '/Wall');
   }
 
-  getWallById(id: any) {
+  getWallDetails(id: any) {
     return this.http
-      .get<Wall>(this.BaseURI + '/Wall/' + id)
+      .get<Wall>(this.BaseURI + '/Wall/WallDetails/' + id)
       .pipe(catchError((Error) => of(null)));
   }
 
@@ -73,38 +70,57 @@ export class WallService {
     );
   }
 
+  insertWall(wall: any): Observable<any> {
+    return this.http.post(this.BaseURI + '/Wall', wall, {
+      headers: this.header,
+    });
+  }
+
   populateForm(Object: Wall) {
+    let groupA = Object.groupConnections.find(
+      (conn) => conn.connectionGroup === 'A'
+    );
+    let groupB = Object.groupConnections.find(
+      (conn) => conn.connectionGroup === 'B'
+    );
+    let groupC = Object.groupConnections.find(
+      (conn) => conn.connectionGroup === 'C'
+    );
+    let groupD = Object.groupConnections.find(
+      (conn) => conn.connectionGroup === 'D'
+    );
+
     this.formModel.patchValue({
       wallID: Object.wallID,
       wallName: Object.wallName,
       GroupATerms: {
-        GroupATerm1: Object.groupATerms[0].termName,
-        GroupATerm2: Object.groupATerms[1].termName,
-        GroupATerm3: Object.groupATerms[2].termName,
-        GroupATerm4: Object.groupATerms[3].termName,
+        GroupATerm1: groupA.terms[0].termName,
+        GroupATerm2: groupA.terms[1].termName,
+        GroupATerm3: groupA.terms[2].termName,
+        GroupATerm4: groupA.terms[3].termName,
       },
       GroupBTerms: {
-        GroupBTerm1: Object.groupBTerms[0].termName,
-        GroupBTerm2: Object.groupBTerms[1].termName,
-        GroupBTerm3: Object.groupBTerms[2].termName,
-        GroupBTerm4: Object.groupBTerms[3].termName,
+        GroupBTerm1: groupB.terms[0].termName,
+        GroupBTerm2: groupB.terms[1].termName,
+        GroupBTerm3: groupB.terms[2].termName,
+        GroupBTerm4: groupB.terms[3].termName,
       },
       GroupCTerms: {
-        GroupCTerm1: Object.groupCTerms[0].termName,
-        GroupCTerm2: Object.groupCTerms[1].termName,
-        GroupCTerm3: Object.groupCTerms[2].termName,
-        GroupCTerm4: Object.groupCTerms[3].termName,
+        GroupCTerm1: groupC.terms[0].termName,
+        GroupCTerm2: groupC.terms[0].termName,
+        GroupCTerm3: groupC.terms[0].termName,
+        GroupCTerm4: groupC.terms[0].termName,
       },
       GroupDTerms: {
-        GroupDTerm1: Object.groupDTerms[0].termName,
-        GroupDTerm2: Object.groupDTerms[1].termName,
-        GroupDTerm3: Object.groupDTerms[2].termName,
-        GroupDTerm4: Object.groupDTerms[3].termName,
+        GroupDTerm1: groupD.terms[0].termName,
+        GroupDTerm2: groupD.terms[1].termName,
+        GroupDTerm3: groupD.terms[2].termName,
+        GroupDTerm4: groupD.terms[3].termName,
       },
-      GroupAConnections: Object.groupAConnections[0].connectionName,
-      GroupBConnections: Object.groupBConnections[0].connectionName,
-      GroupCConnections: Object.groupCConnections[0].connectionName,
-      GroupDConnections: Object.groupDConnections[0].connectionName,
+      GroupAConnections: groupA.connectionName,
+      GroupBConnections: groupB.connectionName,
+      GroupCConnections: groupC.connectionName,
+      GroupDConnections: groupD.connectionName,
     });
   }
 }

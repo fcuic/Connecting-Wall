@@ -4,7 +4,6 @@ import { WallService } from '../shared/wall.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from '../shared/user.service';
 import { MatPaginator } from '@angular/material/paginator';
-import { HttpClient } from '@angular/common/http';
 import { switchMap } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditWallComponent } from '../edit-wall/edit-wall.component';
@@ -20,7 +19,6 @@ export class MyQuizzesComponent implements OnInit {
     private router: Router,
     private service: WallService,
     private userService: UserService,
-    private http: HttpClient,
     private dialog: MatDialog,
     private toastr: ToastrService
   ) {}
@@ -55,7 +53,6 @@ export class MyQuizzesComponent implements OnInit {
         this.walls = res;
         this.dataSource = new MatTableDataSource(this.walls);
         this.dataSource.paginator = this.paginator;
-        console.log(res);
       });
   }
 
@@ -84,22 +81,16 @@ export class MyQuizzesComponent implements OnInit {
       });
     }
   }
-  editWall(
-    wallID: string //editing created walls!
-  ) {
-    this.WallDetails = this.service.getWallById(wallID).subscribe(
-      //zato sto vraca observable bez subscribea
-      (res) => {
-        this.WallDetails = res;
-        this.service.populateForm(this.WallDetails);
-      }
-    );
+  editWall(wallID: string) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '60%';
     dialogConfig.width = '1000px';
     dialogConfig.height = '800px';
+    dialogConfig.data = {
+      wallID: wallID,
+    };
     this.dialog.open(EditWallComponent, dialogConfig);
   }
 }

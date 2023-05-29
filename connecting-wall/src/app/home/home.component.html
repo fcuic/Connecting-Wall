@@ -36,7 +36,7 @@
         <ng-container matColumnDef="Actions">
              <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>            
                 <mat-cell *matCellDef="let row">
-                <button type="button" class="btn btn-success" (click)="openPlayWindow(row?.wallID)">Play Quiz</button>
+                <button type="button" class="btn btn-success" (click)="openPlayWindow(row)">Play Quiz</button>
                 </mat-cell>
         </ng-container>
         <ng-container matColumnDef="loading">

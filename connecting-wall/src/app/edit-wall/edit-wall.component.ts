@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import{WallService} from '../shared/wall.service';
+import { Component, OnInit, Inject } from '@angular/core';
+import { WallService} from '../shared/wall.service';
 import { UserService } from '../shared/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
-import { MyQuizzesComponent } from '../my-quizzes/my-quizzes.component';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Wall } from 'src/models/wall';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-wall',
@@ -15,151 +16,106 @@ export class EditWallComponent implements OnInit {
 
   readonly BaseURI = 'http://localhost:57392/api';
   private header=new HttpHeaders({'content-type': 'application/json'});
-  wallID:string;
-  wallDetails:any;
-  //#region date updated conversion to C# format
+  wall : Wall;
+  userDetails : any;
   CurrentDate:Date;
 
-
-
-  constructor(public service:WallService,private userService:UserService,private toastr:ToastrService, private http:HttpClient,public dialogRef:MatDialogRef<EditWallComponent>) { }
+  constructor(
+    private UserService: UserService,
+    public WallService:WallService,
+    private toastr:ToastrService, 
+    private http:HttpClient,
+    public dialogRef:MatDialogRef<EditWallComponent>,
+    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public receivedData: { wallID: string }) { }
 
   ngOnInit(): void 
   {
+    this.formModel.reset();
+    this.UserService.getUserProfile().subscribe(
+      (res) => {
+        this.userDetails = res;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+    this.WallService
+      .getWallDetails(this.receivedData.wallID)
+      .subscribe((res) => {
+        this.wall = res;
+      });
     this.CurrentDate=new Date()
-    this.GetWallData();
-    console.log(this.CurrentDate.toJSON());
   }
-  GetWallData()
-  {
-    
-  this.wallID=this.service.formModel.value.wallID;
-  if(this.wallID==null){
-    this.toastr.warning('Could not get wall ID','Please close and open this window again');
-  }
-  console.log(this.wallID);
-  this.service.getWallById(this.wallID).subscribe(//zato sto vraca observable bez subscribea
-    res=>{
-      this.wallDetails=res;
-      console.log(this.wallDetails);
-      /*console.log(this.wallDetails.userID);
-      console.log(this.wallDetails.groupAConnections[0].connectionId);
-      console.log(this.wallDetails.groupBConnections[0].connectionId);
-      console.log(this.wallDetails.groupCConnections[0].connectionId);
-      console.log(this.wallDetails.groupDConnections[0].connectionId);*/
-    });
-  }
+
+  formModel = this.fb.group({
+    wallID: new FormControl(null),
+    wallName: ['', [Validators.required, Validators.minLength(3)]],
+    GroupATerms: this.fb.group({
+      GroupATerm1: ['', Validators.required],
+      GroupATerm2: ['', Validators.required],
+      GroupATerm3: ['', Validators.required],
+      GroupATerm4: ['', Validators.required],
+    }),
+    GroupAConnectionName: ['', [Validators.required, Validators.minLength(3)]],
+    GroupBTerms: this.fb.group({
+      GroupBTerm1: ['', Validators.required],
+      GroupBTerm2: ['', Validators.required],
+      GroupBTerm3: ['', Validators.required],
+      GroupBTerm4: ['', Validators.required],
+    }),
+    GroupBConnectionName: ['', [Validators.required, Validators.minLength(3)]],
+    GroupCTerms: this.fb.group({
+      GroupCTerm1: ['', Validators.required],
+      GroupCTerm2: ['', Validators.required],
+      GroupCTerm3: ['', Validators.required],
+      GroupCTerm4: ['', Validators.required],
+    }),
+    GroupCConnectionName: ['', [Validators.required, Validators.minLength(3)]],
+    GroupDTerms: this.fb.group({
+      GroupDTerm1: ['', Validators.required],
+      GroupDTerm2: ['', Validators.required],
+      GroupDTerm3: ['', Validators.required],
+      GroupDTerm4: ['', Validators.required],
+    }),
+    GroupDConnectionName: ['', [Validators.required, Validators.minLength(3)]],
+  });
   
   UpdateWall()
   {
     var body={
-      wallID:this.service.formModel.value.wallID,
-      userID:this.wallDetails.userID,
-      wallName:this.service.formModel.value.wallName,
-      dateCreated:this.wallDetails.dateCreated,
+      wallID:this.formModel.value.wallID,
+      wallName:this.formModel.value.wallName,
       dateUpdated:this.CurrentDate.toJSON(),
-     groupATerms:[
-        {
-          termID:this.wallDetails.groupATerms[0].termID,
-          termName: this.service.formModel.get("GroupATerms").get("GroupATerm1").value
-        },
-        {
-          termID:this.wallDetails.groupATerms[1].termID,
-          termName: this.service.formModel.get("GroupATerms").get("GroupATerm2").value
-        },
-        {
-          termID:this.wallDetails.groupATerms[2].termID,
-          termName: this.service.formModel.get("GroupATerms").get("GroupATerm3").value
-        },
-        {
-          termID:this.wallDetails.groupATerms[3].termID,
-          termName: this.service.formModel.get("GroupATerms").get("GroupATerm4").value
-        }]
-      ,
-      groupBTerms:[
-        {
-          termID:this.wallDetails.groupBTerms[0].termID,
-          termName: this.service.formModel.get("GroupBTerms").get("GroupBTerm1").value
-        },
-        {
-          termID:this.wallDetails.groupBTerms[1].termID,
-          termName: this.service.formModel.get("GroupBTerms").get("GroupBTerm2").value
-        },
-        {
-          termID:this.wallDetails.groupBTerms[2].termID,
-          termName: this.service.formModel.get("GroupBTerms").get("GroupBTerm3").value
-        },
-        {
-          termID:this.wallDetails.groupBTerms[3].termID,
-          termName: this.service.formModel.get("GroupBTerms").get("GroupBTerm4").value
-        }]
-      ,
-      groupCTerms:[
-        {
-          termID:this.wallDetails.groupCTerms[0].termID,
-          termName: this.service.formModel.get("GroupCTerms").get("GroupCTerm1").value
-        },
-        {
-          termID:this.wallDetails.groupCTerms[1].termID,
-          termName: this.service.formModel.get("GroupCTerms").get("GroupCTerm2").value
-        },
-        {
-          termID:this.wallDetails.groupCTerms[2].termID,
-          termName: this.service.formModel.get("GroupCTerms").get("GroupCTerm3").value
-        },
-        {
-          termID:this.wallDetails.groupCTerms[3].termID,
-          termName: this.service.formModel.get("GroupCTerms").get("GroupCTerm4").value
-        }]
-      ,
-      groupDTerms:[
-        {
-          termID:this.wallDetails.groupDTerms[0].termID,
-          termName: this.service.formModel.get("GroupDTerms").get("GroupDTerm1").value
-        },
-        {
-          termID:this.wallDetails.groupDTerms[1].termID,
-          termName: this.service.formModel.get("GroupDTerms").get("GroupDTerm2").value
-        },
-        {
-          termID:this.wallDetails.groupDTerms[2].termID,
-          termName: this.service.formModel.get("GroupDTerms").get("GroupDTerm3").value
-        },
-        {
-          termID:this.wallDetails.groupDTerms[3].termID,
-          termName: this.service.formModel.get("GroupDTerms").get("GroupDTerm4").value
-        }]
-      ,
-      groupAConnections:[
-        {
-          connectionId:this.wallDetails.groupAConnections[0].connectionId,
-          connectionName:this.service.formModel.value.GroupAConnections
-        }
-      ]
-      ,
-      groupBConnections:[
-        {
-          connectionId:this.wallDetails.groupBConnections[0].connectionId,
-          connectionName:this.service.formModel.value.GroupBConnections
-        }
-      ]
-      ,
-      groupCConnections:[
-        {
-          connectionId:this.wallDetails.groupCConnections[0].connectionId,
-          connectionName:this.service.formModel.value.GroupCConnections
-        }
-      ]
-      ,
-      groupDConnections:[
-        {
-          connectionId:this.wallDetails.groupDConnections[0].connectionId,
-          connectionName:this.service.formModel.value.GroupDConnections
-        }
+      groupAConnectionName: this.formModel.value.GroupAConnectionName,
+      groupATerms: [
+        this.formModel.get('GroupATerms').get('GroupATerm1').value,
+        this.formModel.get('GroupATerms').get('GroupATerm2').value,
+        this.formModel.get('GroupATerms').get('GroupATerm3').value,
+        this.formModel.get('GroupATerms').get('GroupATerm4').value,
+      ],
+      groupBConnectionName: this.formModel.value.GroupBConnectionName,
+      groupBTerms: [
+        this.formModel.get('GroupBTerms').get('GroupBTerm1').value,
+        this.formModel.get('GroupBTerms').get('GroupBTerm2').value,
+        this.formModel.get('GroupBTerms').get('GroupBTerm3').value,
+        this.formModel.get('GroupBTerms').get('GroupBTerm4').value,
+      ],
+      groupCConnectionName: this.formModel.value.GroupCConnectionName,
+      groupCTerms: [
+        this.formModel.get('GroupCTerms').get('GroupCTerm1').value,
+        this.formModel.get('GroupCTerms').get('GroupCTerm2').value,
+        this.formModel.get('GroupCTerms').get('GroupCTerm3').value,
+        this.formModel.get('GroupCTerms').get('GroupCTerm4').value,
+      ],
+      groupDConnectionName: this.formModel.value.GroupDConnectionName,
+      groupDTerms: [
+        this.formModel.get('GroupDTerms').get('GroupDTerm1').value,
+        this.formModel.get('GroupDTerms').get('GroupDTerm2').value,
+        this.formModel.get('GroupDTerms').get('GroupDTerm3').value,
+        this.formModel.get('GroupDTerms').get('GroupDTerm4').value,
       ]
   }
-    //console.log(body.wallID);
-    console.log(body);
     return this.http.put(this.BaseURI+'/Wall/'+body.wallID,body,{headers:this.header});
     
   }

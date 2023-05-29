@@ -11,6 +11,7 @@ namespace Registration.Models
         public Guid ConnectionID { get; set; }
         [Required]
         public string ConnectionName { get; set; }
+        public char ConnectionGroup { get; set; }
         [ForeignKey("WallID"), Required]
         public Guid WallID { get; set; }
         public virtual Wall Wall { get; set; }

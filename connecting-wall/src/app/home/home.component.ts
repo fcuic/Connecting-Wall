@@ -27,7 +27,6 @@ export class HomeComponent implements OnInit {
   ];
   dataSource: MatTableDataSource<any>;
   response: any;
-  WallDetails: any;
   walls : Wall[];
 
   constructor(
@@ -55,7 +54,6 @@ export class HomeComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.walls);
         this.dataSource.paginator = this.quizPaginator;
         this.dataSource.sort = this.quizSort;
-        console.log(this.walls);
       },
       (err) => {
         console.log(err);
@@ -77,12 +75,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/user/login']);
   }
 
-  openPlayWindow(wallID: string) {
-    this.response = this.wallService.getWallById(wallID).subscribe((res) => {
-      this.WallDetails = res;
-    });
-
-    // dodat spinner
+  openPlayWindow(wall: any) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
@@ -90,7 +83,7 @@ export class HomeComponent implements OnInit {
     dialogConfig.width = '1000px';
     dialogConfig.height = '800px';
     dialogConfig.data = {
-      wallID: this.WallDetails.wallID,
+      wallID: wall.wallID,
     };
     this.dialog.open(QuizStartComponent, dialogConfig);
   }

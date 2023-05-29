@@ -1,8 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { WallService } from '../shared/wall.service';
 import { ToastrService } from 'ngx-toastr';
 import {
-  MatDialog,
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
@@ -17,6 +16,8 @@ import { Howl } from 'howler';
 })
 export class GameComponent implements OnInit {
   //#region WallData
+  @Input() wall:any = '';
+
   wallID: string;
   wallDetails: any;
   wallName: string;
@@ -38,11 +39,17 @@ export class GameComponent implements OnInit {
   termD2 = {} as Term;
   termD3 = {} as Term;
   termD4 = {} as Term;
+
   //#endregion
+
   //#region Score and countdown
+
   score: number = 0;
+
   //#endregion
+  
   //#region on Click event
+
   isClickedtile1 = false;
   isClickedtile2 = false;
   isClickedtile3 = false;
@@ -59,8 +66,11 @@ export class GameComponent implements OnInit {
   isClickedtile14 = false;
   isClickedtile15 = false;
   isClickedtile16 = false;
+
   //#endregion
+  
   //#region sound variables/effects
+
   successSound = new Howl({
     src: ['../../assets/soundEffects/success.mp3'],
     volume: 1,
@@ -73,12 +83,15 @@ export class GameComponent implements OnInit {
     src: ['../../assets/soundEffects/wrong.mp3'],
     volume: 0.5,
   });
+
   //#endregion
+  
   //#region Quiz Variables
+
   numOfClickedTerms = 0;
   firstGroup = [];
   matchedProperly = false; //varijabla za sakrivanje matchanih pojmova
-  numOfPairedGroupTerms = 0;
+  numOfPairedGroupTerms : number = 0;
   numOfLives = 3;
   firstLifeWasted = false; //for displaying hearts
   secondLifeWasted = false;
@@ -98,120 +111,23 @@ export class GameComponent implements OnInit {
   secondConnectionGuessed = false;
   thirdConnectionGuessed = false;
   fourthConnectionGuessed = false;
+
   //#endregion
 
   constructor(
-    private service: WallService,
     private toastr: ToastrService,
     public dialogRef: MatDialogRef<HomeComponent>,
     @Inject(MAT_DIALOG_DATA) public receivedData: any,
-    private dialog: MatDialog
   ) {
     this.wallID = this.receivedData.wallID;
   }
 
   ngOnInit(): void {
     //#region DataGetting
-    this.service.getWallById(this.wallID).subscribe(
-      (res) => {
-        this.wallDetails = res;
-        this.wallName = this.wallDetails.wallName;
-        this.termA1.termName = this.wallDetails.groupATerms[0].termName;
-        this.termA1.connectionName =
-          this.wallDetails.groupAConnections[0].connectionName;
-        this.termA2.termName = this.wallDetails.groupATerms[1].termName;
-        this.termA2.connectionName =
-          this.wallDetails.groupAConnections[0].connectionName;
-        this.termA3.termName = this.wallDetails.groupATerms[2].termName;
-        this.termA3.connectionName =
-          this.wallDetails.groupAConnections[0].connectionName;
-        this.termA4.termName = this.wallDetails.groupATerms[3].termName;
-        this.termA4.connectionName =
-          this.wallDetails.groupAConnections[0].connectionName;
-        this.termB1.termName = this.wallDetails.groupBTerms[0].termName;
-        this.termB1.connectionName =
-          this.wallDetails.groupBConnections[0].connectionName;
-        this.termB2.termName = this.wallDetails.groupBTerms[1].termName;
-        this.termB2.connectionName =
-          this.wallDetails.groupBConnections[0].connectionName;
-        this.termB3.termName = this.wallDetails.groupBTerms[2].termName;
-        this.termB3.connectionName =
-          this.wallDetails.groupBConnections[0].connectionName;
-        this.termB4.termName = this.wallDetails.groupBTerms[3].termName;
-        this.termB4.connectionName =
-          this.wallDetails.groupBConnections[0].connectionName;
-        this.termC1.termName = this.wallDetails.groupCTerms[0].termName;
-        this.termC1.connectionName =
-          this.wallDetails.groupCConnections[0].connectionName;
-        this.termC2.termName = this.wallDetails.groupCTerms[1].termName;
-        this.termC2.connectionName =
-          this.wallDetails.groupCConnections[0].connectionName;
-        this.termC3.termName = this.wallDetails.groupCTerms[2].termName;
-        this.termC3.connectionName =
-          this.wallDetails.groupCConnections[0].connectionName;
-        this.termC4.termName = this.wallDetails.groupCTerms[3].termName;
-        this.termC4.connectionName =
-          this.wallDetails.groupCConnections[0].connectionName;
-        this.termD1.termName = this.wallDetails.groupDTerms[0].termName;
-        this.termD1.connectionName =
-          this.wallDetails.groupDConnections[0].connectionName;
-        this.termD2.termName = this.wallDetails.groupDTerms[1].termName;
-        this.termD2.connectionName =
-          this.wallDetails.groupDConnections[0].connectionName;
-        this.termD3.termName = this.wallDetails.groupDTerms[2].termName;
-        this.termD3.connectionName =
-          this.wallDetails.groupDConnections[0].connectionName;
-        this.termD4.termName = this.wallDetails.groupDTerms[3].termName;
-        this.termD4.connectionName =
-          this.wallDetails.groupDConnections[0].connectionName;
-        this.terms = [
-          this.termA1,
-          this.termA2,
-          this.termA3,
-          this.termA4, //array that is displayed
-          this.termB1,
-          this.termB2,
-          this.termB3,
-          this.termB4,
-          this.termC1,
-          this.termC2,
-          this.termC3,
-          this.termC4,
-          this.termD1,
-          this.termD2,
-          this.termD3,
-          this.termD4,
-        ];
-        this.sortedTerms = [
-          this.termA1,
-          this.termA2,
-          this.termA3,
-          this.termA4, //for displaying when matching is done!
-          this.termB1,
-          this.termB2,
-          this.termB3,
-          this.termB4,
-          this.termC1,
-          this.termC2,
-          this.termC3,
-          this.termC4,
-          this.termD1,
-          this.termD2,
-          this.termD3,
-          this.termD4,
-        ];
-        console.log(this.sortedTerms);
-        console.log(this.Shuffle(this.terms));
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-    //#endregion
-    //#region Variable to check whather the group is done
-    numOfPairedGroupTerms: Number;
+    
     //#endregion
   }
+
   Shuffle(
     Array //Fisher-Yates shuffle, u dokumentu opisat kako funkcionira
   ) {
@@ -226,6 +142,7 @@ export class GameComponent implements OnInit {
     }
     return Array;
   }
+
   timesUp(
     event //istek vremena
   ) {
@@ -235,6 +152,7 @@ export class GameComponent implements OnInit {
       this.ranOutOfTime = true;
     }
   }
+
   checkForTermMatch(array) {
     const allEqual = (array) => array.every((v) => v === array[0]); //checks if all array elements are equal - function allEqual(array)
     if (array.length == 4 && allEqual(array) == true) {
@@ -278,6 +196,7 @@ export class GameComponent implements OnInit {
       }
     }
   }
+
   hideElement(connectionName) {
     var elms = document.querySelectorAll("[id='" + connectionName + "']"); //sick
     console.log(elms);
@@ -285,6 +204,7 @@ export class GameComponent implements OnInit {
       elms[i].className = 'tile NotClickable';
     }
   }
+
   AllIsUnclicked() { //kad zezne, postavlja sve clickove u false!!
     this.isClickedtile1 = false;
     this.isClickedtile2 = false;
@@ -335,11 +255,13 @@ export class GameComponent implements OnInit {
     conn = event.target.id;
     return conn;
   }
+
   getParagraphText(event) {
     var conn;
     conn = event.target.firstElementChild.innerHTML;
     console.log(conn);
   }
+
   //functions for getting connections written in input
   getConnection1() {
     var conn = (<HTMLInputElement>document.getElementById('conn1')).value;
@@ -353,6 +275,7 @@ export class GameComponent implements OnInit {
     this.firstConnectionGuessed = true;
     console.log(this.guessedConnection1);
   }
+
   getConnection2() {
     var conn = (<HTMLInputElement>document.getElementById('conn2')).value;
     this.guessedConnection2 = conn;
@@ -366,6 +289,7 @@ export class GameComponent implements OnInit {
     this.secondConnectionGuessed = true;
     console.log(this.guessedConnection2);
   }
+
   getConnection3() {
     var conn = (<HTMLInputElement>document.getElementById('conn3')).value;
     this.guessedConnection3 = conn;
@@ -378,6 +302,7 @@ export class GameComponent implements OnInit {
     this.thirdConnectionGuessed = true;
     console.log(this.guessedConnection3);
   }
+
   getConnection4() {
     var conn = (<HTMLInputElement>document.getElementById('conn4')).value;
     this.guessedConnection4 = conn;
@@ -390,6 +315,7 @@ export class GameComponent implements OnInit {
     this.fourthConnectionGuessed = true;
     console.log(this.guessedConnection4);
   }
+
   checkIfUserGuessedAllConnections() {
     if (
       this.guessedConnection1 != null &&
@@ -402,4 +328,5 @@ export class GameComponent implements OnInit {
       return false;
     }
   }
+
 }

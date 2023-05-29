@@ -33,21 +33,6 @@ namespace Registration.Controllers
                 walls = walls.Where(x => string.Equals(x.UserID, userId));
             }
 
-            //var groupAConnections = _context.GroupConnections
-            //    .Where(x => x.wallID1 == );
-
-            //return await _context.Walls
-            //    .Include(p => p.User)
-            //    .Include(p => p.groupATerms)
-            //    .Include(p => p.groupBTerms)
-            //    .Include(p => p.groupCTerms)
-            //    .Include(p => p.groupDTerms)
-            //    .Include(p => p.groupAConnections)
-            //    .Include(p => p.groupBConnections)
-            //    .Include(p => p.groupCConnections)
-            //    .Include(p => p.groupDConnections)
-            //    .ToListAsync();
-
             return (await walls.ToListAsync());
         }
 
@@ -176,6 +161,7 @@ namespace Registration.Controllers
                 {
                     ConnectionID = Guid.NewGuid(),
                     ConnectionName = wallCreateRequest.GroupAConnectionName,
+                    ConnectionGroup = 'A',
                     WallID = newWall.WallID
                 };
 
@@ -201,6 +187,7 @@ namespace Registration.Controllers
                 {
                     ConnectionID = Guid.NewGuid(),
                     ConnectionName = wallCreateRequest.GroupBConnectionName,
+                    ConnectionGroup = 'B',
                     WallID = newWall.WallID
                 };
 
@@ -226,6 +213,7 @@ namespace Registration.Controllers
                 {
                     ConnectionID = Guid.NewGuid(),
                     ConnectionName = wallCreateRequest.GroupCConnectionName,
+                    ConnectionGroup = 'C',
                     WallID = newWall.WallID
                 };
 
@@ -251,6 +239,7 @@ namespace Registration.Controllers
                 {
                     ConnectionID = Guid.NewGuid(),
                     ConnectionName = wallCreateRequest.GroupDConnectionName,
+                    ConnectionGroup = 'D',
                     WallID = newWall.WallID
                 };
 

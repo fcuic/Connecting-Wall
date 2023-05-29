@@ -1,13 +1,17 @@
-form.normal-form
-{
-    margin:10px;
+form.normal-form {
+    margin: 10px;
 }
-.controlls-container
-{
+
+.controlls-container {
     width: 100%;
     padding: 5%;
 }
-.fill-space
-{
-    flex:1 1 auto;
+
+.fill-space {
+    flex: 1 1 auto;
+}
+
+.close-button {
+    height: 33px;
+    width: 39px;
 }

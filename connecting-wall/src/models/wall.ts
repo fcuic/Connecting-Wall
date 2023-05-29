@@ -4,20 +4,24 @@ export interface Wall{
     dateCreated:string,
     dateUpdated:string,
     userID:string,
-    groupAConnections:GroupConnection[],
-    groupBConnections:GroupConnection[],
-    groupCConnections:GroupConnection[],
-    groupDConnections:GroupConnection[],
-    groupATerms:GroupTerm[],
-    groupBTerms:GroupTerm[],
-    groupCTerms:GroupTerm[],
-    groupDTerms:GroupTerm[]
+    // groupAConnection:GroupConnection,
+    // groupBConnection:GroupConnection,
+    // groupCConnection:GroupConnection,
+    // groupDConnection:GroupConnection,
+    groupConnections : GroupConnection[]
+    // groupATerms:GroupTerm[],
+    // groupBTerms:GroupTerm[],
+    // groupCTerms:GroupTerm[],
+    // groupDTerms:GroupTerm[]
 }
 export interface GroupConnection{
     connectionId:string,
-    connectionName:string
+    connectionName:string,
+    connectionGroup : string,
+    terms : Term
 }
-export interface GroupTerm{
+export interface Term{
     termID:string,
     termName:string,
+    groupConnectionId : string
 }

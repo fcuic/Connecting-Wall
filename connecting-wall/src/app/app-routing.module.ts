@@ -11,8 +11,7 @@ import {CreateQuizComponent} from './create-quiz/create-quiz.component';
 import { MyQuizzesComponent } from './my-quizzes/my-quizzes.component';
 import { AboutComponent } from './about/about.component';
 import { QuizStartComponent } from './quiz-start/quiz-start.component';
-import { PlayQuizComponent } from './play-quiz/play-quiz.component';
-
+import { EditWallComponent } from './edit-wall/edit-wall.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'/user/login',pathMatch:'full'},//first component when app starts
@@ -30,7 +29,11 @@ const routes: Routes = [
   {path : 'forbidden', component:ForbiddenComponent},//public - no auth guard
   {path : 'adminpanel', component:AdminPanelComponent, canActivate:[AuthGuard], data:{permittedRoles:['Admin']} },
   {path : 'create-quiz', component: CreateQuizComponent,canActivate:[AuthGuard]},
-  {path : 'my-quizzes', component:MyQuizzesComponent,canActivate:[AuthGuard]},
+  {path : 'my-quizzes', component:MyQuizzesComponent,
+  children:[
+    {path:'edit-wall',component: EditWallComponent}
+  ],
+  canActivate:[AuthGuard]},
   {path: 'about', component:AboutComponent,canActivate:[AuthGuard]}
   
 ];

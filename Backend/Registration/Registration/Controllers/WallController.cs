@@ -4,10 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Registration.Mappers;
 using Registration.Models;
 using Registration.Requests;
-using Registration.ViewModels;
 
 namespace Registration.Controllers
 {
@@ -70,14 +68,8 @@ namespace Registration.Controllers
             {
                 var wall = await _context.Walls
                     .Include(p => p.User)
-                    //.Include(p => p.groupATerms)
-                    //.Include(p => p.groupBTerms)
-                    //.Include(p => p.groupCTerms)
-                    //.Include(p => p.groupDTerms)
-                    //.Include(p => p.groupAConnections)
-                    //.Include(p => p.groupBConnections)
-                    //.Include(p => p.groupCConnections)
-                    //.Include(p => p.groupDConnections)
+                    .Include(p => p.GroupConnections)
+                    .ThenInclude(e => e.Terms)
                     .Where(x => x.WallID == id)
                     .FirstOrDefaultAsync();
 
@@ -86,27 +78,7 @@ namespace Registration.Controllers
                     return NotFound();
                 }
 
-                var wallGroupConnections = await GroupConnectionVmMapper.Map(await _context.GroupConnections
-                    .Where(x => x.WallID == wall.WallID)
-                    .ToListAsync(), _context)
-                    ;
-               
-                var returnWall = new WallVm()
-                {
-                    WallID = wall.WallID,
-                    DateCreated = wall.DateCreated,
-                    DateUpdated = wall.DateUpdated,
-                    UserID = wall.UserID,
-                    WallName = wall.WallName,
-                    GroupConnections = wallGroupConnections,
-                };
-
-                if (wall == null)
-                {
-                    return NotFound();
-                }
-
-                return returnWall;
+                return wall;
             }
             catch
             {
@@ -209,7 +181,7 @@ namespace Registration.Controllers
 
                 _context.GroupConnections.Add(groupAConnection);
 
-                foreach (var groupATerm in wallCreateRequest.GroupATerms) 
+                foreach (var groupATerm in wallCreateRequest.GroupATerms)
                 {
                     var term = new Term()
                     {

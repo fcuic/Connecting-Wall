@@ -17,9 +17,19 @@ namespace Registration.Models
         {
 
             base.OnModelCreating(mb);
-            mb.Entity<Wall>().Property(x => x.WallID).HasDefaultValueSql("NEWID()");
-            mb.Entity<Term>().Property(x => x.TermID).HasDefaultValueSql("NEWID()");
-            mb.Entity<GroupConnection>().Property(x => x.ConnectionID).HasDefaultValueSql("NEWID()");
+
+            mb.Entity<Wall>()
+                .Property(x => x.WallID)
+                .HasDefaultValueSql("NEWID()")
+                ;
+
+            mb.Entity<GroupConnection>()
+                .Property(x => x.ConnectionID)
+                .HasDefaultValueSql("NEWID()");
+
+            mb.Entity<Term>()
+                .Property(x => x.TermID)
+                .HasDefaultValueSql("NEWID()");
 
             mb.Entity<Wall>()
                 .HasKey(s => s.WallID);
@@ -30,6 +40,15 @@ namespace Registration.Models
             mb.Entity<GroupConnection>()
                 .HasKey(s => s.ConnectionID);
 
+            mb.Entity<GroupConnection>()
+                .HasOne<Wall>(w => w.Wall)
+                .WithMany(g => g.GroupConnections)
+                .HasForeignKey(g => g.WallID);
+
+            mb.Entity<Term>()
+                .HasOne<GroupConnection>(t => t.GroupConnection)
+                .WithMany(g => g.Terms)
+                .HasForeignKey(t => t.GroupConnectionID);
         }
     }
 }

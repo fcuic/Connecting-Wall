@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,6 +17,7 @@ namespace Registration.Models
         [ForeignKey("UserID"), Required]
         public string UserID { get; set; }
         public virtual ApplicationUser User { get; set; }
+        public ICollection<GroupConnection> GroupConnections { get; set; }
         //public GroupConnection GroupAConnection { get; set; }
         //public GroupConnection GroupBConnection { get; set; }
         //public GroupConnection GroupCConnection { get; set; }

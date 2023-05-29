@@ -2,7 +2,7 @@
 
 namespace Registration.Requests
 {
-    public class WallRequestModel
+    public class WallInsertRequestModel
     {
         public string WallName { get; set; }
         public string UserId { get; set; }

@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Registration.Mappers;
 using Registration.Models;
 using Registration.Requests;
+using Registration.ViewModels;
 
 namespace Registration.Controllers
 {
@@ -57,20 +59,12 @@ namespace Registration.Controllers
             return await _context.Walls
                 .Where(w => w.UserID == userId)
                 .Include(p => p.User)
-                //.Include(p => p.groupATerms)
-                //.Include(p => p.groupBTerms)
-                //.Include(p => p.groupCTerms)
-                //.Include(p => p.groupDTerms)
-                //.Include(p => p.groupAConnections)
-                //.Include(p => p.groupBConnections)
-                //.Include(p => p.groupCConnections)
-                //.Include(p => p.groupDConnections)
                 .ToListAsync();
         }
 
         // GET: api/Wall/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Wall>> GetWall(Guid id)
+        [HttpGet("WallDetails/{id}")]
+        public async Task<ActionResult<Wall>> GetWallDetails(Guid id)
         {
             try
             {
@@ -92,45 +86,27 @@ namespace Registration.Controllers
                     return NotFound();
                 }
 
-                // Fill-in the group connections and terms
-                //wall.groupAConnections = await _context.GroupConnections
-                //    .Where(x => x.wallID == wall.wallID)
-                //    .ToListAsync();
-
-                //wall.groupBConnections = await _context.GroupConnections
-                //    .Where(x => x.wallID1 == wall.wallID)
-                //    .ToListAsync();
-
-                //wall.groupCConnections = await _context.GroupConnections
-                //    .Where(x => x.wallID2 == wall.wallID)
-                //    .ToListAsync();
-
-                //wall.groupDConnections = await _context.GroupConnections
-                //    .Where(x => x.wallID3 == wall.wallID)
-                //    .ToListAsync();
-
-                //wall.groupATerms = await _context.Terms
-                //    .Where(x => x.wallID == wall.wallID)
-                //    .ToListAsync();
-
-                //wall.groupBTerms = await _context.Terms
-                //    .Where(x => x.wallID1 == wall.wallID)
-                //    .ToListAsync();
-
-                //wall.groupCTerms = await _context.Terms
-                //    .Where(x => x.wallID2 == wall.wallID)
-                //    .ToListAsync();
-
-                //wall.groupDTerms = await _context.Terms
-                //    .Where(x => x.wallID3 == wall.wallID)
-                //    .ToListAsync();
+                var wallGroupConnections = await GroupConnectionVmMapper.Map(await _context.GroupConnections
+                    .Where(x => x.WallID == wall.WallID)
+                    .ToListAsync(), _context)
+                    ;
+               
+                var returnWall = new WallVm()
+                {
+                    WallID = wall.WallID,
+                    DateCreated = wall.DateCreated,
+                    DateUpdated = wall.DateUpdated,
+                    UserID = wall.UserID,
+                    WallName = wall.WallName,
+                    GroupConnections = wallGroupConnections,
+                };
 
                 if (wall == null)
                 {
                     return NotFound();
                 }
 
-                return wall;
+                return returnWall;
             }
             catch
             {
@@ -207,14 +183,14 @@ namespace Registration.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Wall>> PostWall(WallRequestModel wallCreateRequest)
+        public async Task<ActionResult<Wall>> PostWall(WallInsertRequestModel wallCreateRequest)
         {
             using var transaction = _context.Database.BeginTransaction();
             try
             {
                 var newWall = new Wall()
                 {
-                    WallID = new Guid(),
+                    WallID = Guid.NewGuid(),
                     DateCreated = DateTime.Now,
                     UserID = wallCreateRequest.UserId,
                     WallName = wallCreateRequest.WallName
@@ -226,7 +202,7 @@ namespace Registration.Controllers
 
                 var groupAConnection = new GroupConnection()
                 {
-                    ConnectionID = new Guid(),
+                    ConnectionID = Guid.NewGuid(),
                     ConnectionName = wallCreateRequest.GroupAConnectionName,
                     WallID = newWall.WallID
                 };
@@ -237,7 +213,7 @@ namespace Registration.Controllers
                 {
                     var term = new Term()
                     {
-                        TermID = new Guid(),
+                        TermID = Guid.NewGuid(),
                         TermName = groupATerm,
                         GroupConnectionID = groupAConnection.ConnectionID
                     };
@@ -251,7 +227,7 @@ namespace Registration.Controllers
 
                 var groupBConnection = new GroupConnection()
                 {
-                    ConnectionID = new Guid(),
+                    ConnectionID = Guid.NewGuid(),
                     ConnectionName = wallCreateRequest.GroupBConnectionName,
                     WallID = newWall.WallID
                 };
@@ -262,7 +238,7 @@ namespace Registration.Controllers
                 {
                     var term = new Term()
                     {
-                        TermID = new Guid(),
+                        TermID = Guid.NewGuid(),
                         TermName = groupBTerm,
                         GroupConnectionID = groupBConnection.ConnectionID
                     };
@@ -276,7 +252,7 @@ namespace Registration.Controllers
 
                 var groupCConnection = new GroupConnection()
                 {
-                    ConnectionID = new Guid(),
+                    ConnectionID = Guid.NewGuid(),
                     ConnectionName = wallCreateRequest.GroupCConnectionName,
                     WallID = newWall.WallID
                 };
@@ -287,7 +263,7 @@ namespace Registration.Controllers
                 {
                     var term = new Term()
                     {
-                        TermID = new Guid(),
+                        TermID = Guid.NewGuid(),
                         TermName = groupCTerm,
                         GroupConnectionID = groupCConnection.ConnectionID
                     };
@@ -301,7 +277,7 @@ namespace Registration.Controllers
 
                 var groupDConnection = new GroupConnection()
                 {
-                    ConnectionID = new Guid(),
+                    ConnectionID = Guid.NewGuid(),
                     ConnectionName = wallCreateRequest.GroupDConnectionName,
                     WallID = newWall.WallID
                 };
@@ -312,7 +288,7 @@ namespace Registration.Controllers
                 {
                     var term = new Term()
                     {
-                        TermID = new Guid(),
+                        TermID = Guid.NewGuid(),
                         TermName = groupDTerm,
                         GroupConnectionID = groupDConnection.ConnectionID
                     };

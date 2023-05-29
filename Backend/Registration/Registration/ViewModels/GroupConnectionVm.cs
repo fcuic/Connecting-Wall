@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace Registration.ViewModels
 {
-    public class WallVm : Wall
+    public class GroupConnectionVm : GroupConnection
     {
-        public List<GroupConnectionVm> GroupConnections { get; set; }
+        public List<Term> Terms { get; set; }
     }
 }

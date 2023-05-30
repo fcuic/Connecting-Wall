@@ -6,158 +6,219 @@
 <div class="container">
     <div style="background:#07442e !important" class="jumbotron jumbotron-fluid">
         <div class="d-flex justify-content-center">
-        <h1 class="text-white">Create your own Connecting Wall!</h1>
-    </div>
-    </div>
-<form [formGroup]="this.formModel" (ngSubmit)="CreateQuiz()" autocomplete="off">
-    <label>
-       <div class="text"> Quiz Creator : </div>
-       <br>
-        <input type="text" placeholder="{{userDetails?.userName}}" readonly>
-    </label>
-    <br>
-    <label>
-        <div class="text"> Quiz Name : 
-        <input type="text" placeholder="Quiz Name" formControlName="wallName">
+            <h1 class="text-white">Create your own Connecting Wall!</h1>
         </div>
-        <label class="text-danger" *ngIf="this.formModel.get('wallName').touched && this.formModel.get('wallName').errors?.required">This field is required!</label>
-    </label>
-    <br>
-   <div formGroupName="GroupATerms">
-    <label><div class="text">Enter the four terms of the same group (First group):</div></label>
-    <br>
-       <label>
-        <div class="text"> Group A Term 1 :</div>
-        <br>
-           <input type="text" placeholder="GroupATerm1" formControlName="GroupATerm1">
-           <label class="text-danger" *ngIf="this.formModel.get('GroupATerms').get('GroupATerm1').touched && this.formModel.get('GroupATerms').get('GroupATerm1').errors?.required">This field is required!</label>
-       </label>
-       <label>
-        <div class="text"> Group A Term 2 :</div>
-        <br>
-        <input type="text" placeholder="GroupATerm2" formControlName="GroupATerm2">
-        <label class="text-danger" *ngIf="this.formModel.get('GroupATerms').get('GroupATerm2').touched && this.formModel.get('GroupATerms').get('GroupATerm2').errors?.required">This field is required!</label>
-        </label>
+    </div>
+    <form [formGroup]="this.formModel" (ngSubmit)="CreateQuiz()" autocomplete="off">
         <label>
-            <div class="text">Group A Term 3 :</div>
+            <div class="text"> Quiz Creator : </div>
             <br>
-            <input type="text" placeholder="GroupATerm3" formControlName="GroupATerm3">
-            <label class="text-danger" *ngIf="this.formModel.get('GroupATerms').get('GroupATerm3').touched && this.formModel.get('GroupATerms').get('GroupATerm3').errors?.required">This field is required!</label>
+            <input type="text" placeholder="{{userDetails?.userName}}" readonly>
         </label>
-        <label>
-            <div class="text">Group A Term 4 :</div>
-            <br>
-            <input type="text" placeholder="GroupATerm4" formControlName="GroupATerm4">
-            <label class="text-danger" *ngIf="this.formModel.get('GroupATerms').get('GroupATerm4').touched && this.formModel.get('GroupATerms').get('GroupATerm4').errors?.required">This field is required!</label>
-        </label>
-   </div>
-    <label>
-        <div class="text">Group A Connection : 
-        <input type="text" placeholder="Group A Connection" formControlName="GroupAConnectionName">
-        </div>
-    <label class="text-danger" *ngIf="this.formModel.get('GroupAConnectionName').touched && this.formModel.get('GroupAConnectionName').errors?.required">
-        This field is required!
-    </label>
-    </label>
-    <div formGroupName="GroupBTerms">
-        <label><div class="text">Enter the four terms of the same group (Second group):</div></label>
         <br>
         <label>
-            <div class="text"> Group B Term 1 :</div>
-            <br>
-            <input type="text" placeholder="GroupBTerm1" formControlName="GroupBTerm1">
-            <label class="text-danger" *ngIf="this.formModel.get('GroupBTerms').get('GroupBTerm1').touched && this.formModel.get('GroupBTerms').get('GroupBTerm1').errors?.required">This field is required!</label>
+            <div class="text"> Quiz Name :
+                <input type="text" placeholder="Quiz Name" formControlName="wallName">
+            </div>
+            <label class="text-danger"
+                *ngIf="this.formModel.get('wallName').touched && this.formModel.get('wallName').errors?.required">
+                This field is required!
+            </label>
         </label>
-        <label>
-            <div class="text">Group B Term 2 :</div>
-            <br>
-         <input type="text" placeholder="GroupBTerm2" formControlName="GroupBTerm2">
-         <label class="text-danger" *ngIf="this.formModel.get('GroupBTerms').get('GroupBTerm2').touched && this.formModel.get('GroupBTerms').get('GroupBTerm2').errors?.required">This field is required!</label>
-         </label>
-         <label>
-            <div class="text">Group B Term 3 :</div>
-            <br>
-             <input type="text" placeholder="GroupBTerm3" formControlName="GroupBTerm3">
-             <label class="text-danger" *ngIf="this.formModel.get('GroupBTerms').get('GroupBTerm3').touched && this.formModel.get('GroupBTerms').get('GroupBTerm3').errors?.required">This field is required!</label>
-         </label>
-         <label>
-            <div class="text"> Group B Term 4 :</div>
-            <br>
-             <input type="text" placeholder="GroupBTerm4" formControlName="GroupBTerm4">
-             <label class="text-danger" *ngIf="this.formModel.get('GroupBTerms').get('GroupBTerm4').touched && this.formModel.get('GroupBTerms').get('GroupBTerm4').errors?.required">This field is required!</label>
-         </label>
-    </div>
-     <label>
-        <div class="text">Group B Connection : 
-            <input type="text" placeholder="Group B Connection" formControlName="GroupBConnectionName">
-        </div>
-     <label class="text-danger" *ngIf="this.formModel.get('GroupBConnectionName').touched && this.formModel.get('GroupBConnectionName').errors?.required">
-        This field is required!
-    </label>
-     </label>
-     <div formGroupName="GroupCTerms">
-        <label><div class="text">Enter the four terms of the same group (Third group):</div></label>
         <br>
-        <label>
-            <div class="text">Group C Term 1 :</div>
-            <input type="text" placeholder="GroupCTerm1" formControlName="GroupCTerm1">
-            <label class="text-danger" *ngIf="this.formModel.get('GroupCTerms').get('GroupCTerm1').touched && this.formModel.get('GroupCTerms').get('GroupCTerm1').errors?.required">This field is required!</label>
-        </label>
-        <label>
-            <div class="text">Group C Term 2 :</div>
-         <input type="text" placeholder="GroupCTerm2" formControlName="GroupCTerm2">
-         <label class="text-danger" *ngIf="this.formModel.get('GroupCTerms').get('GroupCTerm2').touched && this.formModel.get('GroupCTerms').get('GroupCTerm2').errors?.required">This field is required!</label>
-         </label>
-         <label>
-            <div class="text">Group C Term 3 :</div>
-             <input type="text" placeholder="GroupCTerm3" formControlName="GroupCTerm3">
-             <label class="text-danger" *ngIf="this.formModel.get('GroupCTerms').get('GroupCTerm3').touched && this.formModel.get('GroupCTerms').get('GroupCTerm3').errors?.required">This field is required!</label>
-         </label>
-         <label>
-            <div class="text">Group C Term 4 :</div>
-             <input type="text" placeholder="GroupCTerm4" formControlName="GroupCTerm4">
-             <label class="text-danger" *ngIf="this.formModel.get('GroupCTerms').get('GroupCTerm4').touched && this.formModel.get('GroupCTerms').get('GroupCTerm4').errors?.required">This field is required!</label>
-         </label>
-    </div>
-     <label>
-        <div class="text">Group C Connection : 
-        <input type="text" placeholder="Group C Connection" formControlName="GroupCConnectionName">
+        <div formGroupName="GroupATerms">
+            <label>
+                <div class="text">Enter the four terms of the same group (First group):</div>
+            </label>
+            <br>
+            <label>
+                <div class="text"> Group A Term 1 :</div>
+                <br>
+                <input type="text" placeholder="GroupATerm1" formControlName="GroupATerm1">
+                <label class="text-danger"
+                    *ngIf="this.formModel.get('GroupATerms').get('GroupATerm1').touched && this.formModel.get('GroupATerms').get('GroupATerm1').errors?.required">This
+                    field is required!</label>
+            </label>
+            <label>
+                <div class="text"> Group A Term 2 :</div>
+                <br>
+                <input type="text" placeholder="GroupATerm2" formControlName="GroupATerm2">
+                <label class="text-danger"
+                    *ngIf="this.formModel.get('GroupATerms').get('GroupATerm2').touched && this.formModel.get('GroupATerms').get('GroupATerm2').errors?.required">This
+                    field is required!</label>
+            </label>
+            <label>
+                <div class="text">Group A Term 3 :</div>
+                <br>
+                <input type="text" placeholder="GroupATerm3" formControlName="GroupATerm3">
+                <label class="text-danger"
+                    *ngIf="this.formModel.get('GroupATerms').get('GroupATerm3').touched && this.formModel.get('GroupATerms').get('GroupATerm3').errors?.required">This
+                    field is required!</label>
+            </label>
+            <label>
+                <div class="text">Group A Term 4 :</div>
+                <br>
+                <input type="text" placeholder="GroupATerm4" formControlName="GroupATerm4">
+                <label class="text-danger"
+                    *ngIf="this.formModel.get('GroupATerms').get('GroupATerm4').touched && this.formModel.get('GroupATerms').get('GroupATerm4').errors?.required">This
+                    field is required!</label>
+            </label>
         </div>
-     <label class="text-danger" *ngIf="this.formModel.get('GroupCConnectionName').touched && this.formModel.get('GroupCConnectionName').errors?.required">
-        This field is required!
-    </label>
-     </label>
-     <div formGroupName="GroupDTerms">
-        <label><div class="text">Enter the four terms of the same group (Fourth group):</div></label>
-        <br>
         <label>
-            <div class="text">Group D Term 1 :</div>
-            <input type="text" placeholder="GroupDTerm1" formControlName="GroupDTerm1">
-            <label class="text-danger" *ngIf="this.formModel.get('GroupDTerms').get('GroupDTerm1').touched && this.formModel.get('GroupDTerms').get('GroupDTerm1').errors?.required">This field is required!</label>
+            <div class="text">Group A Connection :
+                <input type="text" placeholder="Group A Connection" formControlName="GroupAConnectionName">
+            </div>
+            <label class="text-danger"
+                *ngIf="this.formModel.get('GroupAConnectionName').touched && this.formModel.get('GroupAConnectionName').errors?.required">
+                This field is required!
+            </label>
         </label>
-        <label>
-            <div class="text">Group D Term 2 :</div>
-         <input type="text" placeholder="GroupDTerm2" formControlName="GroupDTerm2">
-         <label class="text-danger" *ngIf="this.formModel.get('GroupDTerms').get('GroupDTerm2').touched && this.formModel.get('GroupDTerms').get('GroupDTerm2').errors?.required">This field is required!</label>
-         </label>
-         <label>
-            <div class="text">Group D Term 3 :</div>
-             <input type="text" placeholder="GroupDTerm3" formControlName="GroupDTerm3">
-             <label class="text-danger" *ngIf="this.formModel.get('GroupDTerms').get('GroupDTerm3').touched && this.formModel.get('GroupDTerms').get('GroupDTerm3').errors?.required">This field is required!</label>
-         </label>
-         <label>
-            <div class="text">Group D Term 4 :</div>
-             <input type="text" placeholder="GroupDTerm4" formControlName="GroupDTerm4">
-             <label class="text-danger" *ngIf="this.formModel.get('GroupDTerms').get('GroupDTerm4').touched && this.formModel.get('GroupDTerms').get('GroupDTerm4').errors?.required">This field is required!</label>
-         </label>
-    </div>
-     <label>
-        <div class="text">Group D Connections :
-        <input type="text" placeholder="Group D Connections" formControlName="GroupDConnectionName">
+        <label class="text-danger" 
+            *ngIf="this.formModel.get('GroupAConnectionName').touched && this.formModel.get('GroupAConnectionName').errors?.minlength">
+            Please specify Group A Connection with at least 3 letters!
+        </label>
+        <div formGroupName="GroupBTerms">
+            <label>
+                <div class="text">Enter the four terms of the same group (Second group):</div>
+            </label>
+            <br>
+            <label>
+                <div class="text"> Group B Term 1 :</div>
+                <br>
+                <input type="text" placeholder="GroupBTerm1" formControlName="GroupBTerm1">
+                <label class="text-danger"
+                    *ngIf="this.formModel.get('GroupBTerms').get('GroupBTerm1').touched && this.formModel.get('GroupBTerms').get('GroupBTerm1').errors?.required">This
+                    field is required!</label>
+            </label>
+            <label>
+                <div class="text">Group B Term 2 :</div>
+                <br>
+                <input type="text" placeholder="GroupBTerm2" formControlName="GroupBTerm2">
+                <label class="text-danger"
+                    *ngIf="this.formModel.get('GroupBTerms').get('GroupBTerm2').touched && this.formModel.get('GroupBTerms').get('GroupBTerm2').errors?.required">This
+                    field is required!</label>
+            </label>
+            <label>
+                <div class="text">Group B Term 3 :</div>
+                <br>
+                <input type="text" placeholder="GroupBTerm3" formControlName="GroupBTerm3">
+                <label class="text-danger"
+                    *ngIf="this.formModel.get('GroupBTerms').get('GroupBTerm3').touched && this.formModel.get('GroupBTerms').get('GroupBTerm3').errors?.required">This
+                    field is required!</label>
+            </label>
+            <label>
+                <div class="text"> Group B Term 4 :</div>
+                <br>
+                <input type="text" placeholder="GroupBTerm4" formControlName="GroupBTerm4">
+                <label class="text-danger"
+                    *ngIf="this.formModel.get('GroupBTerms').get('GroupBTerm4').touched && this.formModel.get('GroupBTerms').get('GroupBTerm4').errors?.required">This
+                    field is required!</label>
+            </label>
         </div>
-     <label class="text-danger" *ngIf="this.formModel.get('GroupDConnectionName').touched && this.formModel.get('GroupDConnectionName').errors?.required">This field is required!</label>
-     </label>
-     <button type="submit" class="btn btn-lg btn-block" [disabled]="!this.formModel.valid">Submit Quiz</button>
-</form>
+        <label>
+            <div class="text">Group B Connection :
+                <input type="text" placeholder="Group B Connection" formControlName="GroupBConnectionName">
+            </div>
+            <label class="text-danger"
+                *ngIf="this.formModel.get('GroupBConnectionName').touched && this.formModel.get('GroupBConnectionName').errors?.required">
+                This field is required!
+            </label>
+        </label>
+        <label class="text-danger" *ngIf="this.formModel.get('GroupBConnectionName').errors?.minlength">
+            Please specify Group B Connection with at least 3 letters!
+        </label>
+        <div formGroupName="GroupCTerms">
+            <label>
+                <div class="text">Enter the four terms of the same group (Third group):</div>
+            </label>
+            <br>
+            <label>
+                <div class="text">Group C Term 1 :</div>
+                <input type="text" placeholder="GroupCTerm1" formControlName="GroupCTerm1">
+                <label class="text-danger"
+                    *ngIf="this.formModel.get('GroupCTerms').get('GroupCTerm1').touched && this.formModel.get('GroupCTerms').get('GroupCTerm1').errors?.required">This
+                    field is required!</label>
+            </label>
+            <label>
+                <div class="text">Group C Term 2 :</div>
+                <input type="text" placeholder="GroupCTerm2" formControlName="GroupCTerm2">
+                <label class="text-danger"
+                    *ngIf="this.formModel.get('GroupCTerms').get('GroupCTerm2').touched && this.formModel.get('GroupCTerms').get('GroupCTerm2').errors?.required">This
+                    field is required!</label>
+            </label>
+            <label>
+                <div class="text">Group C Term 3 :</div>
+                <input type="text" placeholder="GroupCTerm3" formControlName="GroupCTerm3">
+                <label class="text-danger"
+                    *ngIf="this.formModel.get('GroupCTerms').get('GroupCTerm3').touched && this.formModel.get('GroupCTerms').get('GroupCTerm3').errors?.required">This
+                    field is required!</label>
+            </label>
+            <label>
+                <div class="text">Group C Term 4 :</div>
+                <input type="text" placeholder="GroupCTerm4" formControlName="GroupCTerm4">
+                <label class="text-danger"
+                    *ngIf="this.formModel.get('GroupCTerms').get('GroupCTerm4').touched && this.formModel.get('GroupCTerms').get('GroupCTerm4').errors?.required">This
+                    field is required!</label>
+            </label>
+        </div>
+        <label>
+            <div class="text">Group C Connection :
+                <input type="text" placeholder="Group C Connection" formControlName="GroupCConnectionName">
+            </div>
+            <label class="text-danger"
+                *ngIf="this.formModel.get('GroupCConnectionName').touched && this.formModel.get('GroupCConnectionName').errors?.required">
+                This field is required!
+            </label>
+        </label>
+        <label class="text-danger" *ngIf="this.formModel.get('GroupCConnectionName').errors?.minlength">
+            Please specify Group C Connection with at least 3 letters!
+        </label>
+        <div formGroupName="GroupDTerms">
+            <label>
+                <div class="text">Enter the four terms of the same group (Fourth group):</div>
+            </label>
+            <br>
+            <label>
+                <div class="text">Group D Term 1 :</div>
+                <input type="text" placeholder="GroupDTerm1" formControlName="GroupDTerm1">
+                <label class="text-danger"
+                    *ngIf="this.formModel.get('GroupDTerms').get('GroupDTerm1').touched && this.formModel.get('GroupDTerms').get('GroupDTerm1').errors?.required">This
+                    field is required!</label>
+            </label>
+            <label>
+                <div class="text">Group D Term 2 :</div>
+                <input type="text" placeholder="GroupDTerm2" formControlName="GroupDTerm2">
+                <label class="text-danger"
+                    *ngIf="this.formModel.get('GroupDTerms').get('GroupDTerm2').touched && this.formModel.get('GroupDTerms').get('GroupDTerm2').errors?.required">This
+                    field is required!</label>
+            </label>
+            <label>
+                <div class="text">Group D Term 3 :</div>
+                <input type="text" placeholder="GroupDTerm3" formControlName="GroupDTerm3">
+                <label class="text-danger"
+                    *ngIf="this.formModel.get('GroupDTerms').get('GroupDTerm3').touched && this.formModel.get('GroupDTerms').get('GroupDTerm3').errors?.required">This
+                    field is required!</label>
+            </label>
+            <label>
+                <div class="text">Group D Term 4 :</div>
+                <input type="text" placeholder="GroupDTerm4" formControlName="GroupDTerm4">
+                <label class="text-danger"
+                    *ngIf="this.formModel.get('GroupDTerms').get('GroupDTerm4').touched && this.formModel.get('GroupDTerms').get('GroupDTerm4').errors?.required">This
+                    field is required!</label>
+            </label>
+        </div>
+        <label>
+            <div class="text">Group D Connections :
+                <input type="text" placeholder="Group D Connections" formControlName="GroupDConnectionName">
+            </div>
+            <label class="text-danger"
+                *ngIf="this.formModel.get('GroupDConnectionName').touched && this.formModel.get('GroupDConnectionName').errors?.required">
+                This field is required!
+            </label>
+        </label>
+        <label class="text-danger" *ngIf="this.formModel.get('GroupDConnectionName').errors?.minlength">
+            Please specify Group D Connection with at least 3 letters!
+        </label>
+        <button type="submit" class="btn btn-lg btn-block" [disabled]="!this.formModel.valid">Submit Quiz</button>
+    </form>
 </div>
-

@@ -227,16 +227,45 @@ namespace Registration.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Wall>> DeleteWall(Guid id)
         {
-            var wall = await _context.Walls.FindAsync(id);
-            if (wall == null)
+            using var transaction = _context.Database.BeginTransaction();
+            try
             {
-                return NotFound();
+                var wall = await _context.Walls
+                    .Where(x => x.WallID == id)
+                    .FirstOrDefaultAsync();
+
+                if (wall == null)
+                {
+                    return NotFound();
+                }
+
+                // Cascade delete
+                var wallGroupConnections = await _context.GroupConnections
+                    .Include(x => x.Terms)
+                    .Where(x => x.WallID == wall.WallID)
+                    .ToListAsync();
+
+                foreach (var connection in wallGroupConnections) 
+                {
+                    foreach (var term in connection.Terms) 
+                    {
+                        _context.Terms.Remove(term);
+                    }
+                    _context.GroupConnections.Remove(connection);
+                }
+
+                _context.Walls.Remove(wall);
+
+                await _context.SaveChangesAsync();
+                transaction.Commit();
+
+                return wall;
             }
-
-            _context.Walls.Remove(wall);
-            await _context.SaveChangesAsync();
-
-            return wall;
+            catch
+            {
+                transaction.Rollback();
+                throw;
+            }
         }
 
         private bool WallExists(Guid id)

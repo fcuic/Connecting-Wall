@@ -121,10 +121,10 @@ export class EditWallComponent implements OnInit {
         GroupDTerm3: groupD.terms[2].termName,
         GroupDTerm4: groupD.terms[3].termName,
       },
-      GroupAConnections: groupA.connectionName,
-      GroupBConnections: groupB.connectionName,
-      GroupCConnections: groupC.connectionName,
-      GroupDConnections: groupD.connectionName,
+      GroupAConnectionName: groupA.connectionName,
+      GroupBConnectionName: groupB.connectionName,
+      GroupCConnectionName: groupC.connectionName,
+      GroupDConnectionName: groupD.connectionName,
     });
   }
 
@@ -174,25 +174,7 @@ export class EditWallComponent implements OnInit {
         console.log(err);
       }
     );
-    // return this.http.put(this.BaseURI + '/Wall/' + request.wallID, request, {
-    //   headers: this.header,
-    // });
   }
-  // onSubmit() {
-  //   this.UpdateWall().subscribe(
-  //     (res) => {
-  //       window.location.reload();
-  //       this.toastr.success(
-  //         'Existing Connecting Wall Updated!',
-  //         'Update Successful!'
-  //       );
-  //       console.log(res);
-  //     },
-  //     (err) => {
-  //       console.log(err);
-  //     }
-  //   );
-  // }
   onClose() {
     this.dialogRef.close(); //dialog ref klase matdialog ref za zatvaranje prozora!
   }

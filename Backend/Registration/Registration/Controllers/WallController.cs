@@ -71,69 +71,21 @@ namespace Registration.Controllers
             }
         }
 
-        // PUT: api/Wall/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutWall(Guid id, Wall wall)
+        [HttpPost]
+        [Route("UpdateWall")]
+        public async Task<IActionResult> PutWall([FromBody] WallUpdateRequest updatedWall)
         {
-            if (id != wall.WallID)
+            var wall = await _context.Walls
+                .Where(x => x.WallID == new Guid(updatedWall.WallID))
+                .FirstOrDefaultAsync();
+
+            if (wall == null) 
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(wall).State = EntityState.Modified;
-            //MODIFYING entities inside child entities of wall
-            //foreach (Term term in wall.groupATerms)
-            //{
-            //    _context.Entry(term).State = term.TermID == null ? EntityState.Added : EntityState.Modified;
-            //}
-            //foreach (Term term in wall.groupBTerms)
-            //{
-            //    _context.Entry(term).State = term.TermID == null ? EntityState.Added : EntityState.Modified;
-            //}
-            //foreach (Term term in wall.groupCTerms)
-            //{
-            //    _context.Entry(term).State = term.TermID == null ? EntityState.Added : EntityState.Modified;
-            //}
-            //foreach (Term term in wall.groupDTerms)
-            //{
-            //    _context.Entry(term).State = term.TermID == null ? EntityState.Added : EntityState.Modified;
-            //}
-            //foreach (GroupConnection gc in wall.groupAConnections)
-            //{
-            //    _context.Entry(gc).State = gc.ConnectionId == null ? EntityState.Added : EntityState.Modified;
-            //}
-            //foreach (GroupConnection gc in wall.groupBConnections)
-            //{
-            //    _context.Entry(gc).State = gc.ConnectionId == null ? EntityState.Added : EntityState.Modified;
-            //}
-            //foreach (GroupConnection gc in wall.groupCConnections)
-            //{
-            //    _context.Entry(gc).State = gc.ConnectionId == null ? EntityState.Added : EntityState.Modified;
-            //}
-            //foreach (GroupConnection gc in wall.groupDConnections)
-            //{
-            //    _context.Entry(gc).State = gc.ConnectionId == null ? EntityState.Added : EntityState.Modified;
-            //}
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!WallExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return Ok(_context.Walls.Find(id));
+            return Ok();
         }
 
         // POST: api/Wall

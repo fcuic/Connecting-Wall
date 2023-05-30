@@ -76,51 +76,57 @@ export class WallService {
     });
   }
 
-  populateForm(Object: Wall) {
-    let groupA = Object.groupConnections.find(
-      (conn) => conn.connectionGroup === 'A'
-    );
-    let groupB = Object.groupConnections.find(
-      (conn) => conn.connectionGroup === 'B'
-    );
-    let groupC = Object.groupConnections.find(
-      (conn) => conn.connectionGroup === 'C'
-    );
-    let groupD = Object.groupConnections.find(
-      (conn) => conn.connectionGroup === 'D'
-    );
-
-    this.formModel.patchValue({
-      wallID: Object.wallID,
-      wallName: Object.wallName,
-      GroupATerms: {
-        GroupATerm1: groupA.terms[0].termName,
-        GroupATerm2: groupA.terms[1].termName,
-        GroupATerm3: groupA.terms[2].termName,
-        GroupATerm4: groupA.terms[3].termName,
-      },
-      GroupBTerms: {
-        GroupBTerm1: groupB.terms[0].termName,
-        GroupBTerm2: groupB.terms[1].termName,
-        GroupBTerm3: groupB.terms[2].termName,
-        GroupBTerm4: groupB.terms[3].termName,
-      },
-      GroupCTerms: {
-        GroupCTerm1: groupC.terms[0].termName,
-        GroupCTerm2: groupC.terms[0].termName,
-        GroupCTerm3: groupC.terms[0].termName,
-        GroupCTerm4: groupC.terms[0].termName,
-      },
-      GroupDTerms: {
-        GroupDTerm1: groupD.terms[0].termName,
-        GroupDTerm2: groupD.terms[1].termName,
-        GroupDTerm3: groupD.terms[2].termName,
-        GroupDTerm4: groupD.terms[3].termName,
-      },
-      GroupAConnections: groupA.connectionName,
-      GroupBConnections: groupB.connectionName,
-      GroupCConnections: groupC.connectionName,
-      GroupDConnections: groupD.connectionName,
+  updateWall(request : any) : Observable<any>{
+    return this.http.post(this.BaseURI + '/Wall/UpdateWall/', request, {
+      headers: this.header,
     });
   }
+
+  // populateForm(Object: Wall) {
+  //   let groupA = Object.groupConnections.find(
+  //     (conn) => conn.connectionGroup === 'A'
+  //   );
+  //   let groupB = Object.groupConnections.find(
+  //     (conn) => conn.connectionGroup === 'B'
+  //   );
+  //   let groupC = Object.groupConnections.find(
+  //     (conn) => conn.connectionGroup === 'C'
+  //   );
+  //   let groupD = Object.groupConnections.find(
+  //     (conn) => conn.connectionGroup === 'D'
+  //   );
+
+  //   this.formModel.patchValue({
+  //     wallID: Object.wallID,
+  //     wallName: Object.wallName,
+  //     GroupATerms: {
+  //       GroupATerm1: groupA.terms[0].termName,
+  //       GroupATerm2: groupA.terms[1].termName,
+  //       GroupATerm3: groupA.terms[2].termName,
+  //       GroupATerm4: groupA.terms[3].termName,
+  //     },
+  //     GroupBTerms: {
+  //       GroupBTerm1: groupB.terms[0].termName,
+  //       GroupBTerm2: groupB.terms[1].termName,
+  //       GroupBTerm3: groupB.terms[2].termName,
+  //       GroupBTerm4: groupB.terms[3].termName,
+  //     },
+  //     GroupCTerms: {
+  //       GroupCTerm1: groupC.terms[0].termName,
+  //       GroupCTerm2: groupC.terms[0].termName,
+  //       GroupCTerm3: groupC.terms[0].termName,
+  //       GroupCTerm4: groupC.terms[0].termName,
+  //     },
+  //     GroupDTerms: {
+  //       GroupDTerm1: groupD.terms[0].termName,
+  //       GroupDTerm2: groupD.terms[1].termName,
+  //       GroupDTerm3: groupD.terms[2].termName,
+  //       GroupDTerm4: groupD.terms[3].termName,
+  //     },
+  //     GroupAConnections: groupA.connectionName,
+  //     GroupBConnections: groupB.connectionName,
+  //     GroupCConnections: groupC.connectionName,
+  //     GroupDConnections: groupD.connectionName,
+  //   });
+  // }
 }

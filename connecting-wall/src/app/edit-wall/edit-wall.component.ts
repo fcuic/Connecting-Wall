@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { WallService} from '../shared/wall.service';
+import { WallService } from '../shared/wall.service';
 import { UserService } from '../shared/user.service';
 import { ToastrService } from 'ngx-toastr';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Wall } from 'src/models/wall';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -10,43 +10,23 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-edit-wall',
   templateUrl: './edit-wall.component.html',
-  styleUrls: ['./edit-wall.component.css']
+  styleUrls: ['./edit-wall.component.css'],
 })
 export class EditWallComponent implements OnInit {
-
   readonly BaseURI = 'http://localhost:57392/api';
-  private header=new HttpHeaders({'content-type': 'application/json'});
-  wall : Wall;
-  userDetails : any;
-  CurrentDate:Date;
+  private header = new HttpHeaders({ 'content-type': 'application/json' });
+  wall: Wall;
+  userDetails: any;
 
   constructor(
     private UserService: UserService,
-    public WallService:WallService,
-    private toastr:ToastrService, 
-    private http:HttpClient,
-    public dialogRef:MatDialogRef<EditWallComponent>,
+    public WallService: WallService,
+    private toastr: ToastrService,
+    private http: HttpClient,
+    public dialogRef: MatDialogRef<EditWallComponent>,
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public receivedData: { wallID: string }) { }
-
-  ngOnInit(): void 
-  {
-    this.formModel.reset();
-    this.UserService.getUserProfile().subscribe(
-      (res) => {
-        this.userDetails = res;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-    this.WallService
-      .getWallDetails(this.receivedData.wallID)
-      .subscribe((res) => {
-        this.wall = res;
-      });
-    this.CurrentDate=new Date()
-  }
+    @Inject(MAT_DIALOG_DATA) public receivedData: { wallID: string }
+  ) {}
 
   formModel = this.fb.group({
     wallID: new FormControl(null),
@@ -80,13 +60,78 @@ export class EditWallComponent implements OnInit {
     }),
     GroupDConnectionName: ['', [Validators.required, Validators.minLength(3)]],
   });
-  
-  UpdateWall()
-  {
-    var body={
-      wallID:this.formModel.value.wallID,
-      wallName:this.formModel.value.wallName,
-      dateUpdated:this.CurrentDate.toJSON(),
+
+  ngOnInit(): void {
+    this.formModel.reset();
+    this.UserService.getUserProfile().subscribe(
+      (res) => {
+        this.userDetails = res;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+    this.WallService.getWallDetails(this.receivedData.wallID).subscribe(
+      (res) => {
+        this.wall = res;
+        console.log(this.wall);
+        this.populateForm(this.wall);
+      }
+    );
+  }
+
+  populateForm(wall: Wall) {
+    let groupA = wall.groupConnections.find(
+      (conn) => conn.connectionGroup === 'A'
+    );
+    let groupB = wall.groupConnections.find(
+      (conn) => conn.connectionGroup === 'B'
+    );
+    let groupC = wall.groupConnections.find(
+      (conn) => conn.connectionGroup === 'C'
+    );
+    let groupD = wall.groupConnections.find(
+      (conn) => conn.connectionGroup === 'D'
+    );
+
+    this.formModel.patchValue({
+      wallID: wall.wallID,
+      wallName: wall.wallName,
+      GroupATerms: {
+        GroupATerm1: groupA.terms[0].termName,
+        GroupATerm2: groupA.terms[1].termName,
+        GroupATerm3: groupA.terms[2].termName,
+        GroupATerm4: groupA.terms[3].termName,
+      },
+      GroupBTerms: {
+        GroupBTerm1: groupB.terms[0].termName,
+        GroupBTerm2: groupB.terms[1].termName,
+        GroupBTerm3: groupB.terms[2].termName,
+        GroupBTerm4: groupB.terms[3].termName,
+      },
+      GroupCTerms: {
+        GroupCTerm1: groupC.terms[0].termName,
+        GroupCTerm2: groupC.terms[0].termName,
+        GroupCTerm3: groupC.terms[0].termName,
+        GroupCTerm4: groupC.terms[0].termName,
+      },
+      GroupDTerms: {
+        GroupDTerm1: groupD.terms[0].termName,
+        GroupDTerm2: groupD.terms[1].termName,
+        GroupDTerm3: groupD.terms[2].termName,
+        GroupDTerm4: groupD.terms[3].termName,
+      },
+      GroupAConnections: groupA.connectionName,
+      GroupBConnections: groupB.connectionName,
+      GroupCConnections: groupC.connectionName,
+      GroupDConnections: groupD.connectionName,
+    });
+  }
+
+  UpdateWall() {
+    var request = {
+      wallID: this.formModel.value.wallID,
+      wallName: this.formModel.value.wallName,
       groupAConnectionName: this.formModel.value.GroupAConnectionName,
       groupATerms: [
         this.formModel.get('GroupATerms').get('GroupATerm1').value,
@@ -114,27 +159,41 @@ export class EditWallComponent implements OnInit {
         this.formModel.get('GroupDTerms').get('GroupDTerm2').value,
         this.formModel.get('GroupDTerms').get('GroupDTerm3').value,
         this.formModel.get('GroupDTerms').get('GroupDTerm4').value,
-      ]
-  }
-    return this.http.put(this.BaseURI+'/Wall/'+body.wallID,body,{headers:this.header});
-    
-  }
-  onSubmit()
-  {
-    this.UpdateWall().subscribe(
-      (res)=>
-      {
+      ],
+    };
+    this.WallService.updateWall(request).subscribe(
+      (res) => {
         window.location.reload();
-        this.toastr.success('Existing Connecting Wall Updated!','Update Successful!');
+        this.toastr.success(
+          'Existing Connecting Wall Updated!',
+          'Update Successful!'
+        );
         console.log(res);
       },
-      (err)=>{
+      (err) => {
         console.log(err);
       }
-    )
+    );
+    // return this.http.put(this.BaseURI + '/Wall/' + request.wallID, request, {
+    //   headers: this.header,
+    // });
   }
-  onClose()
-  {
-   this.dialogRef.close();//dialog ref klase matdialog ref za zatvaranje prozora!
+  // onSubmit() {
+  //   this.UpdateWall().subscribe(
+  //     (res) => {
+  //       window.location.reload();
+  //       this.toastr.success(
+  //         'Existing Connecting Wall Updated!',
+  //         'Update Successful!'
+  //       );
+  //       console.log(res);
+  //     },
+  //     (err) => {
+  //       console.log(err);
+  //     }
+  //   );
+  // }
+  onClose() {
+    this.dialogRef.close(); //dialog ref klase matdialog ref za zatvaranje prozora!
   }
 }

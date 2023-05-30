@@ -75,22 +75,155 @@ namespace Registration.Controllers
         [Route("UpdateWall")]
         public async Task<IActionResult> PutWall([FromBody] WallUpdateRequest updatedWall)
         {
-            var wall = await _context.Walls
-                .Where(x => x.WallID == new Guid(updatedWall.WallID))
-                .FirstOrDefaultAsync();
-
-            if (wall == null) 
+            using var transaction = _context.Database.BeginTransaction();
+            try
             {
-                return NotFound();
+                var wall = await _context.Walls
+                          .Where(x => x.WallID == new Guid(updatedWall.WallID))
+                          .FirstOrDefaultAsync();
+
+                if (wall == null)
+                {
+                    return NotFound();
+                }
+
+                if (wall.WallName != updatedWall.WallName)
+                {
+                    wall.WallName = updatedWall.WallName;
+                }
+
+                var groupAConnection = await _context.GroupConnections
+                    .Include(x => x.Terms)
+                    .Where(x => x.WallID == new Guid(updatedWall.WallID) && x.ConnectionGroup == 'A')
+                    .FirstOrDefaultAsync()
+                    ;
+
+                if (groupAConnection.ConnectionName != updatedWall.GroupAConnectionName)
+                {
+                    groupAConnection.ConnectionName = updatedWall.GroupAConnectionName;
+                    _context.GroupConnections.Update(groupAConnection);
+                }
+
+                if (!Enumerable.SequenceEqual(groupAConnection.Terms.Select(x => x.TermName).OrderBy(e => e), updatedWall.GroupATerms.OrderBy(e => e)))
+                {
+                    foreach (var term in groupAConnection.Terms)
+                    {
+                        _context.Terms.Remove(term);
+                    }
+
+                    foreach (var newTerm in updatedWall.GroupATerms)
+                    {
+                        _context.Terms.Add(new Term()
+                        {
+                            TermID = Guid.NewGuid(),
+                            TermName = newTerm,
+                            GroupConnection = groupAConnection
+                        });
+                    }
+                }
+
+                var groupBConnection = await _context.GroupConnections
+                    .Include(x => x.Terms)
+                    .Where(x => x.WallID == new Guid(updatedWall.WallID) && x.ConnectionGroup == 'B')
+                    .FirstOrDefaultAsync()
+                    ;
+
+                if (groupBConnection.ConnectionName != updatedWall.GroupBConnectionName)
+                {
+                    groupBConnection.ConnectionName = updatedWall.GroupAConnectionName;
+                    _context.GroupConnections.Update(groupBConnection);
+                }
+
+                if (!Enumerable.SequenceEqual(groupBConnection.Terms.Select(x => x.TermName).OrderBy(e => e), updatedWall.GroupBTerms.OrderBy(e => e)))
+                {
+                    foreach (var term in groupBConnection.Terms)
+                    {
+                        _context.Terms.Remove(term);
+                    }
+
+                    foreach (var newTerm in updatedWall.GroupBTerms)
+                    {
+                        _context.Terms.Add(new Term()
+                        {
+                            TermID = Guid.NewGuid(),
+                            TermName = newTerm,
+                            GroupConnection = groupBConnection
+                        });
+                    }
+                }
+
+                var groupCConnection = await _context.GroupConnections
+                    .Include(x => x.Terms)
+                    .Where(x => x.WallID == new Guid(updatedWall.WallID) && x.ConnectionGroup == 'C')
+                    .FirstOrDefaultAsync()
+                    ;
+
+                if (groupCConnection.ConnectionName != updatedWall.GroupCConnectionName)
+                {
+                    groupCConnection.ConnectionName = updatedWall.GroupCConnectionName;
+                    _context.GroupConnections.Update(groupCConnection);
+                }
+
+                if (!Enumerable.SequenceEqual(groupCConnection.Terms.Select(x => x.TermName).OrderBy(e => e), updatedWall.GroupCTerms.OrderBy(e => e)))
+                {
+                    foreach (var term in groupCConnection.Terms)
+                    {
+                        _context.Terms.Remove(term);
+                    }
+
+                    foreach (var newTerm in updatedWall.GroupCTerms)
+                    {
+                        _context.Terms.Add(new Term()
+                        {
+                            TermID = Guid.NewGuid(),
+                            TermName = newTerm,
+                            GroupConnection = groupCConnection
+                        });
+                    }
+                }
+
+                var groupDConnection = await _context.GroupConnections
+                    .Include(x => x.Terms)
+                    .Where(x => x.WallID == new Guid(updatedWall.WallID) && x.ConnectionGroup == 'D')
+                    .FirstOrDefaultAsync()
+                    ;
+
+                if (groupDConnection.ConnectionName != updatedWall.GroupDConnectionName)
+                {
+                    groupDConnection.ConnectionName = updatedWall.GroupDConnectionName;
+                    _context.GroupConnections.Update(groupDConnection);
+                }
+
+                if (!Enumerable.SequenceEqual(groupDConnection.Terms.Select(x => x.TermName).OrderBy(e => e), updatedWall.GroupDTerms.OrderBy(e => e)))
+                {
+                    foreach (var term in groupDConnection.Terms)
+                    {
+                        _context.Terms.Remove(term);
+                    }
+
+                    foreach (var newTerm in updatedWall.GroupDTerms)
+                    {
+                        _context.Terms.Add(new Term()
+                        {
+                            TermID = Guid.NewGuid(),
+                            TermName = newTerm,
+                            GroupConnection = groupDConnection
+                        });
+                    }
+                }
+
+                await _context.SaveChangesAsync();
+                transaction.Commit();
+
+                return Ok();
             }
-
-
-            return Ok();
+            catch
+            {
+                transaction.Rollback();
+                throw;
+            }
         }
 
-        // POST: api/Wall
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<Wall>> PostWall(WallInsertRequestModel wallCreateRequest)
         {
@@ -245,9 +378,9 @@ namespace Registration.Controllers
                     .Where(x => x.WallID == wall.WallID)
                     .ToListAsync();
 
-                foreach (var connection in wallGroupConnections) 
+                foreach (var connection in wallGroupConnections)
                 {
-                    foreach (var term in connection.Terms) 
+                    foreach (var term in connection.Terms)
                     {
                         _context.Terms.Remove(term);
                     }
@@ -266,11 +399,6 @@ namespace Registration.Controllers
                 transaction.Rollback();
                 throw;
             }
-        }
-
-        private bool WallExists(Guid id)
-        {
-            return _context.Walls.Any(e => e.WallID == id);
         }
     }
 }

@@ -111,9 +111,9 @@ export class EditWallComponent implements OnInit {
       },
       GroupCTerms: {
         GroupCTerm1: groupC.terms[0].termName,
-        GroupCTerm2: groupC.terms[0].termName,
-        GroupCTerm3: groupC.terms[0].termName,
-        GroupCTerm4: groupC.terms[0].termName,
+        GroupCTerm2: groupC.terms[1].termName,
+        GroupCTerm3: groupC.terms[2].termName,
+        GroupCTerm4: groupC.terms[3].termName,
       },
       GroupDTerms: {
         GroupDTerm1: groupD.terms[0].termName,

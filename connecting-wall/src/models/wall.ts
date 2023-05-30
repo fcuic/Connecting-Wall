@@ -18,7 +18,8 @@ export interface GroupConnection{
     connectionId:string,
     connectionName:string,
     connectionGroup : string,
-    terms : Term
+    terms : Term[],
+    wallID : string
 }
 export interface Term{
     termID:string,

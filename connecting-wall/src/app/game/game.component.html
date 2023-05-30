@@ -2,7 +2,7 @@
 <div class="ScoreAndCountdown">
     <div class="Created">
         <label>Quiz by :</label>
-        <p><strong>{{this.wallDetails.user.fullName}}</strong></p>
+        <p><strong>{{this.user.fullName}}</strong></p>
     </div>
     <span class="fill-space"></span>
     <div class="Score">
@@ -15,72 +15,73 @@
     <p><strong><countdown [config]="{ leftTime: 180, format: 'm:s' }" (event)="timesUp($event)"></countdown></strong></p>
     </div>
 </div>
-<!--Dio za uparivanje pojmova-->
+
 <div class="tilecontainer" *ngIf="gameOver==false">
-    <div class="tile" style="left:40px;top:55px;" (click)="isClickedtile1=!isClickedtile1; chosenSound.play();PushInCheckArray($event,isClickedtile1);getParagraphText($event);" [class.ClickedTile]="isClickedtile1" id="{{this.terms[0].connectionName}}">
+    <div class="tile" [ngClass]="" style="left:40px;top:55px;" (click)="isClickedtile1=!isClickedtile1; chosenSound.play();PushInCheckArray(this.terms[0].groupConnectionID,isClickedtile1);" [class.ClickedTile]="isClickedtile1">
         <p hidden>{{this.terms[0].connectionName}}</p>
         <p>{{this.terms[0].termName}}</p>
     </div>
-    <div class="tile" style="left:200px;top:55px;" (click)="isClickedtile2=!isClickedtile2;chosenSound.play();PushInCheckArray($event,isClickedtile2);getParagraphText($event)" [class.ClickedTile]="isClickedtile2" id="{{this.terms[1].connectionName}}">
+    <div class="tile" style="left:200px;top:55px;" (click)="isClickedtile2=!isClickedtile2;chosenSound.play();PushInCheckArray(this.terms[1].groupConnectionID,isClickedtile2);" [class.ClickedTile]="isClickedtile2">
         <p hidden>{{this.terms[1].connectionName}}</p>
         <p>{{this.terms[1].termName}}</p>
     </div>
-    <div class="tile" style="left:360px;top:55px;" (click)="isClickedtile3=!isClickedtile3;chosenSound.play();PushInCheckArray($event,isClickedtile3);getParagraphText($event)" [class.ClickedTile]="isClickedtile3" id="{{this.terms[2].connectionName}}">
+    <div class="tile" style="left:360px;top:55px;" (click)="isClickedtile3=!isClickedtile3;chosenSound.play();PushInCheckArray(this.terms[2].groupConnectionID,isClickedtile3);" [class.ClickedTile]="isClickedtile3">
         <p hidden>{{this.terms[2].connectionName}}</p>
         <p>{{this.terms[2].termName}}</p>
     </div>
-    <div class="tile" style="left:520px;top:55px;" (click)="isClickedtile4=!isClickedtile4;chosenSound.play();PushInCheckArray($event,isClickedtile4);getParagraphText($event)" [class.ClickedTile]="isClickedtile4" id="{{this.terms[3].connectionName}}">
+    <div class="tile" style="left:520px;top:55px;" (click)="isClickedtile4=!isClickedtile4;chosenSound.play();PushInCheckArray(this.terms[3].groupConnectionID,isClickedtile4);" [class.ClickedTile]="isClickedtile4">
         <p hidden>{{this.terms[3].connectionName}}</p>
         <p>{{this.terms[3].termName}}</p>
     </div>
-    <div class="tile" style="left:40px;top:165px;" (click)="isClickedtile5=!isClickedtile5;chosenSound.play();PushInCheckArray($event,isClickedtile5);getParagraphText($event)" [class.ClickedTile]="isClickedtile5" id="{{this.terms[4].connectionName}}">
+    <div class="tile" style="left:40px;top:165px;" (click)="isClickedtile5=!isClickedtile5;chosenSound.play();PushInCheckArray(this.terms[4].groupConnectionID,isClickedtile5);" [class.ClickedTile]="isClickedtile5">
         <p hidden>{{this.terms[4].connectionName}}</p>
         <p>{{this.terms[4].termName}}</p>
     </div>
-    <div class="tile" style="left:200px;top:165px;" (click)="isClickedtile6=!isClickedtile6;chosenSound.play();PushInCheckArray($event,isClickedtile6);getParagraphText($event)" [class.ClickedTile]="isClickedtile6" id="{{this.terms[5].connectionName}}">
+    <div class="tile" style="left:200px;top:165px;" (click)="isClickedtile6=!isClickedtile6;chosenSound.play();PushInCheckArray(this.terms[5].groupConnectionID,isClickedtile6);" [class.ClickedTile]="isClickedtile6">
         <p hidden>{{this.terms[5].connectionName}}</p>
         <p>{{this.terms[5].termName}}</p>
     </div>
-    <div class="tile" style="left:360px;top:165px;"(click)="isClickedtile7=!isClickedtile7;chosenSound.play();PushInCheckArray($event,isClickedtile7);getParagraphText($event)" [class.ClickedTile]="isClickedtile7" id="{{this.terms[6].connectionName}}">
+    <div class="tile" style="left:360px;top:165px;"(click)="isClickedtile7=!isClickedtile7;chosenSound.play();PushInCheckArray(this.terms[6].groupConnectionID,isClickedtile7);" [class.ClickedTile]="isClickedtile7">
         <p hidden>{{this.terms[6].connectionName}}</p>
         <p>{{this.terms[6].termName}}</p>
     </div>
-    <div class="tile" style="left:520px;top:165px;" (click)="isClickedtile8=!isClickedtile8;chosenSound.play();PushInCheckArray($event,isClickedtile8);getParagraphText($event)" [class.ClickedTile]="isClickedtile8" id="{{this.terms[7].connectionName}}">
+    <div class="tile" style="left:520px;top:165px;" (click)="isClickedtile8=!isClickedtile8;chosenSound.play();PushInCheckArray(this.terms[7].groupConnectionID,isClickedtile8);" [class.ClickedTile]="isClickedtile8">
         <p hidden>{{this.terms[7].connectionName}}</p>
         <p>{{this.terms[7].termName}}</p>
     </div>
-    <div class="tile" style="left:40px;top:275px;" (click)="isClickedtile9=!isClickedtile9;chosenSound.play();PushInCheckArray($event,isClickedtile9);getParagraphText($event)" [class.ClickedTile]="isClickedtile9" id="{{this.terms[8].connectionName}}">
+    <div class="tile" style="left:40px;top:275px;" (click)="isClickedtile9=!isClickedtile9;chosenSound.play();PushInCheckArray(this.terms[8].groupConnectionID,isClickedtile9);" [class.ClickedTile]="isClickedtile9">
         <p hidden>{{this.terms[8].connectionName}}</p>
         <p>{{this.terms[8].termName}}</p>
     </div>
-    <div class="tile" style="left:200px;top:275px;" (click)="isClickedtile10=!isClickedtile10;chosenSound.play();PushInCheckArray($event,isClickedtile10);getParagraphText($event)" [class.ClickedTile]="isClickedtile10" id="{{this.terms[9].connectionName}}">
+    <div class="tile" style="left:200px;top:275px;" (click)="isClickedtile10=!isClickedtile10;chosenSound.play();PushInCheckArray(this.terms[9].groupConnectionID,isClickedtile10);" [class.ClickedTile]="isClickedtile10">
         <p hidden>{{this.terms[9].connectionName}}</p>
         <p>{{this.terms[9].termName}}</p>
     </div>
-    <div class="tile" style="left:360px;top:275px;" (click)="isClickedtile11=!isClickedtile11;chosenSound.play();PushInCheckArray($event,isClickedtile11);getParagraphText($event)" [class.ClickedTile]="isClickedtile11" id="{{this.terms[10].connectionName}}">
+    <div class="tile" style="left:360px;top:275px;" (click)="isClickedtile11=!isClickedtile11;chosenSound.play();PushInCheckArray(this.terms[10].groupConnectionID,isClickedtile11);" [class.ClickedTile]="isClickedtile11">
         <p hidden>{{this.terms[10].connectionName}}</p>
         <p>{{this.terms[10].termName}}</p>
     </div>
-    <div class="tile" style="left:520px;top:275px;" (click)="isClickedtile12=!isClickedtile12;chosenSound.play();PushInCheckArray($event,isClickedtile12);getParagraphText($event)" [class.ClickedTile]="isClickedtile12" id="{{this.terms[11].connectionName}}">
+    <div class="tile" style="left:520px;top:275px;" (click)="isClickedtile12=!isClickedtile12;chosenSound.play();PushInCheckArray(this.terms[11].groupConnectionID,isClickedtile12);" [class.ClickedTile]="isClickedtile12">
         <p hidden>{{this.terms[11].connectionName}}</p>
         <p>{{this.terms[11].termName}}</p>
     </div>
-    <div class="tile" style="left:40px;top:385px;" (click)="isClickedtile13=!isClickedtile13;chosenSound.play();PushInCheckArray($event,isClickedtile13);getParagraphText($event)" [class.ClickedTile]="isClickedtile13" id="{{this.terms[12].connectionName}}">
+    <div class="tile" style="left:40px;top:385px;" (click)="isClickedtile13=!isClickedtile13;chosenSound.play();PushInCheckArray(this.terms[12].groupConnectionID,isClickedtile13);" [class.ClickedTile]="isClickedtile13">
         <p hidden>{{this.terms[12].connectionName}}</p>
         <p>{{this.terms[12].termName}}</p>
     </div>
-    <div class="tile" style="left:200px;top:385px;" (click)="isClickedtile14=!isClickedtile14;chosenSound.play();PushInCheckArray($event,isClickedtile14);getParagraphText($event)" [class.ClickedTile]="isClickedtile14" id="{{this.terms[13].connectionName}}">
+    <div class="tile" style="left:200px;top:385px;" (click)="isClickedtile14=!isClickedtile14;chosenSound.play();PushInCheckArray(this.terms[13].groupConnectionID,isClickedtile14);" [class.ClickedTile]="isClickedtile14">
         <p hidden>{{this.terms[13].connectionName}}</p>
         <p>{{this.terms[13].termName}}</p>
     </div>
-    <div class="tile" style="left:360px;top:385px;" (click)="isClickedtile15=!isClickedtile15;chosenSound.play();PushInCheckArray($event,isClickedtile15);getParagraphText($event)" [class.ClickedTile]="isClickedtile15" id="{{this.terms[14].connectionName}}">
+    <div class="tile" style="left:360px;top:385px;" (click)="isClickedtile15=!isClickedtile15;chosenSound.play();PushInCheckArray(this.terms[14].groupConnectionID,isClickedtile15);" [class.ClickedTile]="isClickedtile15">
         <p hidden>{{this.terms[14].connectionName}}</p>
         <p>{{this.terms[14].termName}}</p>
     </div>
-    <div class="tile" style="left:520px;top:385px;" (click)="isClickedtile16=!isClickedtile16;chosenSound.play();PushInCheckArray($event,isClickedtile16);getParagraphText($event)" [class.ClickedTile]="isClickedtile16" id="{{this.terms[15].connectionName}}">
+    <div class="tile" style="left:520px;top:385px;" (click)="isClickedtile16=!isClickedtile16;chosenSound.play();PushInCheckArray(this.terms[15].groupConnectionID,isClickedtile16);" [class.ClickedTile]="isClickedtile16">
         <p hidden>{{this.terms[15].connectionName}}</p>
         <p>{{this.terms[15].termName}}</p>
     </div>
+
     <div class="lives">
         <div class="life1" *ngIf="showLives==true && firstLifeWasted==false">
             &#x2665;
@@ -92,6 +93,7 @@
             &#x2665;
         </div>
     </div>
+
 </div>
 <!--Dio za ispitivanje kako je user završio uparivanje-->
 <br>

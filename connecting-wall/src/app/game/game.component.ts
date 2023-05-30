@@ -1,13 +1,12 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
-import { WallService } from '../shared/wall.service';
 import { ToastrService } from 'ngx-toastr';
 import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { HomeComponent } from '../home/home.component';
-import { Term } from '../../models/term.model';
 import { Howl } from 'howler';
+import { GroupConnection, Term } from 'src/models/wall';
 
 @Component({
   selector: 'app-game',
@@ -17,6 +16,7 @@ import { Howl } from 'howler';
 export class GameComponent implements OnInit {
   //#region WallData
   @Input() wall:any = '';
+  @Input() user:any = '';
 
   wallID: string;
   wallDetails: any;
@@ -89,7 +89,7 @@ export class GameComponent implements OnInit {
   //#region Quiz Variables
 
   numOfClickedTerms = 0;
-  firstGroup = [];
+  group = [];
   matchedProperly = false; //varijabla za sakrivanje matchanih pojmova
   numOfPairedGroupTerms : number = 0;
   numOfLives = 3;
@@ -115,7 +115,6 @@ export class GameComponent implements OnInit {
   //#endregion
 
   constructor(
-    private toastr: ToastrService,
     public dialogRef: MatDialogRef<HomeComponent>,
     @Inject(MAT_DIALOG_DATA) public receivedData: any,
   ) {
@@ -124,7 +123,11 @@ export class GameComponent implements OnInit {
 
   ngOnInit(): void {
     //#region DataGetting
-    
+    let groupConnections : Array<GroupConnection> = this.wall.groupConnections;
+    let terms2d = groupConnections.map(x => x.terms);
+    this.sortedTerms = [].concat(...terms2d);
+    this.terms = this.Shuffle([].concat(...terms2d))
+    console.log(this.terms);
     //#endregion
   }
 
@@ -157,14 +160,12 @@ export class GameComponent implements OnInit {
     const allEqual = (array) => array.every((v) => v === array[0]); //checks if all array elements are equal - function allEqual(array)
     if (array.length == 4 && allEqual(array) == true) {
       var Connection = array[0];
-      console.log('Konekcija :' + Connection);
-      console.log('Matched properly!');
       this.score++;
       this.numOfPairedGroupTerms++;
       console.log(this.numOfPairedGroupTerms);
       this.numOfClickedTerms = 0;
       this.successSound.play();
-      this.hideElement(Connection);
+      this.hideElements(Connection);
       this.AllIsUnclicked();
       if (this.numOfPairedGroupTerms == 2) {
         this.showLives = true; //pokazi zivote
@@ -197,7 +198,7 @@ export class GameComponent implements OnInit {
     }
   }
 
-  hideElement(connectionName) {
+  hideElements(connectionName) {
     var elms = document.querySelectorAll("[id='" + connectionName + "']"); //sick
     console.log(elms);
     for (var i = 0; i < elms.length; i++) {
@@ -224,29 +225,18 @@ export class GameComponent implements OnInit {
     this.isClickedtile16 = false;
   }
 
-  PushInCheckArray(event, isClicked) {
-    var con = this.getTermConnection(event);
+  PushInCheckArray(term, isClicked) {
     if (isClicked == true) {
-      if (con == '') {
-        this.toastr.warning(
-          'Please Unselect and Select the term again',
-          'Could not get ID of clicked Term!'
-        );
-      }
       this.numOfClickedTerms++;
-      this.firstGroup.push(con);
-      console.log(this.firstGroup);
-      console.log(this.numOfClickedTerms);
-      if (this.firstGroup.length == 4) {
-        this.checkForTermMatch(this.firstGroup);
-        this.firstGroup = [];
-        console.log(this.firstGroup);
+      this.group.push(term);
+      if (this.group.length == 4) {
+        this.checkForTermMatch(this.group);
+        this.group = [];
       }
-    } else if (isClicked == false) {
+    } 
+    else if (isClicked == false) {
       this.numOfClickedTerms--;
-      this.firstGroup.splice(this.numOfClickedTerms, 1);
-      console.log(this.firstGroup);
-      console.log(this.numOfClickedTerms);
+      this.group.splice(this.numOfClickedTerms, 1);
     }
   }
 
@@ -266,7 +256,7 @@ export class GameComponent implements OnInit {
   getConnection1() {
     var conn = (<HTMLInputElement>document.getElementById('conn1')).value;
     this.guessedConnection1 = conn;
-    if (this.guessedConnection1 == this.termA1.connectionName) {
+    if (this.guessedConnection1 == this.termA1.groupConnectionId) {
       this.score++;
       this.successSound.play();
     } else {
@@ -279,7 +269,7 @@ export class GameComponent implements OnInit {
   getConnection2() {
     var conn = (<HTMLInputElement>document.getElementById('conn2')).value;
     this.guessedConnection2 = conn;
-    if (this.guessedConnection2 == this.termB1.connectionName) {
+    if (this.guessedConnection2 == this.termB1.groupConnectionId) {
       this.score++;
       this.successSound.play();
     } else {
@@ -293,7 +283,7 @@ export class GameComponent implements OnInit {
   getConnection3() {
     var conn = (<HTMLInputElement>document.getElementById('conn3')).value;
     this.guessedConnection3 = conn;
-    if (this.guessedConnection3 == this.termC1.connectionName) {
+    if (this.guessedConnection3 == this.termC1.groupConnectionId) {
       this.score++;
       this.successSound.play();
     } else {
@@ -306,7 +296,7 @@ export class GameComponent implements OnInit {
   getConnection4() {
     var conn = (<HTMLInputElement>document.getElementById('conn4')).value;
     this.guessedConnection4 = conn;
-    if (this.guessedConnection4 == this.termD1.connectionName) {
+    if (this.guessedConnection4 == this.termD1.groupConnectionId) {
       this.score++;
       this.successSound.play();
     } else {

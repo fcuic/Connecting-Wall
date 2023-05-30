@@ -9,4 +9,4 @@
 </mat-toolbar>
 <app-play-quiz *ngIf="!Started && this.wall != null" [wall]="this.wall"></app-play-quiz>
 <button type="button" class="btn btn-primary btn-lg btn-block" (click)="OnStart();" *ngIf="!Started">Start</button>
-<app-game *ngIf="Started && this.wall != null" [wall]="this.wall"></app-game>
+<app-game *ngIf="Started && this.wall != null" [wall]="this.wall" [user]="this.userDetails"></app-game>
